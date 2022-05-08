@@ -1,0 +1,29 @@
+# Ignore a blackhole
+node_modules/
+.vs/
+
+# Ignore tsc dist folder
+**/dist
+
+# Ignore JavaScript files
+**/*.js
+**/*.mjs
+**/*.js.map
+**/*.d.ts
+!packages/**/*.d.ts
+**/*.tsbuildinfo
+!**/scripts/**/*.mjs
+
+# Ignore heapsnapshot and log files
+*.heapsnapshot
+*.log
+
+# Ignore package locks
+package-lock.json
+
+# Ignore the GH cli downloaded by workflows
+gh
+
+# Ignore Yarn files
+.yarn/install-state.gz
+.yarn/build-state.yml
