@@ -2,7 +2,10 @@
   "name": "@joshdb/serialize",
   "version": "1.0.0",
   "description": "A serialize utility to be able to convert nodejs data types into a json compatible format",
-  "author": "@joshdb",
+  "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
+  "contributors": [
+    "Hezekiah Hendry <real.shadow.nova@gmail.com>"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "browser": "dist/index.umd.js",
