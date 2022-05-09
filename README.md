@@ -10,4 +10,6 @@
 
 **Packages**
 
+[![npm](https://img.shields.io/npm/v/@joshdb/tests?color=crimson&logo=npm&style=flat-square&label=@joshdb/tests)](https://www.npmjs.com/package/@joshdb/tests)
+
 </div>
