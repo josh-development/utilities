@@ -10,4 +10,6 @@
 
 **Packages**
 
+[![npm](https://img.shields.io/npm/v/@joshdb/serialize?color=crimson&logo=npm&style=flat-square&label=@joshdb/serialize)](https://www.npmjs.com/package/@joshdb/serialize)
+
 </div>
