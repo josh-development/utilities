@@ -6,13 +6,11 @@ import { JoshProviderError, JoshProviderErrorOptions } from './JoshProviderError
 /**
  * The base provider class. Extend this class to create your own provider.
  *
- * NOTE: If you want an example of how to use this class please see `src/lib/structures/default-provider/MapProvider.ts`
- *
  * @since 2.0.0
  * @see {@link JoshProvider.Options} for all options available to the JoshProvider class.
  * @example
  * ```typescript
- * export class Provider extends JoshProvider {
+ * export class Provider<StoredValue = unknown> extends JoshProvider<StoredValue> {
  *   // Implement methods...
  * }
  * ```
@@ -30,9 +28,17 @@ export abstract class JoshProvider<StoredValue = unknown> {
    */
   public options: JoshProvider.Options;
 
+  /**
+   * Data migrations for this provider.
+   * @since 2.0.0
+   */
   public migrations: JoshProvider.Migration[] = [];
 
-  public abstract version: string;
+  /**
+   * The semver version of this provider.
+   * @since 2.0.0
+   */
+  public abstract version: JoshProvider.Semver;
 
   public constructor(options: JoshProvider.Options = {}) {
     this.options = options;
@@ -46,7 +52,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * @example
    * ```typescript
-   * public async init(context: JoshProvider.Context<Value>): Promise<JoshProvider.Context<Value>> {
+   * public async init(context: JoshProvider.Context): Promise<JoshProvider.Context> {
    *   // Initialize provider...
    *   context = await super.init(context);
    *   // Initialize provider...
@@ -59,22 +65,29 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
     this.name = name;
 
-    if (await this.needsMigration()) {
+    const version = await this.fetchVersion();
+
+    if (version.major < this.version.major) {
       const { allowMigrations } = this.options;
 
       if (!allowMigrations) throw this.error(JoshProvider.Identifiers.NeedsMigrations);
 
-      const migrations = this.migrations.map((migration) => ({ ...migration, version: this.resolveVersion(migration.version) }));
+      const migration = this.migrations.find(
+        (migration) =>
+          migration.version.major === version.major && migration.version.minor <= version.minor && migration.version.patch <= version.patch
+      );
 
-      for (const migration of migrations
-        .filter((migration) => migration.version.major > this.resolveVersion(this.version).major)
-        .sort((a, b) => a.version.major - b.version.major)) {
-        console.log(`[${this.constructor.name}]: Running migration ${migration.version.fullVersion}...`);
-        await migration.hook(context);
-        console.log(`[${this.constructor.name}]: Migration ${migration.version.fullVersion} ran successfully.`);
-      }
+      if (migration === undefined) throw this.error(JoshProvider.Identifiers.MigrationNotFound, { version });
 
-      console.log(`[${this.constructor.name}]: Migrations ran successfully.`);
+      const { major, minor, patch } = version;
+
+      console.log(`[${this.constructor.name}]: Running migration for version ${major}.${minor}.${patch}`);
+
+      await migration.run(context);
+
+      console.log(
+        `[${this.constructor.name}]: Migration for version ${major}.${minor}.${patch} ran successfully. This provider is now up-to-date with the latest version (${this.version.major}.${this.version.minor}.${this.version.patch})`
+      );
     }
 
     return Promise.resolve(context);
@@ -452,6 +465,13 @@ export abstract class JoshProvider<StoredValue = unknown> {
     if (result !== null) return result;
 
     switch (identifier) {
+      case JoshProvider.Identifiers.MigrationNotFound: {
+        const { version } = metadata;
+        const { major, minor, patch } = version as JoshProvider.Semver;
+
+        return `Migration not found for version ${major}.${minor}.${patch}.`;
+      }
+
       case JoshProvider.Identifiers.NeedsMigrations:
         return `[${this.constructor.name}]: The provider ${
           this.name?.length ? `with the name "${this.name}" ` : ''
@@ -466,19 +486,18 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param version The version to resolve.
    * @returns The resolved version.
    */
-  protected resolveVersion(version: string): JoshProvider.SemverVersion {
+  protected resolveVersion(version: string): JoshProvider.Semver {
     return version
       .split('.')
       .map(Number)
       .reduce((semver, value, index) => ({ ...semver, [['major', 'minor', 'patch'][index]]: value }), {
-        fullVersion: version,
         major: 0,
         minor: 0,
         patch: 0
       });
   }
 
-  protected abstract needsMigration(): Awaitable<boolean>;
+  protected abstract fetchVersion(): Awaitable<JoshProvider.Semver>;
 }
 
 export namespace JoshProvider {
@@ -522,14 +541,12 @@ export namespace JoshProvider {
   }
 
   export interface Migration {
-    version: string;
+    version: Semver;
 
-    hook(context: Context): Awaitable<void>;
+    run(context: Context): Awaitable<void>;
   }
 
-  export interface SemverVersion {
-    fullVersion: string;
-
+  export interface Semver {
     major: number;
 
     minor: number;
@@ -537,11 +554,9 @@ export namespace JoshProvider {
     patch: number;
   }
 
-  export interface Constructor {
-    new (options?: Options): JoshProvider;
-  }
-
   export enum Identifiers {
+    MigrationNotFound = 'MigrationNotFound',
+
     NeedsMigrations = 'needsMigration'
   }
 }
