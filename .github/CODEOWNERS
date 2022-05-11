@@ -3,6 +3,7 @@
 /.vscode/ @RealShadowNova
 /.yarn/ @RealShadowNova
 /packages/serialize/ @RealShadowNova
+/packages/provider/ @RealShadowNova
 /scripts/ @RealShadowNova
 LICENSE @eslachance
 package.json @RealShadowNova
