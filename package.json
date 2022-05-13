@@ -9,7 +9,7 @@
     "generate": "node scripts/generate/generate.mjs",
     "lint": "eslint packages --ext mjs,ts --fix",
     "format": "prettier --write \"packages/**/*.{mjs,ts}\"",
-    "test": "yarn workspaces foreach -v --no-private run test",
+    "test": "yarn workspace @joshdb/payloads run build && yarn workspaces foreach -v --no-private run test",
     "build": "yarn workspaces foreach -v --no-private run build",
     "update": "yarn upgrade-interactive",
     "release": "yarn workspaces foreach -v --no-private run release",
