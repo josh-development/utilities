@@ -10,7 +10,8 @@
 
 **Packages**
 
-[![npm](https://img.shields.io/npm/v/@joshdb/provider?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/@joshdb/provider)
+[![npm](https://img.shields.io/npm/v/@joshdb/payloads?color=crimson&logo=npm&style=flat-square&label=@joshdb/payloads)](https://www.npmjs.com/package/@joshdb/payloads)
+[![npm](https://img.shields.io/npm/v/@joshdb/provider?color=crimson&logo=npm&style=flat-square&label=@joshdb/provider)](https://www.npmjs.com/package/@joshdb/provider)
 [![npm](https://img.shields.io/npm/v/@joshdb/serialize?color=crimson&logo=npm&style=flat-square&label=@joshdb/serialize)](https://www.npmjs.com/package/@joshdb/serialize)
 
 </div>
