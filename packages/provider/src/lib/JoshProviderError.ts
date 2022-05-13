@@ -1,4 +1,4 @@
-import type { Method } from '../types';
+import type { Method } from '@joshdb/payloads';
 
 /**
  * The base class for errors in {@link Josh}

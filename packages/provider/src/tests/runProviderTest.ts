@@ -1,6 +1,6 @@
+import { CommonIdentifiers, MathOperator, Method, Payload } from '@joshdb/payloads';
 import type { Awaitable, Constructor } from '@sapphire/utilities';
-import type { JoshProvider } from '../lib/structures/JoshProvider';
-import { CommonIdentifiers, MathOperator, Method, Payload } from '../lib/types';
+import type { JoshProvider } from '../lib/JoshProvider';
 
 export function runProviderTest<
   Provider extends Constructor<JoshProvider>,

@@ -902,17 +902,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@joshdb/provider@workspace:packages/provider":
+"@joshdb/payloads@workspace:^, @joshdb/payloads@workspace:packages/payloads":
   version: 0.0.0-use.local
-  resolution: "@joshdb/provider@workspace:packages/provider"
+  resolution: "@joshdb/payloads@workspace:packages/payloads"
   dependencies:
     "@favware/rollup-type-bundler": ^1.0.7
     "@sapphire/utilities": ^3.6.2
     jest: ^27.5.1
     rollup: ^2.68.0
-    rollup-plugin-cleaner: ^1.0.0
-    rollup-plugin-typescript2: ^0.31.2
-    rollup-plugin-version-injector: ^1.3.3
+    standard-version: ^9.3.2
+  languageName: unknown
+  linkType: soft
+
+"@joshdb/provider@workspace:packages/provider":
+  version: 0.0.0-use.local
+  resolution: "@joshdb/provider@workspace:packages/provider"
+  dependencies:
+    "@favware/rollup-type-bundler": ^1.0.7
+    "@joshdb/payloads": "workspace:^"
+    "@sapphire/utilities": ^3.6.2
+    jest: ^27.5.1
+    rollup: ^2.68.0
     standard-version: ^9.3.2
   languageName: unknown
   linkType: soft
@@ -924,9 +934,6 @@ __metadata:
     "@favware/rollup-type-bundler": ^1.0.7
     jest: ^27.5.1
     rollup: ^2.68.0
-    rollup-plugin-cleaner: ^1.0.0
-    rollup-plugin-typescript2: ^0.31.2
-    rollup-plugin-version-injector: ^1.3.3
     standard-version: ^9.3.2
   languageName: unknown
   linkType: soft

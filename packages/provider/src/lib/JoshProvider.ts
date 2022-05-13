@@ -1,6 +1,5 @@
+import { Method, Payloads, resolveCommonIdentifier } from '@joshdb/payloads';
 import type { Awaitable } from '@sapphire/utilities';
-import { resolveCommonIdentifier } from '../functions';
-import type { Method, Payloads } from '../types';
 import { JoshProviderError, JoshProviderErrorOptions } from './JoshProviderError';
 
 /**

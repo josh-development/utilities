@@ -21,13 +21,13 @@ export default {
     {
       file: './dist/index.umd.js',
       format: 'umd',
-      name: 'JoshProvider',
+      name: 'JoshPayloads',
       sourcemap: true,
       globals: {
-        '@joshdb/payloads': 'JoshPayloads'
+        '@joshdb/core': 'JoshCore'
       }
     }
   ],
-  external: ['@joshdb/payloads'],
+  external: ['@joshdb/core'],
   plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') }), versionInjector()]
 };

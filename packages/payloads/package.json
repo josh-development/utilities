@@ -1,7 +1,7 @@
 {
-  "name": "@joshdb/provider",
+  "name": "@joshdb/payloads",
   "version": "1.0.0",
-  "description": "Provider and other useful exports for the Josh project",
+  "description": "Important types related to payloads for the Josh project",
   "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
   "contributors": [
     "Hezekiah Hendry <real.shadow.nova@gmail.com>"
@@ -23,7 +23,6 @@
     "prepublishOnly": "rollup-type-bundler"
   },
   "dependencies": {
-    "@joshdb/payloads": "workspace:^",
     "@sapphire/utilities": "^3.6.2"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
-import { JoshProvider, Method, Payloads } from '../../../src';
+import { Method, Payloads } from '@joshdb/payloads';
+import { JoshProvider } from '../../src';
 
 describe('JoshProvider', () => {
   describe('is a class', () => {
