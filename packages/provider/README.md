@@ -7,6 +7,7 @@
 **A core Josh utility to create providers**
 
 [![GitHub](https://img.shields.io/github/license/josh-development/utilities)](https://github.com/josh-development/utilities/blob/main/LICENSE)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@joshdb/provider?logo=webpack&style=flat-square)](https://bundlephobia.com/result?p=@sjoshdb/provider)
 [![npm](https://img.shields.io/npm/v/@joshdb/provider?color=crimson&logo=npm&style=flat-square&label=@joshdb/provider)](https://www.npmjs.com/package/@joshdb/provider)
 
 </div>
@@ -18,7 +19,7 @@ A core Josh utility to create providers.
 ## Features
 
 - Written in TypeScript
-- Offers CommonJS, ESM, and UMD bundles
+- Offers CommonJS, ESM and UMD bundles
 - Fully tested
 
 ## Installation

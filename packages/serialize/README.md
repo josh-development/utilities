@@ -7,20 +7,20 @@
 **A serialize utility for the Josh project**
 
 [![GitHub](https://img.shields.io/github/license/josh-development/utilities)](https://github.com/josh-development/utilities/blob/main/LICENSE)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@joshdb/serialize?logo=webpack&style=flat-square)](https://bundlephobia.com/result?p=@sjoshdb/serialize)
 [![npm](https://img.shields.io/npm/v/@joshdb/serialize?color=crimson&logo=npm&style=flat-square&label=@joshdb/serialize)](https://www.npmjs.com/package/@joshdb/serialize)
 
 </div>
 
 ## Description
 
-A serialize utility to be able to convert nodejs data types into a json compatible format
+A serialize utility to be able to convert nodejs data types into a json compatible format.
 
 ## Features
 
 - Written in TypeScript
-- Offers CommonJS, ESM, and UMD bundles
+- Offers CommonJS, ESM and UMD bundles
 - Fully tested
-- Can serialize many native node.js types into a JSON compatible format
 
 ## Installation
 
