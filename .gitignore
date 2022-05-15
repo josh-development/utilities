@@ -5,6 +5,7 @@ node_modules/
 # Ignore build artifacts
 dist/
 build/
+.turbo/
 
 # Ignore heapsnapshot and log files
 *.heapsnapshot
