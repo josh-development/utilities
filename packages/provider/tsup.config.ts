@@ -1,3 +1,3 @@
 import { createTsupConfig } from '../../scripts/tsup.config';
 
-export default createTsupConfig({ globalName: 'JoshSerialize' });
+export default createTsupConfig({ globalName: 'JoshProvider' });
