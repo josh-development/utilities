@@ -42,7 +42,7 @@ jobs:
       - name: Install Dependencies
         run: yarn --immutable
       - name: Run Tests
-        run: yarn test --coverage
+        run: yarn test:coverage
       - name: Store Code Coverage Report
         uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535 # tag=v3
         with:
@@ -65,5 +65,5 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install Dependencies
         run: yarn --immutable
-      - name: Build Code
+      - name: Compile Packages
         run: yarn build

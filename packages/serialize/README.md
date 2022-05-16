@@ -13,14 +13,13 @@
 
 ## Description
 
-A serialize utility to be able to convert nodejs data types into a json compatible format
+A serialize utility to be able to convert nodejs data types into a json compatible format.
 
 ## Features
 
 - Written in TypeScript
-- Offers CommonJS, ESM, and UMD bundles
+- Offers CommonJS, ESM and UMD bundles
 - Fully tested
-- Can serialize many native node.js types into a JSON compatible format
 
 ## Installation
 

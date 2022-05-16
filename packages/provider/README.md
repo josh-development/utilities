@@ -18,7 +18,7 @@ A core Josh utility to create providers.
 ## Features
 
 - Written in TypeScript
-- Offers CommonJS, ESM, and UMD bundles
+- Offers CommonJS, ESM and UMD bundles
 - Fully tested
 
 ## Installation
