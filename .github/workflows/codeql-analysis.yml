@@ -12,6 +12,7 @@ on:
 
 jobs:
   code-ql:
+    name: CodeQL Analysis
     runs-on: ubuntu-latest
 
     steps:
