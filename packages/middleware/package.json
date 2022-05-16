@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "@joshdb/provider": "workspace:^",
-    "@sapphire/utilities": "^3.6.2"
+    "@sapphire/utilities": "^3.6.2",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@favware/rollup-type-bundler": "^1.0.7",
