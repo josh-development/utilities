@@ -1,3 +1,3 @@
 name: provider
 org: joshdb
-packagePath: packages/serialize
+packagePath: packages/provider

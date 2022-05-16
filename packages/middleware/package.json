@@ -8,19 +8,22 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "browser": "dist/index.umd.js",
-  "unpkg": "dist/index.umd.js",
+  "browser": "dist/index.global.js",
+  "unpkg": "dist/index.global.js",
   "types": "dist/index.d.ts",
   "exports": {
     "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
   },
+  "sideEffects": false,
   "scripts": {
     "test": "jest",
     "lint": "eslint src tests --ext ts --fix -c ../../.eslintrc",
-    "build": "rollup -c rollup.bundle.ts",
-    "release": "npm publish",
-    "prepublishOnly": "rollup-type-bundler"
+    "build": "tsup && tsc -b src",
+    "prepack": "yarn build",
+    "bump": "cliff-jumper",
+    "check-update": "cliff-jumper --dry-run"
   },
   "dependencies": {
     "@joshdb/provider": "workspace:^",
@@ -28,10 +31,9 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@favware/rollup-type-bundler": "^1.0.7",
-    "jest": "^27.5.1",
-    "rollup": "^2.68.0",
-    "standard-version": "^9.3.2"
+    "@swc/core": "^1.2.185",
+    "tsup": "^5.12.7",
+    "typescript": "^4.6.4"
   },
   "repository": {
     "type": "git",
