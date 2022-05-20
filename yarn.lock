@@ -947,6 +947,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@joshdb/provider@workspace:packages/provider"
   dependencies:
+    "@favware/rollup-type-bundler": ^1.0.7
     "@sapphire/utilities": ^3.6.2
   languageName: unknown
   linkType: soft
@@ -954,6 +955,8 @@ __metadata:
 "@joshdb/serialize@workspace:packages/serialize":
   version: 0.0.0-use.local
   resolution: "@joshdb/serialize@workspace:packages/serialize"
+  dependencies:
+    "@favware/rollup-type-bundler": ^1.0.7
   languageName: unknown
   linkType: soft
 
