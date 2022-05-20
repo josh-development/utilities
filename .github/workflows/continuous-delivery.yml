@@ -35,6 +35,8 @@ jobs:
           registry-url: https://registry.yarnpkg.com/
       - name: Install Dependencies
         run: yarn --immutable
+      - name: Build Packages
+        run: yarn build
       - name: Bump Versions & Publish
         run: |
           # Resolve the tag to be used. "next" for push events, "pr-{prNumber}" for dispatch events.
