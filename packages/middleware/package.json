@@ -20,8 +20,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src tests --ext ts --fix -c ../../.eslintrc",
-    "build": "tsup && tsc -b src",
-    "prepack": "yarn build",
+    "build": "rollup -c rollup.config.ts",
+    "prepack": "rollup-type-bundler",
     "bump": "cliff-jumper",
     "check-update": "cliff-jumper --dry-run"
   },
@@ -31,9 +31,7 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.185",
-    "tsup": "^5.12.7",
-    "typescript": "^4.6.4"
+    "@favware/rollup-type-bundler": "^1.0.7"
   },
   "repository": {
     "type": "git",
