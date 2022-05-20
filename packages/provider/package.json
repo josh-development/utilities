@@ -20,7 +20,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src tests --ext ts --fix -c ../../.eslintrc",
-    "build": "rollup -c rollup.config.ts && tsc -b src",
+    "build": "rollup -c rollup.config.ts",
     "prepack": "rollup-type-bundler",
     "bump": "cliff-jumper",
     "check-update": "cliff-jumper --dry-run"
