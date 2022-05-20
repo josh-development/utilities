@@ -16,6 +16,9 @@
     "require": "./dist/index.js",
     "types": "./dist/index.d.ts"
   },
+  "devDependencies": {
+    "@favware/rollup-type-bundler": "^1.0.7"
+  },
   "sideEffects": false,
   "scripts": {
     "test": "jest",
