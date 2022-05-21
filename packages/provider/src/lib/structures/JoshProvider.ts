@@ -70,14 +70,14 @@ export abstract class JoshProvider<StoredValue = unknown> {
     if (version.major < this.version.major) {
       const { allowMigrations } = this.options;
 
-      if (!allowMigrations) throw this.error(JoshProvider.Identifiers.NeedsMigrations);
+      if (!allowMigrations) throw this.error(JoshProvider.CommonIdentifiers.NeedsMigrations);
 
       const migration = this.migrations.find(
         (migration) =>
           migration.version.major === version.major && migration.version.minor <= version.minor && migration.version.patch <= version.patch
       );
 
-      if (migration === undefined) throw this.error(JoshProvider.Identifiers.MigrationNotFound, { version });
+      if (migration === undefined) throw this.error(JoshProvider.CommonIdentifiers.MigrationNotFound, { version });
 
       const { major, minor, patch } = version;
 
@@ -465,14 +465,14 @@ export abstract class JoshProvider<StoredValue = unknown> {
     if (result !== null) return result;
 
     switch (identifier) {
-      case JoshProvider.Identifiers.MigrationNotFound: {
+      case JoshProvider.CommonIdentifiers.MigrationNotFound: {
         const { version } = metadata;
         const { major, minor, patch } = version as JoshProvider.Semver;
 
         return `Migration not found for version ${major}.${minor}.${patch}.`;
       }
 
-      case JoshProvider.Identifiers.NeedsMigrations:
+      case JoshProvider.CommonIdentifiers.NeedsMigrations:
         return `[${this.constructor.name}]: The provider ${
           this.name?.length ? `with the name "${this.name}" ` : ''
         }needs migrations. Please set the "allowMigrations" option to true to run migrations automatically.`;
@@ -554,7 +554,7 @@ export namespace JoshProvider {
     patch: number;
   }
 
-  export enum Identifiers {
+  export enum CommonIdentifiers {
     MigrationNotFound = 'MigrationNotFound',
 
     NeedsMigrations = 'needsMigration'
