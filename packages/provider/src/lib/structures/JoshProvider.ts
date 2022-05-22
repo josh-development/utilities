@@ -38,7 +38,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * The semver version of this provider.
    * @since 2.0.0
    */
-  public abstract version: JoshProvider.Semver;
+  public abstract get version(): JoshProvider.Semver;
 
   public constructor(options: JoshProvider.Options = {}) {
     this.options = options;
@@ -487,14 +487,9 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @returns The resolved version.
    */
   protected resolveVersion(version: string): JoshProvider.Semver {
-    return version
-      .split('.')
-      .map(Number)
-      .reduce((semver, value, index) => ({ ...semver, [['major', 'minor', 'patch'][index]]: value }), {
-        major: 0,
-        minor: 0,
-        patch: 0
-      });
+    const [major, minor, patch] = version.split('.').map(Number);
+
+    return { major, minor, patch };
   }
 
   protected abstract fetchVersion(): Awaitable<JoshProvider.Semver>;
