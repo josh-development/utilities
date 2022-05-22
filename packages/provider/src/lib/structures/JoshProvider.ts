@@ -65,7 +65,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
     this.name = name;
 
-    const version = await this.fetchVersion();
+    const version = await this.fetchVersion(context);
 
     if (version.major < this.version.major) {
       const { allowMigrations } = this.options;
@@ -492,7 +492,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
     return { major, minor, patch };
   }
 
-  protected abstract fetchVersion(): Awaitable<JoshProvider.Semver>;
+  protected abstract fetchVersion(context: JoshProvider.Context): Awaitable<JoshProvider.Semver>;
 }
 
 export namespace JoshProvider {
