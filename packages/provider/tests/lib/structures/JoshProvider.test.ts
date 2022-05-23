@@ -13,7 +13,9 @@ describe('JoshProvider', () => {
 
   describe('migrations', () => {
     class TestProvider<StoredValue = unknown> extends JoshProvider<StoredValue> {
-      public version = { major: 2, minor: 0, patch: 0 };
+      public get version() {
+        return { major: 2, minor: 0, patch: 0 };
+      }
 
       public migrations = [
         {
