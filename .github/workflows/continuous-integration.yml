@@ -41,6 +41,8 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install Dependencies
         run: yarn --immutable
+      - name: Build Packages
+        run: yarn build
       - name: Run Tests
         run: yarn test:coverage
       - name: Store Code Coverage Report
