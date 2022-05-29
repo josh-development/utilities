@@ -1,4 +1,5 @@
 name: '*next*'
 package:
+  - '@joshdb/middleware'
   - '@joshdb/provider'
   - '@joshdb/serialize'
