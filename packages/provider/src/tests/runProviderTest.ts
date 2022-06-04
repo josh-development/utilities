@@ -32,6 +32,7 @@ export function runProviderTest<
       });
 
       afterAll(async () => {
+        await provider[Method.Clear]({ method: Method.Clear });
         if (typeof cleanup === 'function') await cleanup(provider as CleanupProvider);
       });
 
@@ -1785,7 +1786,7 @@ export function runProviderTest<
           expect(mockCallback.mock.calls.length).toBe(0);
         });
 
-        test('GIVEN provider w/ data THEN loops x times', async () => {
+        test('GIVEN provider w/ data THEN loops x times THEN clears', async () => {
           const mockCallback = jest.fn((..._) => true);
 
           await provider[Method.Set]({ method: Method.Set, key: 'test:each1', path: [], value: 'value1' });
