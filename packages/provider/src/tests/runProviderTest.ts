@@ -7,10 +7,10 @@ export function runProviderTest<
   Options extends JoshProvider.Options = JoshProvider.Options,
   CleanupProvider extends JoshProvider = JoshProvider
 >(options: ProviderTestOptions<Provider, Options, CleanupProvider>): void {
-  const { providerConstructor: Provider, providerOptions = {}, cleanup, disableDisableSerializationCheck } = options;
+  const { providerConstructor: Provider, providerOptions = {}, cleanup, serialization } = options;
 
-  for (const serialization of disableDisableSerializationCheck ? [true] : [true, false]) {
-    describe(`${Provider.prototype.constructor.name} - serialization: ${serialization}`, () => {
+  for (const serialize of serialization === false ? [true] : [true, false]) {
+    describe(`${Provider.prototype.constructor.name} - serialization: ${serialize}`, () => {
       describe('is a class', () => {
         test(`GIVEN typeof ${Provider.prototype.constructor.name} THEN returns function`, () => {
           expect(typeof Provider).toBe('function');
@@ -22,7 +22,7 @@ export function runProviderTest<
       });
 
       describe('can manipulate provider data', () => {
-        const provider = new Provider(providerOptions);
+        const provider = new Provider({ ...providerOptions, disableSerialization: !serialize });
 
         beforeAll(async () => {
           await provider.init({ name: 'provider' });
@@ -1817,7 +1817,11 @@ export interface ProviderTestOptions<
 
   providerOptions?: Options;
 
-  disableDisableSerializationCheck?: boolean;
+  /**
+   * Whether to test ``disableSerialization`` on the provider
+   * @default true
+   */
+  serialization?: boolean;
 
   cleanup?: (provider: CleanupProvider) => Awaitable<void>;
 }
