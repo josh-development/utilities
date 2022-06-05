@@ -10,7 +10,7 @@ export function runProviderTest<
   const { providerConstructor: Provider, providerOptions = {}, cleanup, serialization } = options;
 
   for (const serialize of serialization === false ? [true] : [true, false]) {
-    describe(`${Provider.prototype.constructor.name} - serialization: ${serialize}`, () => {
+    describe(`${Provider.prototype.constructor.name} - Serialization ${serialize ? 'Enabled' : 'Disabled'}`, () => {
       describe('is a class', () => {
         test(`GIVEN typeof ${Provider.prototype.constructor.name} THEN returns function`, () => {
           expect(typeof Provider).toBe('function');
