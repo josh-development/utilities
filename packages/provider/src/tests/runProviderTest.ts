@@ -1818,7 +1818,7 @@ export interface ProviderTestOptions<
   providerOptions?: Options;
 
   /**
-   * Whether to test ``disableSerialization`` on the provider
+   * Whether to test `disableSerialization` on the provider
    * @default true
    */
   serialization?: boolean;
