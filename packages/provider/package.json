@@ -29,7 +29,7 @@
     "@sapphire/utilities": "^3.6.2"
   },
   "devDependencies": {
-    "@favware/rollup-type-bundler": "^1.0.7"
+    "@favware/rollup-type-bundler": "^1.0.8"
   },
   "repository": {
     "type": "git",
