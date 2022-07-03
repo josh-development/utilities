@@ -17,7 +17,7 @@
     "types": "./dist/index.d.ts"
   },
   "devDependencies": {
-    "@favware/rollup-type-bundler": "^1.0.8"
+    "@favware/rollup-type-bundler": "^1.0.9"
   },
   "sideEffects": false,
   "scripts": {
