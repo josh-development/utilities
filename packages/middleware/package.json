@@ -27,11 +27,11 @@
   },
   "dependencies": {
     "@joshdb/provider": "workspace:^",
-    "@sapphire/utilities": "^3.6.2",
+    "@sapphire/utilities": "^3.7.0",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@favware/rollup-type-bundler": "^1.0.8"
+    "@favware/rollup-type-bundler": "^1.0.9"
   },
   "repository": {
     "type": "git",
