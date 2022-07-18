@@ -20,7 +20,7 @@ export class JoshProviderError extends Error {
   public constructor(options: JoshProviderErrorOptions) {
     const { name, message, identifier, method } = options;
 
-    super(message);
+    super((identifier || 'unknown') + (message ? `: ${message}` : ''));
     this.name = name ?? 'JoshError';
     this.identifier = identifier;
     this.method = method ?? null;
