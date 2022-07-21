@@ -2,6 +2,7 @@ import type { Awaitable, Constructor } from '@sapphire/utilities';
 import type { JoshProvider } from '../lib/structures/JoshProvider';
 import { CommonIdentifiers, MathOperator, Method, Payload } from '../lib/types';
 
+/* istanbul ignore next */
 export function runProviderTest<
   Provider extends Constructor<JoshProvider>,
   Options extends JoshProvider.Options = JoshProvider.Options,
