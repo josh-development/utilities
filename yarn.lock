@@ -964,6 +964,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@joshdb/middleware@workspace:packages/middleware"
   dependencies:
+    "@favware/cliff-jumper": ^1.8.5
     "@favware/rollup-type-bundler": ^1.0.9
     "@joshdb/provider": "workspace:^"
     "@sapphire/utilities": ^3.7.0
@@ -975,6 +976,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@joshdb/provider@workspace:packages/provider"
   dependencies:
+    "@favware/cliff-jumper": ^1.8.5
     "@favware/rollup-type-bundler": ^1.0.9
     "@sapphire/utilities": ^3.7.0
   languageName: unknown
@@ -984,6 +986,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@joshdb/serialize@workspace:packages/serialize"
   dependencies:
+    "@favware/cliff-jumper": ^1.8.5
     "@favware/rollup-type-bundler": ^1.0.9
   languageName: unknown
   linkType: soft
