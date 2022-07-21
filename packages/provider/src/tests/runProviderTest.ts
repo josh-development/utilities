@@ -1751,7 +1751,7 @@ export function runProviderTest<
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
               expect(error).toBeUndefined();
-              expect(path).toEqual(['path']);
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(false);
             });
@@ -1773,7 +1773,7 @@ export function runProviderTest<
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
               expect(error).toBeUndefined();
-              expect(path).toEqual(['path']);
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
