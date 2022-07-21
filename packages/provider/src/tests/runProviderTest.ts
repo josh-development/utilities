@@ -2,6 +2,7 @@ import type { Awaitable, Constructor } from '@sapphire/utilities';
 import type { JoshProvider } from '../lib/structures/JoshProvider';
 import { CommonIdentifiers, MathOperator, Method, Payload } from '../lib/types';
 
+/* istanbul ignore next */
 export function runProviderTest<
   Provider extends Constructor<JoshProvider>,
   Options extends JoshProvider.Options = JoshProvider.Options,
@@ -417,6 +418,45 @@ export function runProviderTest<
               expect(trigger).toBeUndefined();
               expect(error).toBeUndefined();
               expect(path).toEqual(['path']);
+              expect(value).toBe('value');
+              expect(data).toBe(true);
+            });
+
+            test('GIVEN provider w/o data w/o path THEN returns payload(true)', async () => {
+              const payload = await provider[Method.Every]({ method: Method.Every, type: Payload.Type.Value, path: [], value: 'value' });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, path, value, data } = payload;
+
+              expect(method).toBe(Method.Every);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
+              expect(value).toBe('value');
+              expect(data).toBe(true);
+            });
+
+            test('GIVEN provider w/ data w/o path THEN returns payload(true)', async () => {
+              await provider[Method.SetMany]({
+                method: Method.SetMany,
+                entries: [
+                  [{ key: 'firstKey', path: [] }, 'value'],
+                  [{ key: 'secondKey', path: [] }, 'value']
+                ],
+                overwrite: true
+              });
+
+              const payload = await provider[Method.Every]({ method: Method.Every, type: Payload.Type.Value, path: [], value: 'value' });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, path, value, data } = payload;
+
+              expect(method).toBe(Method.Every);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -1693,6 +1733,48 @@ export function runProviderTest<
               expect(trigger).toBeUndefined();
               expect(error).toBeUndefined();
               expect(path).toEqual(['path']);
+              expect(value).toBe('value');
+              expect(data).toBe(true);
+            });
+
+            test('GIVEN provider w/o data w/o path THEN returns payload(false)', async () => {
+              const payload = await provider[Method.Some]({
+                method: Method.Some,
+                type: Payload.Type.Value,
+                path: [],
+                value: 'value'
+              });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, path, value, data } = payload;
+
+              expect(method).toBe(Method.Some);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
+              expect(value).toBe('value');
+              expect(data).toBe(false);
+            });
+
+            test('GIVEN provider w/ data w/o path THEN returns payload(true)', async () => {
+              await provider[Method.Set]({ method: Method.Set, key: 'test:some', path: [], value: 'value' });
+
+              const payload = await provider[Method.Some]({
+                method: Method.Some,
+                type: Payload.Type.Value,
+                path: [],
+                value: 'value'
+              });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, path, value, data } = payload;
+
+              expect(method).toBe(Method.Some);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
