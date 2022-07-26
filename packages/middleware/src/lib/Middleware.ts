@@ -308,10 +308,10 @@ export namespace Middleware {
      */
     conditions: Conditions;
   }
+}
 
-  export enum Identifiers {
-    NameNotFound = 'nameNotFound',
+export enum MiddlewareIdentifiers {
+  NameNotFound = 'nameNotFound',
 
-    StoreNotFound = 'storeNotFound'
-  }
+  StoreNotFound = 'storeNotFound'
 }
