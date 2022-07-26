@@ -24,14 +24,16 @@ export class JoshProviderError extends Error {
   public context: Record<PropertyKey, unknown>;
 
   public constructor(options: JoshProviderErrorOptions) {
-    const { name, message, identifier, method, context } = options;
+    const { name, identifier, method, context } = options;
 
-    super(message);
+    super(JoshProviderError.formatMessage(options));
     this.name = name ?? 'JoshError';
     this.identifier = identifier;
     this.method = method ?? null;
     this.context = context ?? {};
   }
+
+  public static formatMessage: (options: JoshProviderErrorOptions) => string | undefined = ({ message }) => message;
 }
 
 /**
