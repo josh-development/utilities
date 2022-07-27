@@ -73,7 +73,7 @@ export namespace Payload {
     /**
      * The type for this extension.
      * @since 2.0.0
-     * @see {@link Type}
+     * @see Type
      */
     type: Type.Hook;
 
@@ -92,7 +92,7 @@ export namespace Payload {
     /**
      * The type for this extension.
      * @since 2.0.0
-     * @see {@link Type}
+     * @see Type
      */
     type: Type.Value;
 
@@ -124,7 +124,7 @@ export namespace Payload {
     /**
      * The type for this extension.
      * @since 2.0.0
-     * @see {@link Type}
+     * @see `Type`
      */
     type: Type.Path;
 

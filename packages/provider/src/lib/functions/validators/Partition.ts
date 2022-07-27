@@ -1,7 +1,7 @@
 import { Method, Payload, Payloads } from '../../types';
 
 /**
- * Validates whether the given payload is {@link Payloads.Partition.ByHook}
+ * Validates whether the given payload is `Payloads.Partition.ByHook`
  * @since 2.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
@@ -11,7 +11,7 @@ export function isPartitionByHookPayload<StoredValue>(payload: Payloads.Partitio
 }
 
 /**
- * Validates whether the given payload is {@link Payloads.Partition.ByValue}
+ * Validates whether the given payload is `Payloads.Partition.ByValue`
  * @since 2.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.

@@ -7,6 +7,7 @@
   "scripts": {
     "clean": "rimraf \"packages/**/dist\" \"packages/**/build\" \"packages/**/.turbo\" \"packages/**/node_modules/.cache\" \"node_modules/.cache\"",
     "generate": "node scripts/generate/generate.mjs",
+    "docs": "turbo run docs",
     "lint": "eslint packages --ext mjs,js,ts --fix",
     "format": "prettier --write \"packages/**/{src,tests}/**/*.{mjs,js,ts}\"",
     "test": "turbo run test",
@@ -17,6 +18,7 @@
     "postinstall": "husky install"
   },
   "devDependencies": {
+    "@actions/core": "^1.9.0",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@favware/cliff-jumper": "^1.8.5",
