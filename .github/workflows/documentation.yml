@@ -88,8 +88,8 @@ jobs:
       - name: Move Documentation
         if: ${{ env.TYPE == 'tag' }}
         env:
-          PACKAGE: ${{ extract-tag.outputs.package }}
-          SEMVER: ${{ extract-tag.outputs.semver }}
+          PACKAGE: ${{ steps.extract-tag.outputs.package }}
+          SEMVER: ${{ steps.extract-tag.outputs.semver }}
         run: |
           mkdir -p out/${PACKAGE}
           mv docs/${PACKAGE}/docs/api.json out/${PACKAGE}/${SEMVER}.json
