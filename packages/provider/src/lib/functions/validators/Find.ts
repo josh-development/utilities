@@ -1,7 +1,7 @@
 import { Method, Payload, Payloads } from '../../types';
 
 /**
- * Validates whether the given payload is {@link Payloads.Find.ByHook}
+ * Validates whether the given payload is `Payloads.Find.ByHook`
  * @since 2.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
@@ -11,7 +11,7 @@ export function isFindByHookPayload<StoredValue>(payload: Payloads.Find<StoredVa
 }
 
 /**
- * Validates whether the given payload is {@link Payloads.Find.ByValue}
+ * Validates whether the given payload is `Payloads.Find.ByValue`
  * @since 2.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.

@@ -1,7 +1,7 @@
 import { Method, Payload, Payloads } from '../../types';
 
 /**
- * Validates whether the given payload is {@link Payloads.Filter.ByHook}
+ * Validates whether the given payload is `Payloads.Filter.ByHook`
  * @since 2.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
@@ -11,7 +11,7 @@ export function isFilterByHookPayload<StoredValue>(payload: Payloads.Filter<Stor
 }
 
 /**
- * Validates whether the given payload is {@link Payloads.Filter.ByValue}
+ * Validates whether the given payload is `Payloads.Filter.ByValue`
  * @since 2.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.

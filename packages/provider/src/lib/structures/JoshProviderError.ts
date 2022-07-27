@@ -1,7 +1,7 @@
 import type { Method } from '../types';
 
 /**
- * The base class for errors in {@link Josh}
+ * The base class for errors in `Josh`
  * @since 2.0.0
  */
 export class JoshProviderError extends Error {
@@ -37,7 +37,7 @@ export class JoshProviderError extends Error {
 }
 
 /**
- * The options for {@link JoshError}
+ * The options for `JoshError`
  * @since 2.0.0
  */
 export interface JoshProviderErrorOptions {

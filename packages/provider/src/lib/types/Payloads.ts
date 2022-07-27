@@ -113,7 +113,7 @@ export namespace Payloads {
     key: string;
 
     /**
-     * The default value to store if {@link Payloads.Ensure.key} doesn't exist.
+     * The default value to store if `Payloads.Ensure#key` doesn't exist.
      * @since 2.0.0
      */
     defaultValue: StoredValue;
