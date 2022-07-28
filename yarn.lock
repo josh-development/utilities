@@ -970,7 +970,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^1.8.5
     "@favware/rollup-type-bundler": ^1.0.9
-    "@joshdb/provider": "workspace:^"
+    "@joshdb/provider": 1.1.0-next.28cedac.0
     "@sapphire/utilities": ^3.7.0
     reflect-metadata: ^0.1.13
     typedoc: ^0.23.9
@@ -978,7 +978,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@joshdb/provider@workspace:^, @joshdb/provider@workspace:packages/provider":
+"@joshdb/provider@npm:1.1.0-next.28cedac.0":
+  version: 1.1.0-next.28cedac.0
+  resolution: "@joshdb/provider@npm:1.1.0-next.28cedac.0"
+  dependencies:
+    "@sapphire/utilities": ^3.7.0
+  checksum: 4f0cd5cbdb977fc021d1161f0c7aaf58e0abda414b0b06592d0b32cae7d3fb793f6eba0282565a42926d8baecf59b1badfdf4862681ccf64c2f699e325108f9a
+  languageName: node
+  linkType: hard
+
+"@joshdb/provider@workspace:packages/provider":
   version: 0.0.0-use.local
   resolution: "@joshdb/provider@workspace:packages/provider"
   dependencies:
