@@ -4,7 +4,7 @@
   "description": "A serialize utility to be able to convert nodejs data types into a json compatible format",
   "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
   "contributors": [
-    "Hezekiah Hendry <real.shadow.nova@gmail.com>"
+    "Hezekiah Hendry <hezekiah.hendry@gmail.com>"
   ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -16,12 +16,6 @@
     "require": "./dist/index.js",
     "types": "./dist/index.d.ts"
   },
-  "devDependencies": {
-    "@favware/cliff-jumper": "^1.8.5",
-    "@favware/rollup-type-bundler": "^1.0.9",
-    "typedoc": "^0.23.9",
-    "typedoc-json-parser": "^2.0.1"
-  },
   "sideEffects": false,
   "scripts": {
     "test": "jest",
@@ -31,6 +25,12 @@
     "prepack": "rollup-type-bundler",
     "bump": "cliff-jumper",
     "check-update": "cliff-jumper --dry-run"
+  },
+  "devDependencies": {
+    "@favware/cliff-jumper": "^1.8.5",
+    "@favware/rollup-type-bundler": "^1.0.9",
+    "typedoc": "^0.23.9",
+    "typedoc-json-parser": "^2.0.1"
   },
   "repository": {
     "type": "git",

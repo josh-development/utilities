@@ -6,8 +6,11 @@
 
 **A core Josh utility to create providers**
 
-[![GitHub](https://img.shields.io/github/license/josh-development/utilities)](https://github.com/josh-development/utilities/blob/main/LICENSE)
-[![npm](https://img.shields.io/npm/v/@joshdb/provider?color=crimson&logo=npm&style=flat-square&label=@joshdb/provider)](https://www.npmjs.com/package/@joshdb/provider)
+[![GitHub](https://img.shields.io/github/license/josh-development/utilities)](https://github.com/josh-development/utilities/blob/main/LICENSE.md)
+[![codecov](https://codecov.io/gh/josh-development/utilities/branch/main/graph/badge.svg?token=JnJcjxqT3k)](https://codecov.io/gh/josh-development/utilities)
+[![npm](https://img.shields.io/npm/v/@joshdb/middleware?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/@joshdb/middleware)
+
+[![Support Server](https://discord.com/api/guilds/298508738623438848/embed.png?style=banner2)](https://discord.gg/N7ZKH3P)
 
 </div>
 

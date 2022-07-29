@@ -2,11 +2,12 @@
 
 ![Josh Logo](https://evie.codes/josh-light.png)
 
-# @joshdb/utilities
+# Josh Utilities
 
 **Common Node.js packages for the Josh project.**
 
 [![GitHub](https://img.shields.io/github/license/josh-development/utilities)](https://github.com/josh-development/utilities/blob/main/LICENSE)
+[![codecov](https://codecov.io/gh/josh-development/utilities/branch/main/graph/badge.svg?token=JnJcjxqT3k)](https://codecov.io/gh/josh-development/utilities)
 
 **Packages**
 
