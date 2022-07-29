@@ -4,12 +4,12 @@ import type { Middleware } from './Middleware';
 
 /**
  * The store to contain {@link Middleware} classes.
- * @since 2.0.0
+ * @since 1.0.0
  */
 export class MiddlewareStore<StoredValue = unknown> extends Map<string, Middleware<NonNullObject, StoredValue>> {
   /**
    * The link {@link JoshProvider} instance for this store.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public provider: JoshProvider<StoredValue>;
 
@@ -23,7 +23,7 @@ export class MiddlewareStore<StoredValue = unknown> extends Map<string, Middlewa
 
   /**
    * Gets an array of middlewares.
-   * @since 2.0.0
+   * @since 1.0.0
    * @returns The array of middlewares.
    */
   public array(): Middleware<NonNullObject, StoredValue>[] {
@@ -32,7 +32,7 @@ export class MiddlewareStore<StoredValue = unknown> extends Map<string, Middlewa
 
   /**
    * Get pre provider middlewares by method.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param method The method to filter by.
    * @returns The middlewares after filtered.
    */
@@ -42,7 +42,7 @@ export class MiddlewareStore<StoredValue = unknown> extends Map<string, Middlewa
 
   /**
    * Get post provider middlewares by method.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param method The method to filter by.
    * @returns The middlewares after filtered.
    */
@@ -52,7 +52,7 @@ export class MiddlewareStore<StoredValue = unknown> extends Map<string, Middlewa
 
   /**
    * Filter middlewares by their conditions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param method
    * @param trigger
    * @returns

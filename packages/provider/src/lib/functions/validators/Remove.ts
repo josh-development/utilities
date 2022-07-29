@@ -2,7 +2,7 @@ import { Method, Payload, Payloads } from '../../types';
 
 /**
  * Validates whether the given payload is `Payloads.Remove.ByHook`
- * @since 2.0.0
+ * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */
@@ -12,7 +12,7 @@ export function isRemoveByHookPayload<Value>(payload: Payloads.Remove<Value>): p
 
 /**
  * Validates whether the given payload is `Payloads.Remove.ByValue`
- * @since 2.0.0
+ * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */

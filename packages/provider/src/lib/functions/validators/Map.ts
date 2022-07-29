@@ -2,7 +2,7 @@ import { Method, Payload, Payloads } from '../../types';
 
 /**
  * Validates whether the given payload is `Payloads.Map.ByHook`
- * @since 2.0.0
+ * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */
@@ -14,7 +14,7 @@ export function isMapByHookPayload<StoredValue, ReturnValue>(
 
 /**
  * Validates whether the given payload is `Payloads.Map.ByPath`
- * @since 2.0.0
+ * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */

@@ -5,7 +5,7 @@ import type { MiddlewareStore } from './MiddlewareStore';
 /**
  * The base class for creating middlewares. Extend this class to create a middleware.
  * @see {@link Middleware.Options} for all available options for middlewares.
- * @since 2.0.0
+ * @since 1.0.0
  *
  * @example
  * ```typescript
@@ -33,25 +33,25 @@ import type { MiddlewareStore } from './MiddlewareStore';
 export class Middleware<ContextData extends NonNullObject, StoredValue = unknown> {
   /**
    * The store for this middleware.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public store?: MiddlewareStore<StoredValue>;
 
   /**
    * The name of this middleware.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public name: string;
 
   /**
    * The position this middleware runs at.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public readonly position?: number;
 
   /**
    * The conditions this middleware to run.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public readonly conditions: Middleware.Conditions;
 
@@ -71,7 +71,7 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
 
   /**
    * Initiates this class with it's store.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param store The store to set to `this`.
    * @returns Returns the current Middleware class.
    */
@@ -224,7 +224,7 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
 
   /**
    * Adds the options of this class to an object.
-   * @since 2.0.0
+   * @since 1.0.0
    * @returns The options for this middleware as an object.
    */
   public toJSON(): Middleware.JSON {
@@ -233,7 +233,7 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
 
   /**
    * The provider that is used with the current Josh.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   protected get provider(): JoshProvider<StoredValue> {
     if (this.store === undefined) throw new Error('The "store" property is undefined. This usually means this middleware has not been initiated.');
@@ -245,66 +245,66 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
 export namespace Middleware {
   /**
    * The options for {@link Middleware}
-   * @since 2.0.0
+   * @since 1.0.0
    */
   export interface Options {
     /**
      * The name of this middleware.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     name: string;
 
     /**
      * The position at which this middleware runs at.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     position?: number;
 
     /**
      * The conditions for this middleware to run on.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     conditions: Conditions;
   }
 
   /**
    * The conditions to run this middleware on.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   export interface Conditions {
     /**
      * The `pre` provider method conditions to run at.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     pre: Method[];
 
     /**
      * The `post` provider method conditions to run at.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     post: Method[];
   }
 
   /**
    * The options in an object for {@link Middleware}
-   * @since 2.0.0
+   * @since 1.0.0
    */
   export interface JSON {
     /**
      * The name of this middleware.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     name: string;
 
     /**
      * The position of this middleware.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     position?: number;
 
     /**
      * The conditions for this middleware.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     conditions: Conditions;
   }

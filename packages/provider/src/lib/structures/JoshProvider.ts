@@ -6,7 +6,7 @@ import { JoshProviderError, JoshProviderErrorOptions } from './JoshProviderError
 /**
  * The base provider class. Extend this class to create your own provider.
  *
- * @since 2.0.0
+ * @since 1.0.0
  * @see {@link JoshProvider.Options} for all options available to the JoshProvider class.
  * @example
  * ```typescript
@@ -18,25 +18,25 @@ import { JoshProviderError, JoshProviderErrorOptions } from './JoshProviderError
 export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * The name for this provider.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public name?: string;
 
   /**
    * The options for this provider.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public options: JoshProvider.Options;
 
   /**
    * Data migrations for this provider.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public migrations: JoshProvider.Migration[] = [];
 
   /**
    * The semver version of this provider.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   public abstract get version(): JoshProvider.Semver;
 
@@ -46,7 +46,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * Initialize the provider.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param context The provider's context sent by this provider's Josh instance.
    * @returns The provider's context.
    *
@@ -95,7 +95,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which generates a unique automatic key. This key must be unique and cannot overlap other keys.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -103,7 +103,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which clears all entries.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -115,7 +115,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType``
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -123,7 +123,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * Deletes either the entry itself or a path in an entry.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -131,7 +131,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * Deletes multiple entries and/or a path in an entry.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -139,7 +139,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach), except this supports asynchronous functions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -150,7 +150,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * If the key exists, it returns the value.
    * If the key does not exist, it creates it and returns the default value.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -158,7 +158,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Map#entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries), except returns a record of key-value pairs.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -166,7 +166,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#each(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)], except this supports asynchronous functions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -177,7 +177,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -186,7 +186,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except this supports asynchronous functions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -197,7 +197,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -206,7 +206,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find), except this supports asynchronous functions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -217,7 +217,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -226,7 +226,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Map#get()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get), except this has support for a path.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -234,7 +234,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method to get multiple entries.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -242,7 +242,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Map#has()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has), except this has support for a path.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -254,7 +254,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The entry or path in an entry does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType``
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -262,7 +262,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Map#keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys), except returns an array.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -270,7 +270,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map), except supports asynchronous functions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -283,7 +283,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not found - `CommonIdentifiers.MissingData`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -296,7 +296,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -304,7 +304,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except returns both truthy and falsy entries and supports asynchronous functions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -316,7 +316,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not found - `CommonIdentifiers.MissingData`
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -329,7 +329,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data at the path is not an array - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -339,7 +339,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * A method which gets random value(s).
    * Whether duplicates are allowed or not are controlled by `Payloads.Random#duplicates` option.
    * The amount of values returned is controlled by `Payloads.Random#count` option.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -349,7 +349,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * A method which gets random key(s).
    * Whether duplicates are allowed or not are controlled by `Payloads.RandomKey#duplicates` option.
    * The amount of keys returned is controlled by `Payloads.RandomKey#count` option.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -357,7 +357,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except it removes the values filtered and uses a path and value to validate
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -369,7 +369,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data at the path is not an array - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -378,7 +378,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Map#set()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set), except this supports a path.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -386,7 +386,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which sets multiple entries and/or paths in entries.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -394,7 +394,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Map#size()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size)
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -402,7 +402,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Array#some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some), except this supports asynchronous functions.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -414,7 +414,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The path does not exist on an entry - `CommonIdentifiers.MissingData`
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -426,7 +426,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * An error should be set to the payload and immediately return, if any of the following occurs:
    * - The key does not exist - `CommonIdentifiers.MissingData`
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -434,7 +434,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which mimics the functionality of [Map#values()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values), except this returns an array.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
@@ -442,7 +442,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * Creates an Josh provider error.
-   * @since 2.0.0
+   * @since 1.0.0
    * @param options The options for the error.
    * @returns The error.
    */
@@ -498,7 +498,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 export namespace JoshProvider {
   /**
    * The options to extend for {@link JoshProvider}
-   * @since 2.0.0
+   * @since 1.0.0
    *
    * @example
    * ```typescript
@@ -512,25 +512,25 @@ export namespace JoshProvider {
   export interface Options {
     /**
      * Whether to allow automatic provider data migrations.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     allowMigrations?: boolean;
   }
 
   /**
    * The context sent by the Josh instance.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   export interface Context {
     /**
      * The name of this context.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     name: string;
 
     /**
      * The error of this context.
-     * @since 2.0.0
+     * @since 1.0.0
      */
     error?: JoshProviderError;
   }

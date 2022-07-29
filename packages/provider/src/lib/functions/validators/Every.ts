@@ -2,7 +2,7 @@ import { Method, Payload, Payloads } from '../../types';
 
 /**
  * Validates whether the given payload is `Payloads.Every.ByHook`
- * @since 2.0.0
+ * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */
@@ -12,7 +12,7 @@ export function isEveryByHookPayload<StoredValue>(payload: Payloads.Every<Stored
 
 /**
  * Validates whether the given payload is `Payloads.Every.ByValue`
- * @since 2.0.0
+ * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */

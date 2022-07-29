@@ -2,18 +2,18 @@ import type { SerializeType } from './SerializeType';
 
 /**
  * The json format type interface.
- * @since 2.0.0
+ * @since 1.0.0
  */
 export interface SerializeJSON {
   /**
    * The type of {@link SerializeJSON.value}
-   * @since 2.0.0
+   * @since 1.0.0
    */
   type: SerializeType;
 
   /**
    * The value for this json.
-   * @since 2.0.0
+   * @since 1.0.0
    */
   value:
     | string

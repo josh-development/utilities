@@ -5,7 +5,7 @@ import { createProxy } from './utils/createProxy';
 
 /**
  * Decorator function that applies given options to {@link Middleware} class.
- * @since 2.0.0
+ * @since 1.0.0
  * @param options The middleware options.
  *
  * @example
