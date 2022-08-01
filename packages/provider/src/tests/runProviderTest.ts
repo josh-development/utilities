@@ -183,6 +183,10 @@ export function runProviderTest<
             expect(error).toBeUndefined();
             expect(key).toBe('test:dec');
             expect(path).toEqual([]);
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:dec', path: [] });
+
+            expect(get.data).toEqual(0);
           });
 
           test('GIVEN provider w/ number at path THEN decremented number at path', async () => {
@@ -199,6 +203,10 @@ export function runProviderTest<
             expect(error).toBeUndefined();
             expect(key).toBe('test:dec');
             expect(path).toEqual(['path']);
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:dec', path: ['path'] });
+
+            expect(get.data).toEqual(0);
           });
         });
 
@@ -832,6 +840,10 @@ export function runProviderTest<
             expect(error).toBeUndefined();
             expect(key).toBe('test:inc');
             expect(path).toEqual([]);
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:inc', path: [] });
+
+            expect(get.data).toEqual(2);
           });
 
           test('GIVEN provider w/ number at path THEN incremented number at key and path', async () => {
@@ -848,6 +860,10 @@ export function runProviderTest<
             expect(error).toBeUndefined();
             expect(key).toBe('test:inc');
             expect(path).toEqual(['path']);
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:inc', path: ['path'] });
+
+            expect(get.data).toEqual(2);
           });
         });
 
@@ -1289,6 +1305,10 @@ export function runProviderTest<
             expect(key).toBe('test:push');
             expect(path).toEqual([]);
             expect(value).toBe('value');
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:push', path: [] });
+
+            expect(get.data).toEqual(['value']);
           });
 
           test('GIVEN provider w/ array at path THEN returns payload AND pushes value to array at path', async () => {
@@ -1306,6 +1326,10 @@ export function runProviderTest<
             expect(key).toBe('test:push');
             expect(path).toEqual(['path']);
             expect(value).toBe('value');
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:push', path: ['path'] });
+
+            expect(get.data).toEqual(['value']);
           });
         });
 
@@ -1800,7 +1824,7 @@ export function runProviderTest<
           test('GIVEN provider w/ data at key THEN returns payload w/ data AND updates value at key', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'test:update', path: [], value: 'value' });
 
-            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => value });
+            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => value + ' updated'});
 
             expect(typeof payload).toBe('object');
 
@@ -1811,12 +1835,16 @@ export function runProviderTest<
             expect(error).toBeUndefined();
             expect(key).toBe('test:update');
             expect(typeof hook).toBe('function');
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:update', path: [] });
+
+            expect(get.data).toEqual('value updated');
           });
 
           test('GIVEN provider w/ data at path THEN returns payload w/ data AND updates value at path', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'test:update', path: ['path'], value: 'value' });
 
-            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => value });
+            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => value + ' updated'});
 
             expect(typeof payload).toBe('object');
 
@@ -1827,6 +1855,10 @@ export function runProviderTest<
             expect(error).toBeUndefined();
             expect(key).toBe('test:update');
             expect(typeof hook).toBe('function');
+
+            const get = await provider[Method.Get]({ method: Method.Get, key: 'test:update', path: ['path'] });
+
+            expect(get.data).toEqual('value updated');
           });
         });
 
