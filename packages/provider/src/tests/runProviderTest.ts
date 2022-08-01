@@ -1824,7 +1824,7 @@ export function runProviderTest<
           test('GIVEN provider w/ data at key THEN returns payload w/ data AND updates value at key', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'test:update', path: [], value: 'value' });
 
-            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => value + ' updated'});
+            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => `${value} updated` });
 
             expect(typeof payload).toBe('object');
 
@@ -1844,7 +1844,7 @@ export function runProviderTest<
           test('GIVEN provider w/ data at path THEN returns payload w/ data AND updates value at path', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'test:update', path: ['path'], value: 'value' });
 
-            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => value + ' updated'});
+            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => `${value} updated` });
 
             expect(typeof payload).toBe('object');
 
