@@ -1824,7 +1824,11 @@ export function runProviderTest<
           test('GIVEN provider w/ data at key THEN returns payload w/ data AND updates value at key', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'test:update', path: [], value: 'value' });
 
-            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => `${value} updated` });
+            const payload = await provider[Method.Update]({
+              method: Method.Update,
+              key: 'test:update',
+              hook: (value) => (value as string).toUpperCase()
+            });
 
             expect(typeof payload).toBe('object');
 
@@ -1838,13 +1842,17 @@ export function runProviderTest<
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'test:update', path: [] });
 
-            expect(get.data).toEqual('value updated');
+            expect(get.data).toEqual('VALUE');
           });
 
           test('GIVEN provider w/ data at path THEN returns payload w/ data AND updates value at path', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'test:update', path: ['path'], value: 'value' });
 
-            const payload = await provider[Method.Update]({ method: Method.Update, key: 'test:update', hook: (value) => `${value} updated` });
+            const payload = await provider[Method.Update]({
+              method: Method.Update,
+              key: 'test:update',
+              hook: (value) => (value as string).toUpperCase()
+            });
 
             expect(typeof payload).toBe('object');
 
@@ -1858,7 +1866,7 @@ export function runProviderTest<
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'test:update', path: ['path'] });
 
-            expect(get.data).toEqual('value updated');
+            expect(get.data).toEqual('VALUE');
           });
         });
 
