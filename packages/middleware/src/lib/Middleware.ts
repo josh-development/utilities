@@ -1,4 +1,4 @@
-import { JoshProvider, Method, Payload, Payloads } from '@joshdb/provider';
+import { JoshProvider, Method, Payloads } from '@joshdb/provider';
 import type { Awaitable, NonNullObject } from '@sapphire/utilities';
 import type { MiddlewareStore } from './MiddlewareStore';
 
@@ -44,12 +44,6 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
   public name: string;
 
   /**
-   * The position this middleware runs at.
-   * @since 1.0.0
-   */
-  public readonly position?: number;
-
-  /**
    * The conditions this middleware to run.
    * @since 1.0.0
    */
@@ -60,12 +54,11 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
   public constructor(context: ContextData, options: Partial<Middleware.Options> = {}) {
     this.context = context;
 
-    const { name, position, conditions } = options;
+    const { name, conditions } = options;
 
     if (!name) throw new Error('No name was provided for this middleware.');
 
     this.name = name;
-    this.position = position;
     this.conditions = conditions ?? { pre: [], post: [] };
   }
 
@@ -228,17 +221,13 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
     return payload;
   }
 
-  public run<P extends Payload>(payload: P): Awaitable<unknown> {
-    return payload;
-  }
-
   /**
    * Adds the options of this class to an object.
    * @since 1.0.0
    * @returns The options for this middleware as an object.
    */
   public toJSON(): Middleware.JSON {
-    return { name: this.name, position: this.position, conditions: this.conditions };
+    return { name: this.name, conditions: this.conditions };
   }
 }
 
@@ -253,12 +242,6 @@ export namespace Middleware {
      * @since 1.0.0
      */
     name: string;
-
-    /**
-     * The position at which this middleware runs at.
-     * @since 1.0.0
-     */
-    position?: number;
 
     /**
      * The conditions for this middleware to run on.
@@ -295,12 +278,6 @@ export namespace Middleware {
      * @since 1.0.0
      */
     name: string;
-
-    /**
-     * The position of this middleware.
-     * @since 1.0.0
-     */
-    position?: number;
 
     /**
      * The conditions for this middleware.
