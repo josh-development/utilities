@@ -1,6 +1,6 @@
 import type { Awaitable } from '@sapphire/utilities';
-import type { Method, Trigger } from '.';
-import type { JoshProviderError } from '../structures/JoshProviderError';
+import type { Method } from './Method';
+import type { Trigger } from './Trigger';
 
 /**
  * The base payload to use for most Josh operations.
@@ -14,16 +14,16 @@ export interface Payload {
   method: Method;
 
   /**
+   * The metadata to use for this payload.
+   * @since 1.0.0
+   */
+  metadata: Record<PropertyKey, unknown>;
+
+  /**
    * The trigger this payload is currently for.
    * @since 1.0.0
    */
   trigger?: Trigger;
-
-  /**
-   * The error for this payload.
-   * @since 1.0.0
-   */
-  error?: JoshProviderError;
 }
 
 export namespace Payload {
@@ -150,7 +150,5 @@ export namespace Payload {
     Path
   }
 
-  export type Hook<Value, R = boolean> = (value: Value) => Awaitable<R>;
-
-  export type HookWithKey<Value, R = unknown> = (value: Value, key: string) => Awaitable<R>;
+  export type Hook<Value, R = unknown> = (value: Value, key: string) => Awaitable<R>;
 }

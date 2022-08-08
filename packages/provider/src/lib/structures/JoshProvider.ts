@@ -112,7 +112,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * Decrements an entry or a path in an entry by one.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType``
    * @since 1.0.0
@@ -175,7 +175,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#each(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)], except this uses a path and a value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
@@ -195,7 +195,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except this uses a path and a value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
@@ -215,7 +215,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find), except this uses a path and value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
@@ -251,7 +251,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * Increments an entry or a path in an entry by one.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The entry or path in an entry does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType``
    * @since 1.0.0
@@ -281,7 +281,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map), except maps over a path.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The data at the path is not found - `CommonIdentifiers.MissingData`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
@@ -293,7 +293,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which executes a math operation a value with an operand either on the entry or a path in the entry.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
@@ -313,7 +313,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except returns both truthy and falsy entries and validates using a path and value.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The data at the path is not found - `CommonIdentifiers.MissingData`
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
@@ -326,7 +326,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push), except this supports a path.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data at the path is not an array - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
@@ -366,7 +366,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except it removes the values filtered and uses a path and value to validate
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data at the path is not an array - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
@@ -411,7 +411,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which mimics the functionality of [Array#some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some), except this uses a path and value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The path does not exist on an entry - `CommonIdentifiers.MissingData`
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
@@ -424,7 +424,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   /**
    * A method which gets the stored value at a key and passes it to an asynchronous function and sets the data returned.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be thrown if any of the following occurs:
    * - The key does not exist - `CommonIdentifiers.MissingData`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
