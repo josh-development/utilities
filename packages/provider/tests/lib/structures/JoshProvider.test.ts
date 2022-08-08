@@ -13,10 +13,6 @@ describe('JoshProvider', () => {
 
   describe('migrations', () => {
     class TestProvider<StoredValue = unknown> extends JoshProvider<StoredValue> {
-      public get version() {
-        return { major: 2, minor: 0, patch: 0 };
-      }
-
       public migrations = [
         {
           version: { major: 1, minor: 0, patch: 0 },
@@ -24,6 +20,10 @@ describe('JoshProvider', () => {
           run() {}
         }
       ];
+
+      public get version() {
+        return { major: 2, minor: 0, patch: 0 };
+      }
 
       public [Method.AutoKey](payload: Payloads.AutoKey): Payloads.AutoKey {
         return payload;

@@ -70,6 +70,16 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
   }
 
   /**
+   * The provider that is used with the current Josh.
+   * @since 1.0.0
+   */
+  protected get provider(): JoshProvider<StoredValue> {
+    if (this.store === undefined) throw new Error('The "store" property is undefined. This usually means this middleware has not been initiated.');
+
+    return this.store.provider;
+  }
+
+  /**
    * Initiates this class with it's store.
    * @since 1.0.0
    * @param store The store to set to `this`.
@@ -229,16 +239,6 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
    */
   public toJSON(): Middleware.JSON {
     return { name: this.name, position: this.position, conditions: this.conditions };
-  }
-
-  /**
-   * The provider that is used with the current Josh.
-   * @since 1.0.0
-   */
-  protected get provider(): JoshProvider<StoredValue> {
-    if (this.store === undefined) throw new Error('The "store" property is undefined. This usually means this middleware has not been initiated.');
-
-    return this.store.provider;
   }
 }
 

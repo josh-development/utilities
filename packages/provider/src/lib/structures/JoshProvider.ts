@@ -34,15 +34,15 @@ export abstract class JoshProvider<StoredValue = unknown> {
    */
   public migrations: JoshProvider.Migration[] = [];
 
+  public constructor(options: JoshProvider.Options = {}) {
+    this.options = options;
+  }
+
   /**
    * The semver version of this provider.
    * @since 1.0.0
    */
   public abstract get version(): JoshProvider.Semver;
-
-  public constructor(options: JoshProvider.Options = {}) {
-    this.options = options;
-  }
 
   /**
    * Initialize the provider.
