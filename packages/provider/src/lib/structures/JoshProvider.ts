@@ -1,7 +1,7 @@
 import type { Awaitable } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
 import type { Method, Payloads } from '../types';
-import { JoshProviderError, JoshProviderErrorOptions } from './JoshProviderError';
+import { JoshProviderError } from './JoshProviderError';
 
 /**
  * The base provider class. Extend this class to create your own provider.
@@ -446,8 +446,15 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param options The options for the error.
    * @returns The error.
    */
-  protected error(options: string | JoshProviderErrorOptions, metadata: Record<string, unknown> = {}): JoshProviderError {
-    if (typeof options === 'string') return new JoshProviderError({ identifier: options, message: this.resolveIdentifier(options, metadata) });
+  protected error(options: string | JoshProviderError.Options, metadata: Record<string, unknown> = {}): JoshProviderError {
+    if (typeof options === 'string') {
+      return new JoshProviderError({
+        identifier: options,
+        origin: { type: JoshProviderError.OriginType.Provider, name: this.constructor.name.replace(/Provider/, '') },
+        message: this.resolveIdentifier(options, metadata)
+      });
+    }
+
     if ('message' in options) return new JoshProviderError(options);
 
     return new JoshProviderError({ ...options, name: options.name ?? `${this.constructor.name}Error` });

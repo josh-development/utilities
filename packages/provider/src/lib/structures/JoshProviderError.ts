@@ -23,7 +23,7 @@ export class JoshProviderError extends Error {
    */
   public context: Record<PropertyKey, unknown>;
 
-  public constructor(options: JoshProviderErrorOptions) {
+  public constructor(options: JoshProviderError.Options) {
     const { name, identifier, method, context } = options;
 
     super(JoshProviderError.formatMessage(options));
@@ -33,41 +33,69 @@ export class JoshProviderError extends Error {
     this.context = context ?? {};
   }
 
-  public static formatMessage: (options: JoshProviderErrorOptions) => string | undefined = ({ message }) => message;
+  public static formatMessage: (options: JoshProviderError.Options) => string | undefined = ({ message }) => message;
 }
 
-/**
- * The options for `JoshError`
- * @since 1.0.0
- */
-export interface JoshProviderErrorOptions {
+export namespace JoshProviderError {
   /**
-   * The name for this error.
+   * The options for `JoshError`
    * @since 1.0.0
    */
-  name?: string;
+  export interface Options {
+    /**
+     * The name for this error.
+     * @since 1.0.0
+     */
+    name?: string;
 
-  /**
-   * The identifier for this error.
-   * @since 1.0.0
-   */
-  identifier: string;
+    /**
+     * The identifier for this error.
+     * @since 1.0.0
+     */
+    identifier: string;
 
-  /**
-   * The method this error applies to.
-   * @since 1.0.0
-   */
-  method?: Method;
+    /**
+     * The method this error applies to.
+     * @since 1.0.0
+     */
+    method?: Method;
 
-  /**
-   * The context for this error.
-   * @since 1.0.0
-   */
-  context?: Record<PropertyKey, unknown>;
+    /**
+     * The origin of this error.
+     * @since 1.0.0
+     */
+    origin: Origin;
 
-  /**
-   * The message for this error.
-   * @since 1.0.0
-   */
-  message?: string;
+    /**
+     * The context for this error.
+     * @since 1.0.0
+     */
+    context?: Record<PropertyKey, unknown>;
+
+    /**
+     * The message for this error.
+     * @since 1.0.0
+     */
+    message?: string;
+  }
+
+  export interface Origin {
+    /**
+     * The origin type for this origin.
+     * @since 1.0.0
+     */
+    type: OriginType;
+
+    /**
+     * The origin name for this origin.
+     * @since 1.0.0
+     */
+    name: string;
+  }
+
+  export enum OriginType {
+    Provider = 'provider',
+
+    Middleware = 'middleware'
+  }
 }
