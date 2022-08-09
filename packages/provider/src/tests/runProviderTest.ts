@@ -44,10 +44,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.AutoKey);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(typeof data).toBe('string');
           });
 
@@ -69,10 +70,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger } = payload;
+            const { method, trigger, error } = payload;
 
             expect(method).toBe(Method.Clear);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
 
             const sizeAfter = await provider[Method.Size]({ method: Method.Size });
 
@@ -80,7 +82,7 @@ export function runProviderTest<
           });
 
           test('GIVEN provider w/ data THEN provider data cleared', async () => {
-            await provider[Method.Set]({ method: Method.Set, key: 'test:clear', path: [], value: 'value' });
+            await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
             const sizeBefore = await provider[Method.Size]({ method: Method.Size });
 
@@ -90,10 +92,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger } = payload;
+            const { method, trigger, error } = payload;
 
             expect(method).toBe(Method.Clear);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
 
             const sizeAfter = await provider[Method.Size]({ method: Method.Size });
 
@@ -103,31 +106,67 @@ export function runProviderTest<
 
         describe(Method.Dec, () => {
           test('GIVEN provider w/o data at key THEN returns payload w/ missing data error', async () => {
-            await expect(await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: [] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Dec }, { key: 'key', path: [] })
-            );
+            const payload = await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: [] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Dec);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
           });
 
           test('GIVEN provider w/o data at path THEN returns payload w/ missing data error', async () => {
-            await expect(await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: ['path'] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Dec }, { key: 'key', path: ['path'] })
-            );
+            const payload = await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: ['path'] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Dec);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
           });
 
           test('GIVEN provider w/ invalid type at key THEN returns payload w/ invalid type error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
-            await expect(await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: [] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Dec }, { key: 'key', path: [] })
-            );
+            const payload = await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: [] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Dec);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
           });
 
           test('GIVEN provider w/ invalid type at path THEN returns payload w/ invalid type error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: ['path'], value: 'value' });
 
-            await expect(await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: ['path'] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Dec }, { key: 'key', path: ['path'], type: 'number' })
-            );
+            const payload = await provider[Method.Dec]({ method: Method.Dec, key: 'key', path: ['path'] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Dec);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
           });
 
           test('GIVEN provider w/ number at key THEN decremented number at key', async () => {
@@ -137,16 +176,17 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path } = payload;
+            const { method, trigger, error, key, path } = payload;
 
             expect(method).toBe(Method.Dec);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
 
-            expect(get.data).toStrictEqual(0);
+            expect(get.data).toEqual(0);
           });
 
           test('GIVEN provider w/ number at path THEN decremented number at path', async () => {
@@ -156,16 +196,17 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path } = payload;
+            const { method, trigger, error, key, path } = payload;
 
             expect(method).toBe(Method.Dec);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual(['path']);
+            expect(path).toEqual(['path']);
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: ['path'] });
 
-            expect(get.data).toStrictEqual(0);
+            expect(get.data).toEqual(0);
           });
         });
 
@@ -181,10 +222,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger } = payload;
+            const { method, trigger, error } = payload;
 
             expect(method).toBe(Method.Delete);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
 
             const hasAfter = await provider[Method.Has]({ method: Method.Has, key: 'key', path: [] });
 
@@ -202,10 +244,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger } = payload;
+            const { method, trigger, error } = payload;
 
             expect(method).toBe(Method.Delete);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
 
             const hasAfter = await provider[Method.Has]({ method: Method.Has, key: 'key', path: ['path'] });
 
@@ -223,112 +266,15 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger } = payload;
+            const { method, trigger, error } = payload;
 
             expect(method).toBe(Method.Delete);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
 
             const hasAfter = await provider[Method.Has]({ method: Method.Has, key: 'key', path: ['path', 'nested'] });
 
             expect(hasAfter.data).toBe(false);
-          });
-        });
-
-        describe(Method.DeleteMany, () => {
-          test('GIVEN provider w/o data THEN passes', async () => {
-            const payload = await provider[Method.DeleteMany]({ method: Method.DeleteMany, keys: ['key'] });
-
-            expect(typeof payload).toBe('object');
-
-            const { method, trigger, keys } = payload;
-
-            expect(method).toBe(Method.DeleteMany);
-            expect(trigger).toBeUndefined();
-            expect(keys).toStrictEqual(['key']);
-          });
-
-          test('GIVEN provider w/ data THEN deletes data', async () => {
-            await provider[Method.SetMany]({
-              method: Method.SetMany,
-              entries: [
-                { key: 'key', path: [], value: 'value' },
-                { key: 'anotherKey', path: [], value: 'value' }
-              ],
-              overwrite: true
-            });
-
-            const sizeBefore = await provider[Method.Size]({ method: Method.Size });
-
-            expect(sizeBefore.data).toBe(2);
-
-            const payload = await provider[Method.DeleteMany]({ method: Method.DeleteMany, keys: ['key', 'anotherKey'] });
-
-            expect(typeof payload).toBe('object');
-
-            const { method, trigger, keys } = payload;
-
-            expect(method).toBe(Method.DeleteMany);
-            expect(trigger).toBeUndefined();
-            expect(keys).toStrictEqual(['key', 'anotherKey']);
-
-            const sizeAfter = await provider[Method.Size]({ method: Method.Size });
-
-            expect(sizeAfter.data).toBe(0);
-          });
-
-          test('GIVEN provider w/ data THEN deletes one entry', async () => {
-            await provider[Method.SetMany]({
-              method: Method.SetMany,
-              entries: [
-                { key: 'key', path: [], value: 'value' },
-                { key: 'anotherKey', path: [], value: 'value' }
-              ],
-              overwrite: true
-            });
-
-            const sizeBefore = await provider[Method.Size]({ method: Method.Size });
-
-            expect(sizeBefore.data).toBe(2);
-
-            const payload = await provider[Method.DeleteMany]({ method: Method.DeleteMany, keys: ['key'] });
-
-            expect(typeof payload).toBe('object');
-
-            const { method, trigger, keys } = payload;
-
-            expect(method).toBe(Method.DeleteMany);
-            expect(trigger).toBeUndefined();
-            expect(keys).toStrictEqual(['key']);
-
-            const sizeAfter = await provider[Method.Size]({ method: Method.Size });
-
-            expect(sizeAfter.data).toBe(1);
-          });
-        });
-
-        describe(Method.Each, () => {
-          test('GIVEN provider w/o data THEN loops 0 times', () => {
-            const mockCallback = jest.fn(() => true);
-            const payload = provider[Method.Each]({ method: Method.Each, hook: () => mockCallback() });
-
-            expect(typeof payload).toBe('object');
-            expect(mockCallback.mock.calls.length).toBe(0);
-          });
-
-          test('GIVEN provider w/ data THEN loops x times THEN clears', async () => {
-            const mockCallback = jest.fn((..._) => true);
-
-            await provider[Method.Set]({ method: Method.Set, key: 'test:each1', path: [], value: 'value1' });
-            await provider[Method.Set]({ method: Method.Set, key: 'test:each2', path: [], value: 'value2' });
-            await provider[Method.Set]({ method: Method.Set, key: 'test:each3', path: [], value: 'value3' });
-
-            const payload = await provider[Method.Each]({ method: Method.Each, hook: mockCallback });
-
-            expect(typeof payload).toBe('object');
-            expect(mockCallback.mock.calls.length).toBe(3);
-            expect(mockCallback.mock.calls).toContainEqual(['value1', 'test:each1']);
-            expect(mockCallback.mock.calls).toContainEqual(['value2', 'test:each2']);
-            expect(mockCallback.mock.calls).toContainEqual(['value3', 'test:each3']);
           });
         });
 
@@ -342,10 +288,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, defaultValue, data } = payload;
+            const { method, trigger, error, key, defaultValue, data } = payload;
 
             expect(method).toBe(Method.Ensure);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
             expect(defaultValue).toBe('defaultValue');
             expect(data).toBe('defaultValue');
@@ -362,10 +309,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, defaultValue, data } = payload;
+            const { method, trigger, error, key, defaultValue, data } = payload;
 
             expect(method).toBe(Method.Ensure);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
             expect(defaultValue).toBe('defaultValue');
             expect(data).toBe('value');
@@ -373,30 +321,32 @@ export function runProviderTest<
         });
 
         describe(Method.Entries, () => {
-          test('GIVEN provider w/o data THEN returns payload w/o data from entries', async () => {
+          test('GIVEN provider w/o data THEN returns payload w/o data from getAll', async () => {
             const payload = await provider.entries({ method: Method.Entries });
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Entries);
             expect(trigger).toBeUndefined();
-            expect(data).toStrictEqual({});
+            expect(error).toBeUndefined();
+            expect(data).toEqual({});
           });
 
-          test('GIVEN provider w/ data THEN returns payload w/ data from entries', async () => {
+          test('GIVEN provider w/ data THEN returns payload w/ data from getAll', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
             const payload = await provider.entries({ method: Method.Entries });
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Entries);
             expect(trigger).toBeUndefined();
-            expect(data).toStrictEqual({ key: 'value' });
+            expect(error).toBeUndefined();
+            expect(data).toEqual({ key: 'value' });
           });
         });
 
@@ -407,10 +357,11 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Every);
               expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
               expect(data).toBe(true);
             });
@@ -419,8 +370,8 @@ export function runProviderTest<
               await provider[Method.SetMany]({
                 method: Method.SetMany,
                 entries: [
-                  { key: 'key', path: [], value: 'value' },
-                  { key: 'anotherKey', path: [], value: 'value' }
+                  { key: 'firsKey', path: [], value: 'value' },
+                  { key: 'secondKey', path: [], value: 'value' }
                 ],
                 overwrite: true
               });
@@ -429,10 +380,11 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Every);
               expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
               expect(data).toBe(true);
             });
@@ -444,11 +396,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Every);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -457,8 +410,8 @@ export function runProviderTest<
               await provider[Method.SetMany]({
                 method: Method.SetMany,
                 entries: [
-                  { key: 'key', path: [], value: 'value' },
-                  { key: 'anotherKey', path: [], value: 'value' }
+                  { key: 'firsKey', path: [], value: 'value' },
+                  { key: 'secondKey', path: [], value: 'value' }
                 ],
                 overwrite: true
               });
@@ -467,11 +420,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Every);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -481,11 +435,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Every);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual([]);
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -494,8 +449,8 @@ export function runProviderTest<
               await provider[Method.SetMany]({
                 method: Method.SetMany,
                 entries: [
-                  { key: 'key', path: [], value: 'value' },
-                  { key: 'anotherKey', path: [], value: 'value' }
+                  { key: 'firsKey', path: [], value: 'value' },
+                  { key: 'secondKey', path: [], value: 'value' }
                 ],
                 overwrite: true
               });
@@ -504,11 +459,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Every);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual([]);
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -522,13 +478,13 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Filter);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
-              expect(data).toStrictEqual({});
+              expect(data).toEqual({});
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data from filter', async () => {
@@ -538,12 +494,13 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Filter);
               expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
-              expect(data).toStrictEqual({ key: 'value' });
+              expect(data).toEqual({ key: 'value' });
             });
           });
 
@@ -553,13 +510,14 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Filter);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
-              expect(data).toStrictEqual({});
+              expect(data).toEqual({});
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data from filter', async () => {
@@ -569,13 +527,14 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Filter);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
-              expect(data).toStrictEqual({ key: { path: 'value' } });
+              expect(data).toEqual({ key: { path: 'value' } });
             });
           });
         });
@@ -587,14 +546,14 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
-
               expect(method).toBe(Method.Find);
               expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
-              expect(data).toStrictEqual([null, null]);
+              expect(data).toEqual([null, null]);
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data from find', async () => {
@@ -604,12 +563,13 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Find);
               expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
-              expect(data).toStrictEqual(['key', 'value']);
+              expect(data).toEqual(['key', 'value']);
             });
           });
 
@@ -619,13 +579,14 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Find);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
-              expect(data).toStrictEqual([null, null]);
+              expect(data).toEqual([null, null]);
             });
 
             test('GIVEN provider w/ data THEN returns payload w/o data from find', async () => {
@@ -635,13 +596,14 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Find);
               expect(trigger).toBeUndefined();
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
-              expect(data).toStrictEqual(['key', { path: 'value' }]);
+              expect(data).toEqual(['key', { path: 'value' }]);
             });
           });
         });
@@ -652,12 +614,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, data } = payload;
+            const { method, trigger, error, key, path, data } = payload;
 
             expect(method).toBe(Method.Get);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
             expect(data).toBeUndefined();
           });
 
@@ -668,12 +631,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, data } = payload;
+            const { method, trigger, error, key, path, data } = payload;
 
             expect(method).toBe(Method.Get);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
             expect(data).toBe('value');
           });
 
@@ -684,12 +648,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, data } = payload;
+            const { method, trigger, error, key, path, data } = payload;
 
             expect(method).toBe(Method.Get);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual(['path']);
+            expect(path).toEqual(['path']);
             expect(data).toBe('value');
           });
         });
@@ -702,12 +667,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, keys, data } = payload;
+            const { method, trigger, error, keys, data } = payload;
 
             expect(method).toBe(Method.GetMany);
             expect(trigger).toBeUndefined();
-            expect(keys).toStrictEqual(['key']);
-            expect(data).toStrictEqual({ key: null });
+            expect(error).toBeUndefined();
+            expect(keys).toEqual(['key']);
+            expect(data).toEqual({ key: null });
           });
 
           test('GIVEN provider w/ data THEN returns payload w/ data from getMany', async () => {
@@ -717,12 +683,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, keys, data } = payload;
+            const { method, trigger, error, keys, data } = payload;
 
             expect(method).toBe(Method.GetMany);
             expect(trigger).toBeUndefined();
-            expect(keys).toStrictEqual(['key']);
-            expect(data).toStrictEqual({ key: 'value' });
+            expect(error).toBeUndefined();
+            expect(keys).toEqual(['key']);
+            expect(data).toEqual({ key: 'value' });
           });
         });
 
@@ -732,13 +699,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, data } = payload;
+            const { method, trigger, error, key, path, data } = payload;
 
             expect(method).toBe(Method.Has);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
             expect(data).toBe(false);
           });
 
@@ -749,12 +716,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, data } = payload;
+            const { method, trigger, error, key, path, data } = payload;
 
             expect(method).toBe(Method.Has);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual(['path']);
+            expect(path).toEqual(['path']);
             expect(data).toBe(false);
           });
 
@@ -765,12 +733,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, data } = payload;
+            const { method, trigger, error, key, path, data } = payload;
 
             expect(method).toBe(Method.Has);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
             expect(data).toBe(true);
           });
 
@@ -781,43 +750,80 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, data } = payload;
+            const { method, trigger, error, key, path, data } = payload;
 
             expect(method).toBe(Method.Has);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual(['path']);
+            expect(path).toEqual(['path']);
             expect(data).toBe(true);
           });
         });
 
         describe(Method.Inc, () => {
           test('GIVEN provider w/o data at key THEN returns payload w/ missing data error', async () => {
-            await expect(provider[Method.Inc]({ method: Method.Inc, key: 'key', path: [] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Inc }, { key: 'key', path: [] })
-            );
+            const payload = await provider[Method.Inc]({ method: Method.Inc, key: 'key', path: [] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Inc);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
           });
 
           test('GIVEN provider w/o data at path THEN returns payload w/ missing data error', async () => {
-            await expect(provider[Method.Inc]({ method: Method.Inc, key: 'key', path: ['path'] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Inc }, { key: 'key', path: ['path'] })
-            );
+            const payload = await provider[Method.Inc]({ method: Method.Inc, key: 'key', path: ['path'] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Inc);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
           });
 
           test('GIVEN provider w/ invalid type at key THEN returns payload w/ invalid type error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
-            await expect(provider[Method.Inc]({ method: Method.Inc, key: 'key', path: [] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Inc }, { key: 'key', path: [], type: 'number' })
-            );
+            const payload = await provider[Method.Inc]({ method: Method.Inc, key: 'key', path: [] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Inc);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
           });
 
           test('GIVEN provider w/ invalid type at path THEN returns payload w/ invalid type error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: ['path'], value: 'value' });
 
-            await expect(provider[Method.Inc]({ method: Method.Inc, key: 'key', path: ['path'] })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Inc }, { key: 'key', path: ['path'], type: 'number' })
-            );
+            const payload = await provider[Method.Inc]({ method: Method.Inc, key: 'key', path: ['path'] });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path } = payload;
+
+            expect(method).toBe(Method.Inc);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
           });
 
           test('GIVEN provider w/ number at key THEN incremented number at key', async () => {
@@ -827,17 +833,17 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path } = payload;
+            const { method, trigger, error, key, path } = payload;
 
             expect(method).toBe(Method.Inc);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
 
-            expect(get.data).toStrictEqual(2);
+            expect(get.data).toEqual(2);
           });
 
           test('GIVEN provider w/ number at path THEN incremented number at key and path', async () => {
@@ -847,17 +853,17 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path } = payload;
+            const { method, trigger, error, key, path } = payload;
 
             expect(method).toBe(Method.Inc);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual(['path']);
+            expect(path).toEqual(['path']);
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: ['path'] });
 
-            expect(get.data).toStrictEqual(2);
+            expect(get.data).toEqual(2);
           });
         });
 
@@ -867,27 +873,27 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Keys);
             expect(trigger).toBeUndefined();
-
-            expect(data).toStrictEqual([]);
+            expect(error).toBeUndefined();
+            expect(data).toEqual([]);
           });
 
           test('GIVEN provider w/ data THEN returns payload w/ data from keys', async () => {
-            await provider[Method.Set]({ method: Method.Set, key: 'test:keys', path: [], value: 'value' });
+            await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
             const payload = await provider[Method.Keys]({ method: Method.Keys });
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Keys);
             expect(trigger).toBeUndefined();
-
-            expect(data).toStrictEqual(['test:keys']);
+            expect(error).toBeUndefined();
+            expect(data).toEqual(['key']);
           });
         });
 
@@ -898,29 +904,29 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Map);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
-              expect(data).toStrictEqual([]);
+              expect(data).toEqual([]);
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data from map', async () => {
-              await provider[Method.Set]({ method: Method.Set, key: 'test:map', path: [], value: 'value' });
+              await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
               const payload = await provider[Method.Map]({ method: Method.Map, type: Payload.Type.Hook, hook: (value) => value });
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Map);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
-              expect(data).toStrictEqual(['value']);
+              expect(data).toEqual(['value']);
             });
           });
 
@@ -930,87 +936,146 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, data } = payload;
+              const { method, trigger, error, path, data } = payload;
 
               expect(method).toBe(Method.Map);
               expect(trigger).toBeUndefined();
-
-              expect(path).toStrictEqual([]);
-              expect(data).toStrictEqual([]);
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
+              expect(data).toEqual([]);
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data from map', async () => {
-              await provider[Method.Set]({ method: Method.Set, key: 'test:map', path: [], value: 'value' });
+              await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
               const payload = await provider[Method.Map]({ method: Method.Map, type: Payload.Type.Path, path: [] });
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, data } = payload;
+              const { method, trigger, error, path, data } = payload;
 
               expect(method).toBe(Method.Map);
               expect(trigger).toBeUndefined();
-
-              expect(path).toStrictEqual([]);
-              expect(data).toStrictEqual(['value']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
+              expect(data).toEqual(['value']);
             });
 
             test('GIVEN provider w/ data at path THEN returns payload w/ data from map', async () => {
-              await provider[Method.Set]({ method: Method.Set, key: 'test:map', path: ['path'], value: 'value' });
+              await provider[Method.Set]({ method: Method.Set, key: 'key', path: ['path'], value: 'value' });
 
               const payload = await provider[Method.Map]({ method: Method.Map, type: Payload.Type.Path, path: ['path'] });
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, data } = payload;
+              const { method, trigger, error, path, data } = payload;
 
               expect(method).toBe(Method.Map);
               expect(trigger).toBeUndefined();
-
-              expect(path).toStrictEqual(['path']);
-              expect(data).toStrictEqual(['value']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
+              expect(data).toEqual(['value']);
             });
           });
         });
 
         describe(Method.Math, () => {
           test('GIVEN provider w/o data THEN returns payload w/ error', async () => {
-            await expect(
-              provider[Method.Math]({ method: Method.Math, key: 'key', path: [], operator: MathOperator.Addition, operand: 1 })
-            ).rejects.toThrowError(provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Math }, { key: 'key', path: [] }));
+            const payload = await provider[Method.Math]({
+              method: Method.Math,
+              key: 'key',
+              path: [],
+              operator: MathOperator.Addition,
+              operand: 1
+            });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, operator, operand } = payload;
+
+            expect(method).toBe(Method.Math);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
+            expect(operator).toBe(MathOperator.Addition);
+            expect(operand).toBe(1);
           });
 
           test('GIVEN provider w/o data at path THEN returns payload w/ error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 0 });
 
-            await expect(
-              provider[Method.Math]({ method: Method.Math, key: 'key', path: ['path'], operator: MathOperator.Addition, operand: 1 })
-            ).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Math }, { key: 'key', path: ['path'] })
-            );
+            const payload = await provider[Method.Math]({
+              method: Method.Math,
+              key: 'key',
+              path: ['path'],
+              operator: MathOperator.Addition,
+              operand: 1
+            });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, operator, operand } = payload;
+
+            expect(method).toBe(Method.Math);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
+            expect(operator).toBe(MathOperator.Addition);
+            expect(operand).toBe(1);
           });
 
           test('GIVEN provider w/ invalid type at key THEN returns payload w/ error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
-            await expect(
-              provider[Method.Math]({ method: Method.Math, key: 'key', path: [], operator: MathOperator.Addition, operand: 1 })
-            ).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Math }, { key: 'key', path: [], type: 'number' })
-            );
+            const payload = await provider[Method.Math]({
+              method: Method.Math,
+              key: 'key',
+              path: [],
+              operator: MathOperator.Addition,
+              operand: 1
+            });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, operator, operand } = payload;
+
+            expect(method).toBe(Method.Math);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
+            expect(operator).toBe(MathOperator.Addition);
+            expect(operand).toBe(1);
           });
 
           test('GIVEN provider w/ invalid type at path THEN returns payload w/ error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: ['path'], value: 'value' });
 
-            await expect(
-              provider[Method.Math]({ method: Method.Math, key: 'key', path: ['path'], operator: MathOperator.Addition, operand: 1 })
-            ).rejects.toThrowError(
-              provider['error'](
-                { identifier: CommonIdentifiers.InvalidDataType, method: Method.Math },
-                { key: 'key', path: ['path'], type: 'number' }
-              )
-            );
+            const payload = await provider[Method.Math]({
+              method: Method.Math,
+              key: 'key',
+              path: ['path'],
+              operator: MathOperator.Addition,
+              operand: 1
+            });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, operator, operand } = payload;
+
+            expect(method).toBe(Method.Math);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
+            expect(operator).toBe(MathOperator.Addition);
+            expect(operand).toBe(1);
           });
         });
 
@@ -1025,15 +1090,15 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, hook, data } = payload;
+              const { method, trigger, error, type, hook, data } = payload;
 
               expect(method).toBe(Method.Partition);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(type).toBe(Payload.Type.Hook);
               expect(typeof hook).toBe('function');
-              expect(data?.truthy).toStrictEqual({});
-              expect(data?.falsy).toStrictEqual({});
+              expect(data?.truthy).toEqual({});
+              expect(data?.falsy).toEqual({});
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data', async () => {
@@ -1047,15 +1112,15 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, hook, data } = payload;
+              const { method, trigger, error, type, hook, data } = payload;
 
               expect(method).toBe(Method.Partition);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(type).toBe(Payload.Type.Hook);
               expect(typeof hook).toBe('function');
-              expect(data?.truthy).toStrictEqual({ key: 'value' });
-              expect(data?.falsy).toStrictEqual({});
+              expect(data?.truthy).toEqual({ key: 'value' });
+              expect(data?.falsy).toEqual({});
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data', async () => {
@@ -1069,15 +1134,15 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, hook, data } = payload;
+              const { method, trigger, error, type, hook, data } = payload;
 
               expect(method).toBe(Method.Partition);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(type).toBe(Payload.Type.Hook);
               expect(typeof hook).toBe('function');
-              expect(data?.truthy).toStrictEqual({});
-              expect(data?.falsy).toStrictEqual({ key: 'value' });
+              expect(data?.truthy).toEqual({});
+              expect(data?.falsy).toEqual({ key: 'value' });
             });
           });
 
@@ -1092,16 +1157,16 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, path, value, data } = payload;
+              const { method, trigger, error, type, path, value, data } = payload;
 
               expect(method).toBe(Method.Partition);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(type).toBe(Payload.Type.Value);
-              expect(path).toStrictEqual([]);
+              expect(path).toEqual([]);
               expect(value).toBe('value');
-              expect(data?.truthy).toStrictEqual({});
-              expect(data?.falsy).toStrictEqual({});
+              expect(data?.truthy).toEqual({});
+              expect(data?.falsy).toEqual({});
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data', async () => {
@@ -1116,16 +1181,16 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, path, value, data } = payload;
+              const { method, trigger, error, type, path, value, data } = payload;
 
               expect(method).toBe(Method.Partition);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(type).toBe(Payload.Type.Value);
-              expect(path).toStrictEqual([]);
+              expect(path).toEqual([]);
               expect(value).toBe('value');
-              expect(data?.truthy).toStrictEqual({ key: 'value' });
-              expect(data?.falsy).toStrictEqual({});
+              expect(data?.truthy).toEqual({ key: 'value' });
+              expect(data?.falsy).toEqual({});
             });
 
             test('GIVEN provider w/ data THEN returns payload w/ data', async () => {
@@ -1140,49 +1205,89 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, path, value, data } = payload;
+              const { method, trigger, error, type, path, value, data } = payload;
 
               expect(method).toBe(Method.Partition);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(type).toBe(Payload.Type.Value);
-              expect(path).toStrictEqual([]);
+              expect(path).toEqual([]);
               expect(value).toBe('anotherValue');
-              expect(data?.truthy).toStrictEqual({});
-              expect(data?.falsy).toStrictEqual({ key: 'value' });
+              expect(data?.truthy).toEqual({});
+              expect(data?.falsy).toEqual({ key: 'value' });
             });
           });
         });
 
         describe(Method.Push, () => {
           test('GIVEN provider w/o data THEN returns payload w/ missing data error', async () => {
-            await expect(provider[Method.Push]({ method: Method.Push, key: 'key', path: [], value: 'value' })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Push }, { key: 'key', path: [] })
-            );
+            const payload = await provider[Method.Push]({ method: Method.Push, key: 'key', path: [], value: 'value' });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, value } = payload;
+
+            expect(method).toBe(Method.Push);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
+            expect(value).toBe('value');
           });
 
           test('GIVEN provider w/o data at path THEN returns payload w/ missing data error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: {} });
 
-            await expect(provider[Method.Push]({ method: Method.Push, key: 'key', path: ['path'], value: 'value' })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Push }, { key: 'key', path: ['path'] })
-            );
+            const payload = await provider[Method.Push]({ method: Method.Push, key: 'key', path: ['path'], value: 'value' });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, value } = payload;
+
+            expect(method).toBe(Method.Push);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
+            expect(value).toBe('value');
           });
 
           test('GIVEN provider w/ invalid type at key THEN returns payload w/ invalid type error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
-            await expect(provider[Method.Push]({ method: Method.Push, key: 'key', path: [], value: 'value' })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Push }, { key: 'key', path: [], type: 'array' })
-            );
+            const payload = await provider[Method.Push]({ method: Method.Push, key: 'key', path: [], value: 'value' });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, value } = payload;
+
+            expect(method).toBe(Method.Push);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual([]);
+            expect(value).toBe('value');
           });
 
           test('GIVEN provider w/ invalid type at path THEN returns payload w/ invalid type error', async () => {
             await provider[Method.Set]({ method: Method.Set, key: 'key', path: ['path'], value: 'value' });
 
-            await expect(provider[Method.Push]({ method: Method.Push, key: 'key', path: ['path'], value: 'value' })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Push }, { key: 'key', path: ['path'], type: 'array' })
-            );
+            const payload = await provider[Method.Push]({ method: Method.Push, key: 'key', path: ['path'], value: 'value' });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, path, value } = payload;
+
+            expect(method).toBe(Method.Push);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
+            expect(key).toBe('key');
+            expect(path).toEqual(['path']);
+            expect(value).toBe('value');
           });
 
           test('GIVEN provider w/ array at key THEN returns payload AND pushes value to array at key', async () => {
@@ -1192,18 +1297,18 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, value } = payload;
+            const { method, trigger, error, key, path, value } = payload;
 
             expect(method).toBe(Method.Push);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
             expect(value).toBe('value');
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
 
-            expect(get.data).toStrictEqual(['value']);
+            expect(get.data).toEqual(['value']);
           });
 
           test('GIVEN provider w/ array at path THEN returns payload AND pushes value to array at path', async () => {
@@ -1213,18 +1318,18 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, value } = payload;
+            const { method, trigger, error, key, path, value } = payload;
 
             expect(method).toBe(Method.Push);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual(['path']);
+            expect(path).toEqual(['path']);
             expect(value).toBe('value');
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: ['path'] });
 
-            expect(get.data).toStrictEqual(['value']);
+            expect(get.data).toEqual(['value']);
           });
         });
 
@@ -1234,11 +1339,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Random);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(data).toBeUndefined();
           });
 
@@ -1249,12 +1354,12 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Random);
             expect(trigger).toBeUndefined();
-
-            expect(data).toStrictEqual(['value']);
+            expect(error).toBeUndefined();
+            expect(data).toEqual(['value']);
           });
         });
 
@@ -1264,11 +1369,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.RandomKey);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(data).toBeUndefined();
           });
 
@@ -1279,53 +1384,42 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.RandomKey);
             expect(trigger).toBeUndefined();
-
-            expect(data).toStrictEqual(['key']);
+            expect(error).toBeUndefined();
+            expect(data).toEqual(['key']);
           });
         });
 
         describe(Method.Remove, () => {
           describe(Payload.Type.Hook, () => {
             test('GIVEN provider w/o data at key THEN returns payload w/ missing data error', async () => {
-              await expect(
-                provider[Method.Remove]({
-                  method: Method.Remove,
-                  type: Payload.Type.Hook,
-                  key: 'key',
-                  path: [],
-                  hook: (value: string) => value === 'value'
-                })
-              ).rejects.toThrowError(
-                provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Remove }, { key: 'key', path: [] })
-              );
+              const payload = await provider[Method.Remove]({
+                method: Method.Remove,
+                type: Payload.Type.Hook,
+                key: 'key',
+                path: [],
+                hook: (value: string) => value === 'value'
+              });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, type, key, path, hook } = payload;
+
+              expect(method).toBe(Method.Remove);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeInstanceOf(Error);
+              expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+              expect(type).toBe(Payload.Type.Hook);
+              expect(key).toBe('key');
+              expect(path).toEqual([]);
+              expect(typeof hook).toBe('function');
             });
 
             test('GIVEN provider w/ invalid type at key THEN returns payload w/ invalid type error', async () => {
               await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
-
-              await expect(
-                provider[Method.Remove]({
-                  method: Method.Remove,
-                  type: Payload.Type.Hook,
-                  key: 'key',
-                  path: [],
-                  hook: (value: string) => value === 'value'
-                })
-              ).rejects.toThrowError(
-                provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Remove }, { key: 'key', path: [], type: 'array' })
-              );
-            });
-
-            test('GIVEN provider w/ array at key THEN returns payload AND removes value from array at key', async () => {
-              await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: ['value'] });
-
-              const getBefore = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
-
-              expect(getBefore.data).toStrictEqual(['value']);
 
               const payload = await provider[Method.Remove]({
                 method: Method.Remove,
@@ -1337,51 +1431,16 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, key, path, hook } = payload;
+              const { method, trigger, error, type, key, path, hook } = payload;
 
               expect(method).toBe(Method.Remove);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeInstanceOf(Error);
+              expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
               expect(type).toBe(Payload.Type.Hook);
               expect(key).toBe('key');
-              expect(path).toStrictEqual([]);
+              expect(path).toEqual([]);
               expect(typeof hook).toBe('function');
-
-              const getAfter = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
-
-              expect(getAfter.data).toStrictEqual([]);
-            });
-          });
-
-          describe(Payload.Type.Value, () => {
-            test('GIVEN provider w/o data at key THEN returns payload w/ missing data error', async () => {
-              await expect(
-                provider[Method.Remove]({
-                  method: Method.Remove,
-                  type: Payload.Type.Value,
-                  key: 'key',
-                  path: [],
-                  value: 'value'
-                })
-              ).rejects.toThrowError(
-                provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Remove }, { key: 'key', path: [] })
-              );
-            });
-
-            test('GIVEN provider w/ invalid type at key THEN returns payload w/ invalid type error', async () => {
-              await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
-
-              await expect(
-                provider[Method.Remove]({
-                  method: Method.Remove,
-                  type: Payload.Type.Value,
-                  key: 'key',
-                  path: [],
-                  value: 'value'
-                })
-              ).rejects.toThrowError(
-                provider['error']({ identifier: CommonIdentifiers.InvalidDataType, method: Method.Remove }, { key: 'key', path: [], type: 'array' })
-              );
             });
 
             test('GIVEN provider w/ array at key THEN returns payload AND removes value from array at key', async () => {
@@ -1389,7 +1448,60 @@ export function runProviderTest<
 
               const getBefore = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
 
-              expect(getBefore.data).toStrictEqual(['value']);
+              expect(getBefore.data).toEqual(['value']);
+
+              const payload = await provider[Method.Remove]({
+                method: Method.Remove,
+                type: Payload.Type.Hook,
+                key: 'key',
+                path: [],
+                hook: (value: string) => value === 'value'
+              });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, type, key, path, hook } = payload;
+
+              expect(method).toBe(Method.Remove);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
+              expect(type).toBe(Payload.Type.Hook);
+              expect(key).toBe('key');
+              expect(path).toEqual([]);
+              expect(typeof hook).toBe('function');
+
+              const getAfter = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
+
+              expect(getAfter.data).toEqual([]);
+            });
+          });
+
+          describe(Payload.Type.Value, () => {
+            test('GIVEN provider w/o data at key THEN returns payload w/ missing data error', async () => {
+              const payload = await provider[Method.Remove]({
+                method: Method.Remove,
+                type: Payload.Type.Value,
+                key: 'key',
+                path: [],
+                value: 'value'
+              });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, type, key, path, value } = payload;
+
+              expect(method).toBe(Method.Remove);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeInstanceOf(Error);
+              expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+              expect(type).toBe(Payload.Type.Value);
+              expect(key).toBe('key');
+              expect(path).toEqual([]);
+              expect(value).toBe('value');
+            });
+
+            test('GIVEN provider w/ invalid type at key THEN returns payload w/ invalid type error', async () => {
+              await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
               const payload = await provider[Method.Remove]({
                 method: Method.Remove,
@@ -1401,19 +1513,48 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, type, key, path, value } = payload;
+              const { method, trigger, error, type, key, path, value } = payload;
 
               expect(method).toBe(Method.Remove);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeInstanceOf(Error);
+              expect(error?.identifier).toBe(CommonIdentifiers.InvalidDataType);
               expect(type).toBe(Payload.Type.Value);
               expect(key).toBe('key');
-              expect(path).toStrictEqual([]);
+              expect(path).toEqual([]);
+              expect(value).toBe('value');
+            });
+
+            test('GIVEN provider w/ array at key THEN returns payload AND removes value from array at key', async () => {
+              await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: ['value'] });
+
+              const getBefore = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
+
+              expect(getBefore.data).toEqual(['value']);
+
+              const payload = await provider[Method.Remove]({
+                method: Method.Remove,
+                type: Payload.Type.Value,
+                key: 'key',
+                path: [],
+                value: 'value'
+              });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, error, type, key, path, value } = payload;
+
+              expect(method).toBe(Method.Remove);
+              expect(trigger).toBeUndefined();
+              expect(error).toBeUndefined();
+              expect(type).toBe(Payload.Type.Value);
+              expect(key).toBe('key');
+              expect(path).toEqual([]);
               expect(value).toBe('value');
 
               const getAfter = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
 
-              expect(getAfter.data).toStrictEqual([]);
+              expect(getAfter.data).toEqual([]);
             });
           });
         });
@@ -1428,13 +1569,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, value } = payload;
+            const { method, trigger, error, key, path, value } = payload;
 
             expect(method).toBe(Method.Set);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual([]);
+            expect(path).toEqual([]);
             expect(value).toBe('value');
 
             const hasAfter = await provider[Method.Has]({ method: Method.Has, key: 'key', path: [] });
@@ -1451,13 +1592,13 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, path, value } = payload;
+            const { method, trigger, error, key, path, value } = payload;
 
             expect(method).toBe(Method.Set);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
-            expect(path).toStrictEqual(['path']);
+            expect(path).toEqual(['path']);
             expect(value).toBe('value');
 
             const hasAfter = await provider[Method.Has]({ method: Method.Has, key: 'key', path: ['path'] });
@@ -1480,12 +1621,12 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, entries } = payload;
+            const { method, trigger, error, entries } = payload;
 
             expect(method).toBe(Method.SetMany);
             expect(trigger).toBeUndefined();
-
-            expect(entries).toStrictEqual([[{ key: 'key', path: [] }, 'value']]);
+            expect(error).toBeUndefined();
+            expect(entries).toEqual([{ key: 'key', path: [], value: 'value' }]);
           });
 
           test('GIVEN provider w/ data THEN returns payload AND does not set value at key', async () => {
@@ -1497,18 +1638,18 @@ export function runProviderTest<
 
             const payload = await provider[Method.SetMany]({
               method: Method.SetMany,
-              entries: [{ key: 'key', path: [], value: 'value' }],
+              entries: [{ key: 'key', path: [], value: 'anotherValue' }],
               overwrite: false
             });
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, entries } = payload;
+            const { method, trigger, error, entries } = payload;
 
             expect(method).toBe(Method.SetMany);
             expect(trigger).toBeUndefined();
-
-            expect(entries).toStrictEqual([[{ key: 'key', path: [] }, 'value-overwritten']]);
+            expect(error).toBeUndefined();
+            expect(entries).toEqual([{ key: 'key', path: [], value: 'anotherValue' }]);
 
             const getAfter = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
 
@@ -1522,11 +1663,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Size);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(data).toBe(0);
           });
 
@@ -1537,11 +1678,11 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Size);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(data).toBe(1);
           });
         });
@@ -1557,11 +1698,11 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
               expect(data).toBe(false);
             });
@@ -1577,11 +1718,11 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, hook, data } = payload;
+              const { method, trigger, error, hook, data } = payload;
 
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
-
+              expect(error).toBeUndefined();
               expect(typeof hook).toBe('function');
               expect(data).toBe(true);
             });
@@ -1593,12 +1734,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
-
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
               expect(data).toBe(false);
             });
@@ -1610,12 +1751,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
-
-              expect(path).toStrictEqual(['path']);
+              expect(error).toBeUndefined();
+              expect(path).toEqual(['path']);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -1630,12 +1771,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
-
-              expect(path).toStrictEqual([]);
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(false);
             });
@@ -1652,12 +1793,12 @@ export function runProviderTest<
 
               expect(typeof payload).toBe('object');
 
-              const { method, trigger, path, value, data } = payload;
+              const { method, trigger, error, path, value, data } = payload;
 
               expect(method).toBe(Method.Some);
               expect(trigger).toBeUndefined();
-
-              expect(path).toStrictEqual([]);
+              expect(error).toBeUndefined();
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -1666,9 +1807,18 @@ export function runProviderTest<
 
         describe(Method.Update, () => {
           test('GIVEN provider w/o data THEN returns payload w/ missing data error', async () => {
-            await expect(provider[Method.Update]({ method: Method.Update, key: 'key', hook: (value) => value })).rejects.toThrowError(
-              provider['error']({ identifier: CommonIdentifiers.MissingData, method: Method.Update }, { key: 'key' })
-            );
+            const payload = await provider[Method.Update]({ method: Method.Update, key: 'key', hook: (value) => value });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, error, key, hook } = payload;
+
+            expect(method).toBe(Method.Update);
+            expect(trigger).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error?.identifier).toBe(CommonIdentifiers.MissingData);
+            expect(key).toBe('key');
+            expect(typeof hook).toBe('function');
           });
 
           test('GIVEN provider w/ data at key THEN returns payload w/ data AND updates value at key', async () => {
@@ -1682,17 +1832,17 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, hook } = payload;
+            const { method, trigger, error, key, hook } = payload;
 
             expect(method).toBe(Method.Update);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
             expect(typeof hook).toBe('function');
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: [] });
 
-            expect(get.data).toStrictEqual('VALUE');
+            expect(get.data).toEqual('VALUE');
           });
 
           test('GIVEN provider w/ data at path THEN returns payload w/ data AND updates value at path', async () => {
@@ -1706,17 +1856,17 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, key, hook } = payload;
+            const { method, trigger, error, key, hook } = payload;
 
             expect(method).toBe(Method.Update);
             expect(trigger).toBeUndefined();
-
+            expect(error).toBeUndefined();
             expect(key).toBe('key');
             expect(typeof hook).toBe('function');
 
             const get = await provider[Method.Get]({ method: Method.Get, key: 'key', path: ['path'] });
 
-            expect(get.data).toStrictEqual('VALUE');
+            expect(get.data).toEqual('VALUE');
           });
         });
 
@@ -1726,27 +1876,53 @@ export function runProviderTest<
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Values);
             expect(trigger).toBeUndefined();
-
-            expect(data).toStrictEqual([]);
+            expect(error).toBeUndefined();
+            expect(data).toEqual([]);
           });
 
           test('GIVEN provider w/ data THEN returns payload w/ data', async () => {
-            await provider[Method.Set]({ method: Method.Set, key: 'test:values', path: [], value: 'value' });
+            await provider[Method.Set]({ method: Method.Set, key: 'key', path: [], value: 'value' });
 
             const payload = await provider[Method.Values]({ method: Method.Values });
 
             expect(typeof payload).toBe('object');
 
-            const { method, trigger, data } = payload;
+            const { method, trigger, error, data } = payload;
 
             expect(method).toBe(Method.Values);
             expect(trigger).toBeUndefined();
+            expect(error).toBeUndefined();
+            expect(data).toEqual(['value']);
+          });
+        });
 
-            expect(data).toStrictEqual(['value']);
+        describe(Method.Each, () => {
+          test('GIVEN provider w/o data THEN loops 0 times', () => {
+            const mockCallback = jest.fn(() => true);
+            const payload = provider[Method.Each]({ method: Method.Each, hook: () => mockCallback() });
+
+            expect(typeof payload).toBe('object');
+            expect(mockCallback.mock.calls.length).toBe(0);
+          });
+
+          test('GIVEN provider w/ data THEN loops x times THEN clears', async () => {
+            const mockCallback = jest.fn((..._) => true);
+
+            await provider[Method.Set]({ method: Method.Set, key: 'firstKey', path: [], value: 'firstValue' });
+            await provider[Method.Set]({ method: Method.Set, key: 'secondKey', path: [], value: 'secondValue' });
+            await provider[Method.Set]({ method: Method.Set, key: 'thirdKey', path: [], value: 'thirdValue' });
+
+            const payload = await provider[Method.Each]({ method: Method.Each, hook: mockCallback });
+
+            expect(typeof payload).toBe('object');
+            expect(mockCallback.mock.calls.length).toBe(3);
+            expect(mockCallback.mock.calls).toContainEqual(['firstValue', 'firstKey']);
+            expect(mockCallback.mock.calls).toContainEqual(['secondValue', 'secondKey']);
+            expect(mockCallback.mock.calls).toContainEqual(['thirdValue', 'thirdKey']);
           });
         });
       });
@@ -1763,10 +1939,6 @@ export interface ProviderTestOptions<
 
   providerOptions?: Options;
 
-  /**
-   * Whether to test `disableSerialization` on the provider
-   * @default true
-   */
   serialization?: boolean;
 
   cleanup?: (provider: CleanupProvider) => Awaitable<void>;

@@ -1,4 +1,5 @@
 import type { Awaitable } from '@sapphire/utilities';
+import type { JoshProviderError } from '../structures/JoshProviderError';
 import type { Method } from './Method';
 import type { Trigger } from './Trigger';
 
@@ -24,6 +25,12 @@ export interface Payload {
    * @since 1.0.0
    */
   trigger?: Trigger;
+
+  /**
+   * The error from this payload.
+   * @since 1.0.0
+   */
+  error?: JoshProviderError;
 }
 
 export namespace Payload {
