@@ -1,6 +1,6 @@
 import { CommonIdentifiers } from '../types';
 
-export function resolveCommonIdentifier(identifier: string, metadata: Record<string, unknown>): string | null {
+export function resolveCommonIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string | null {
   switch (identifier) {
     case CommonIdentifiers.InvalidCount:
       return 'The "count" of items must be less than or equal to the amount of items in the provider.';
