@@ -1,5 +1,6 @@
 import type { Primitive } from '@sapphire/utilities';
-import type { MathOperator, Method } from '.';
+import type { MathOperator } from './MathOperator';
+import type { Method } from './Method';
 import type { Payload } from './Payload';
 
 export namespace Payloads {
@@ -90,7 +91,19 @@ export namespace Payloads {
      */
     method: Method.Each;
 
-    hook: Payload.HookWithKey<StoredValue>;
+    /**
+     * The metadata for this payload.
+     * @since 1.0.0
+     */
+    metadata?: Each.Metadata;
+
+    hook: Payload.Hook<StoredValue>;
+  }
+
+  export namespace Each {
+    export interface Metadata extends Record<PropertyKey, unknown> {
+      skipProvider?: boolean;
+    }
   }
 
   /**
@@ -801,7 +814,13 @@ export namespace Payloads {
      * The entries to set.
      * @since 1.0.0
      */
-    entries: [Payload.KeyPath, unknown][];
+    entries: SetMany.KeyPathValue[];
+  }
+
+  export namespace SetMany {
+    export interface KeyPathValue extends Payload.KeyPath {
+      value: unknown;
+    }
   }
 
   /**
