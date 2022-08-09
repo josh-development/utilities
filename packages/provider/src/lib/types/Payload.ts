@@ -17,7 +17,7 @@ export interface Payload {
    * The metadata to use for this payload.
    * @since 1.0.0
    */
-  metadata: Record<PropertyKey, unknown>;
+  metadata?: Record<PropertyKey, unknown>;
 
   /**
    * The trigger this payload is currently for.
