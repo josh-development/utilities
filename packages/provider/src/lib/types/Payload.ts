@@ -27,10 +27,10 @@ export interface Payload {
   trigger?: Trigger;
 
   /**
-   * The error from this payload.
+   * The errors that occurred during payload execution.
    * @since 1.0.0
    */
-  error?: JoshProviderError;
+  errors: JoshProviderError[];
 }
 
 export namespace Payload {
