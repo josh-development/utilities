@@ -1,4 +1,4 @@
-import type { Awaitable, RequiredExcept } from '@sapphire/utilities';
+import type { Awaitable, PartialRequired } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
 import type { Method, Payloads } from '../types';
 import { JoshProviderError } from './JoshProviderError';
@@ -447,7 +447,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @returns The error.
    */
   protected error(
-    options: string | RequiredExcept<JoshProviderError.Options, 'origin' | 'message'>,
+    options: string | PartialRequired<JoshProviderError.Options, 'identifier'>,
     metadata: Record<string, unknown> = {}
   ): JoshProviderError {
     if (typeof options === 'string') {
