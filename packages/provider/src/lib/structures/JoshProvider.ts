@@ -1,4 +1,4 @@
-import type { Awaitable } from '@sapphire/utilities';
+import type { Awaitable, RequiredExcept } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
 import type { Method, Payloads } from '../types';
 import { JoshProviderError } from './JoshProviderError';
@@ -446,7 +446,10 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param options The options for the error.
    * @returns The error.
    */
-  protected error(options: string | JoshProviderError.Options, metadata: Record<string, unknown> = {}): JoshProviderError {
+  protected error(
+    options: string | RequiredExcept<JoshProviderError.Options, 'origin' | 'message'>,
+    metadata: Record<string, unknown> = {}
+  ): JoshProviderError {
     if (typeof options === 'string') {
       return new JoshProviderError({
         identifier: options,
@@ -455,9 +458,15 @@ export abstract class JoshProvider<StoredValue = unknown> {
       });
     }
 
-    if ('message' in options) return new JoshProviderError(options);
+    if ('message' in options) {
+      return new JoshProviderError({ ...options, origin: { name: this.constructor.name, type: JoshProviderError.OriginType.Provider } });
+    }
 
-    return new JoshProviderError({ ...options, name: options.name ?? `${this.constructor.name}Error` });
+    return new JoshProviderError({
+      ...options,
+      name: options.name ?? `${this.constructor.name}Error`,
+      origin: { name: this.constructor.name, type: JoshProviderError.OriginType.Provider }
+    });
   }
 
   /**

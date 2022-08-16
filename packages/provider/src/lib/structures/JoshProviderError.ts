@@ -18,18 +18,25 @@ export class JoshProviderError extends Error {
   public method: Method | null;
 
   /**
+   * The origin of this error.
+   * @since 1.0.0
+   */
+  public origin: JoshProviderError.Origin;
+
+  /**
    * The context for this error.
    * @since 1.0.0
    */
   public context: Record<PropertyKey, unknown>;
 
   public constructor(options: JoshProviderError.Options) {
-    const { name, identifier, method, context } = options;
+    const { name, identifier, method, origin, context } = options;
 
     super(JoshProviderError.formatMessage(options));
     this.name = name ?? 'JoshError';
     this.identifier = identifier;
     this.method = method ?? null;
+    this.origin = origin;
     this.context = context ?? {};
   }
 
