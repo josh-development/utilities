@@ -1,4 +1,4 @@
-import { JoshProvider, Method, Payloads } from '@joshdb/provider';
+import { JoshProvider, Method, Payload, Payloads } from '@joshdb/provider';
 import type { Awaitable, NonNullObject } from '@sapphire/utilities';
 import type { MiddlewareStore } from './MiddlewareStore';
 
@@ -218,6 +218,10 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
   }
 
   public [Method.Values](payload: Payloads.Values<StoredValue>): Awaitable<Payloads.Values<StoredValue>> {
+    return payload;
+  }
+
+  public run<P extends Payload>(payload: P): Awaitable<P> {
     return payload;
   }
 
