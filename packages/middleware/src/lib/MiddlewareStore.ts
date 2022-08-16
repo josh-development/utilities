@@ -22,15 +22,6 @@ export class MiddlewareStore<StoredValue = unknown> extends Map<string, Middlewa
   }
 
   /**
-   * Gets an array of middlewares.
-   * @since 1.0.0
-   * @returns The array of middlewares.
-   */
-  public array(): Middleware<NonNullObject, StoredValue>[] {
-    return Array.from(this.values());
-  }
-
-  /**
    * Get pre provider middlewares by method.
    * @since 1.0.0
    * @param method The method to filter by.
@@ -58,14 +49,9 @@ export class MiddlewareStore<StoredValue = unknown> extends Map<string, Middlewa
    * @returns
    */
   private filterByCondition(method: Method, trigger: Trigger): Middleware<NonNullObject, StoredValue>[] {
-    const middlewares = this.array().filter((middleware) =>
+    return Array.from(this.values()).filter((middleware) =>
       trigger === Trigger.PreProvider ? middleware.conditions.pre.includes(method) : middleware.conditions.post.includes(method)
     );
-
-    const withPositions = middlewares.filter((middleware) => middleware.position !== undefined);
-    const withoutPositions = middlewares.filter((middleware) => middleware.position !== undefined);
-
-    return [...withPositions.sort((a, b) => a.position! - b.position!), ...withoutPositions];
   }
 }
 
