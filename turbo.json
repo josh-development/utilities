@@ -9,7 +9,7 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["@joshdb/provider#build"],
+      "dependsOn": [],
       "outputs": ["coverage/**"]
     },
     "bump": {

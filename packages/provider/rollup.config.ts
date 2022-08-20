@@ -28,6 +28,6 @@ export default defineConfig({
       }
     }
   ],
-  external: ['@sapphire/utilities'],
+  external: ['@sapphire/utilities', 'reflect-metadata'],
   plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
 });

@@ -458,19 +458,16 @@ export abstract class JoshProvider<StoredValue = unknown> {
       });
     }
 
-    if ('message' in options) {
-      return new JoshProviderError({ ...options, origin: { name: this.constructor.name, type: JoshProviderError.OriginType.Provider } });
-    }
-
     return new JoshProviderError({
       ...options,
       name: options.name ?? `${this.constructor.name}Error`,
-      origin: { name: this.constructor.name, type: JoshProviderError.OriginType.Provider }
+      origin: { type: JoshProviderError.OriginType.Provider, name: this.constructor.name.replace(/Provider/, '') }
     });
   }
 
   /**
    * Resolves an identifier.
+   * @since 1.0.0
    * @param identifier The identifier to resolve.
    * @param metadata The metadata to use.
    * @returns The resolved identifier message.
@@ -499,6 +496,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * Resolves a version.
+   * @since 1.0.0
    * @param version The version to resolve.
    * @returns The resolved version.
    */
