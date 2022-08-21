@@ -452,7 +452,7 @@ export function runProviderTest<
               expect(method).toBe(Method.Every);
               expect(trigger).toBeUndefined();
               expect(errors).toStrictEqual([]);
-              expect(path).toEqual(['path']);
+              expect(path).toEqual([]);
               expect(value).toBe('value');
               expect(data).toBe(true);
             });
@@ -1959,7 +1959,7 @@ export function runProviderTest<
               method: Method.Update,
               errors: [],
               key: 'key',
-              hook: (value) => (value as Record<'path', string>).path.toUpperCase()
+              hook: (value) => ({ path: (value as Record<'path', string>).path.toUpperCase() })
             });
 
             expect(typeof payload).toBe('object');
