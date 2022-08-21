@@ -441,7 +441,7 @@ export function runProviderTest<
                 method: Method.Every,
                 errors: [],
                 type: Payload.Type.Value,
-                path: ['path'],
+                path: [],
                 value: 'value'
               });
 
@@ -915,7 +915,7 @@ export function runProviderTest<
 
             const get = await provider[Method.Get]({ method: Method.Get, errors: [], key: 'key', path: [] });
 
-            expect(get.data).toEqual(2);
+            expect(get.data).toEqual(1);
           });
 
           test('GIVEN provider w/ number at path THEN incremented number at key and path', async () => {
@@ -935,7 +935,7 @@ export function runProviderTest<
 
             const get = await provider[Method.Get]({ method: Method.Get, errors: [], key: 'key', path: ['path'] });
 
-            expect(get.data).toEqual(2);
+            expect(get.data).toEqual(1);
           });
         });
 
@@ -1959,7 +1959,7 @@ export function runProviderTest<
               method: Method.Update,
               errors: [],
               key: 'key',
-              hook: (value) => (value as string).toUpperCase()
+              hook: (value) => (value as Record<'path', string>).path.toUpperCase()
             });
 
             expect(typeof payload).toBe('object');
