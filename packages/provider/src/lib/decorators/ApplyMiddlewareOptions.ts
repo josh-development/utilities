@@ -1,5 +1,5 @@
 import type { Ctor, NonNullableProperties, PartialRequired } from '@sapphire/utilities';
-import type { Middleware } from '../Middleware';
+import type { JoshMiddleware } from '../structures/JoshMiddleware';
 import { createClassDecorator } from './utils/createClassDecorator';
 import { createProxy } from './utils/createProxy';
 
@@ -18,8 +18,8 @@ import { createProxy } from './utils/createProxy';
  * })
  * export class CoreMiddleware extends Middleware {}
  * ``` */
-export function ApplyMiddlewareOptions(options: PartialRequired<Middleware.Options, 'name'>): ClassDecorator {
-  return createClassDecorator((target: Ctor<ConstructorParameters<typeof Middleware>, Middleware<NonNullableProperties>>) =>
+export function ApplyMiddlewareOptions(options: PartialRequired<JoshMiddleware.Options, 'name'>): ClassDecorator {
+  return createClassDecorator((target: Ctor<ConstructorParameters<typeof JoshMiddleware>, JoshMiddleware<NonNullableProperties>>) =>
     createProxy(target, {
       construct(ctor, [context]) {
         const pre = Reflect.getMetadata('pre', target.constructor) ?? [];

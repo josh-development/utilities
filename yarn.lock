@@ -983,29 +983,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@joshdb/middleware@workspace:packages/middleware":
-  version: 0.0.0-use.local
-  resolution: "@joshdb/middleware@workspace:packages/middleware"
-  dependencies:
-    "@favware/cliff-jumper": ^1.8.6
-    "@favware/rollup-type-bundler": ^1.0.10
-    "@joshdb/provider": 2.0.0-next.5865881.0
-    "@sapphire/utilities": ^3.9.0
-    reflect-metadata: ^0.1.13
-    typedoc: ^0.23.10
-    typedoc-json-parser: ^2.3.2
-  languageName: unknown
-  linkType: soft
-
-"@joshdb/provider@npm:2.0.0-next.5865881.0":
-  version: 2.0.0-next.5865881.0
-  resolution: "@joshdb/provider@npm:2.0.0-next.5865881.0"
-  dependencies:
-    "@sapphire/utilities": ^3.9.0
-  checksum: a6f9e78e5a780420b6b7b9c543fe4e4c0ad27f9505f6aed358cc5081074f6897ad3576930db91193300c3d99da1c693b7bfecb830ec30b755b87865b6cfaf738
-  languageName: node
-  linkType: hard
-
 "@joshdb/provider@workspace:packages/provider":
   version: 0.0.0-use.local
   resolution: "@joshdb/provider@workspace:packages/provider"
@@ -1013,6 +990,7 @@ __metadata:
     "@favware/cliff-jumper": ^1.8.6
     "@favware/rollup-type-bundler": ^1.0.10
     "@sapphire/utilities": ^3.9.0
+    reflect-metadata: ^0.1.13
     typedoc: ^0.23.10
     typedoc-json-parser: ^2.3.2
   languageName: unknown

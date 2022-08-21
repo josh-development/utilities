@@ -1,62 +1,65 @@
-import { JoshProvider, Method, Payload, Payloads } from '@joshdb/provider';
-import type { Awaitable, NonNullObject } from '@sapphire/utilities';
-import type { MiddlewareStore } from './MiddlewareStore';
+import type { Awaitable, NonNullObject, PartialRequired } from '@sapphire/utilities';
+import { resolveCommonIdentifier } from '../functions';
+import { Method, Payload, Payloads } from '../types';
+import type { JoshMiddlewareStore } from './JoshMiddlewareStore';
+import type { JoshProvider } from './JoshProvider';
+import { JoshProviderError } from './JoshProviderError';
 
 /**
- * The base class for creating middlewares. Extend this class to create a middleware.
- * @see {@link Middleware.Options} for all available options for middlewares.
+ * The base class for creating middlewares. Extend this class to create a JoshMiddleware.
+ * @see {@link JoshMiddleware.Options} for all available options for middlewares.
  * @since 1.0.0
  *
  * @example
  * ```typescript
- * (at)ApplyOptions<Middleware.Options>({
- *   name: 'middleware',
+ * (at)ApplyOptions<JoshMiddleware.Options>({
+ *   name: 'JoshMiddleware',
  *   // More options...
  * })
- * export class CoreMiddleware extends Middleware {
+ * export class CoreMiddleware extends JoshMiddleware {
  *   // Make method implementations...
  * }
  * ```
  *
  * @example
  * ```typescript
- * export class CoreMiddleware extends Middleware {
+ * export class CoreMiddleware extends JoshMiddleware {
  *   public constructor() {
  *     super({
- *       name: 'middleware'
+ *       name: 'JoshMiddleware'
  *     })
  *   }
  * }
  * ```
  */
 
-export class Middleware<ContextData extends NonNullObject, StoredValue = unknown> {
+export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unknown> {
   /**
-   * The store for this middleware.
+   * The store for this JoshMiddleware.
    * @since 1.0.0
    */
-  public store?: MiddlewareStore<StoredValue>;
+  public store?: JoshMiddlewareStore<StoredValue>;
 
   /**
-   * The name of this middleware.
+   * The name of this JoshMiddleware.
    * @since 1.0.0
    */
   public name: string;
 
   /**
-   * The conditions this middleware to run.
+   * The conditions this JoshMiddleware to run.
    * @since 1.0.0
    */
-  public readonly conditions: Middleware.Conditions;
+  public readonly conditions: JoshMiddleware.Conditions;
 
   protected context: ContextData;
 
-  public constructor(context: ContextData, options: Partial<Middleware.Options> = {}) {
+  public constructor(context: ContextData, options: Partial<JoshMiddleware.Options> = {}) {
     this.context = context;
 
     const { name, conditions } = options;
 
-    if (!name) throw new Error('No name was provided for this middleware.');
+    if (!name) throw this.error(JoshMiddleware.CommonIdentifiers.NameNotFound);
 
     this.name = name;
     this.conditions = conditions ?? { pre: [], post: [] };
@@ -67,7 +70,7 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
    * @since 1.0.0
    */
   protected get provider(): JoshProvider<StoredValue> {
-    if (this.store === undefined) throw new Error('The "store" property is undefined. This usually means this middleware has not been initiated.');
+    if (this.store === undefined) throw this.error(JoshMiddleware.CommonIdentifiers.StoreNotFound);
 
     return this.store.provider;
   }
@@ -76,9 +79,9 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
    * Initiates this class with it's store.
    * @since 1.0.0
    * @param store The store to set to `this`.
-   * @returns Returns the current Middleware class.
+   * @returns Returns the current JoshMiddleware class.
    */
-  public init(store: MiddlewareStore<StoredValue>): Awaitable<this> {
+  public init(store: JoshMiddlewareStore<StoredValue>): Awaitable<this> {
     this.store = store;
 
     return this;
@@ -228,34 +231,82 @@ export class Middleware<ContextData extends NonNullObject, StoredValue = unknown
   /**
    * Adds the options of this class to an object.
    * @since 1.0.0
-   * @returns The options for this middleware as an object.
+   * @returns The options for this JoshMiddleware as an object.
    */
-  public toJSON(): Middleware.JSON {
+  public toJSON(): JoshMiddleware.JSON {
     return { name: this.name, conditions: this.conditions };
+  }
+
+  /**
+   * Creates an Josh provider error.
+   * @since 1.0.0
+   * @param options The options for the error.
+   * @returns The error.
+   */
+  protected error(
+    options: string | PartialRequired<JoshProviderError.Options, 'identifier'>,
+    metadata: Record<string, unknown> = {}
+  ): JoshProviderError {
+    if (typeof options === 'string') {
+      return new JoshProviderError({
+        identifier: options,
+        origin: { type: JoshProviderError.OriginType.Middleware, name: this.constructor.name.replace(/Middleware/, '') },
+        message: this.resolveIdentifier(options, metadata)
+      });
+    }
+
+    return new JoshProviderError({
+      ...options,
+      name: options.name ?? `${this.constructor.name}Error`,
+      origin: { type: JoshProviderError.OriginType.Middleware, name: this.constructor.name.replace(/Middleware/, '') }
+    });
+  }
+
+  /**
+   * Resolves an identifier.
+   * @since 1.0.0
+   * @param identifier The identifier to resolve.
+   * @param metadata The metadata to use.
+   * @returns The resolved identifier message.
+   */
+  protected resolveIdentifier(identifier: string, metadata: Record<string, unknown>): string {
+    const result = resolveCommonIdentifier(identifier, metadata);
+
+    if (result !== null) return result;
+
+    switch (identifier) {
+      case JoshMiddleware.CommonIdentifiers.NameNotFound:
+        return 'No name was provided for this JoshMiddleware.';
+
+      case JoshMiddleware.CommonIdentifiers.StoreNotFound:
+        return 'The "store" property is undefined. This usually means this JoshMiddleware has not been initiated.';
+    }
+
+    throw new Error(`Unknown identifier: ${identifier}`);
   }
 }
 
-export namespace Middleware {
+export namespace JoshMiddleware {
   /**
-   * The options for {@link Middleware}
+   * The options for {@link JoshMiddleware}
    * @since 1.0.0
    */
   export interface Options {
     /**
-     * The name of this middleware.
+     * The name of this JoshMiddleware.
      * @since 1.0.0
      */
     name: string;
 
     /**
-     * The conditions for this middleware to run on.
+     * The conditions for this JoshMiddleware to run on.
      * @since 1.0.0
      */
     conditions: Conditions;
   }
 
   /**
-   * The conditions to run this middleware on.
+   * The conditions to run this JoshMiddleware on.
    * @since 1.0.0
    */
   export interface Conditions {
@@ -273,26 +324,26 @@ export namespace Middleware {
   }
 
   /**
-   * The options in an object for {@link Middleware}
+   * The options in an object for {@link JoshMiddleware}
    * @since 1.0.0
    */
   export interface JSON {
     /**
-     * The name of this middleware.
+     * The name of this JoshMiddleware.
      * @since 1.0.0
      */
     name: string;
 
     /**
-     * The conditions for this middleware.
+     * The conditions for this JoshMiddleware.
      * @since 1.0.0
      */
     conditions: Conditions;
   }
-}
 
-export enum MiddlewareIdentifiers {
-  NameNotFound = 'nameNotFound',
+  export enum CommonIdentifiers {
+    NameNotFound = 'nameNotFound',
 
-  StoreNotFound = 'storeNotFound'
+    StoreNotFound = 'storeNotFound'
+  }
 }
