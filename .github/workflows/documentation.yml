@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: ['middleware', 'provider', 'serialize']
+        package: ['provider', 'serialize']
     runs-on: ubuntu-latest
     env:
       NAME: ${{ needs.build.outputs.NAME }}
