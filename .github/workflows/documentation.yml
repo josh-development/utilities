@@ -5,7 +5,11 @@ on:
     branches:
       - main
     tags:
-      - 'v*'
+      - '**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -49,8 +53,11 @@ jobs:
     needs: build
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
-        package: ['provider', 'serialize']
+        package:
+          - provider
+          - serialize
     runs-on: ubuntu-latest
     env:
       NAME: ${{ needs.build.outputs.NAME }}
@@ -109,7 +116,9 @@ jobs:
           cd out
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config rebase.autostash true
+          git config pull.rebase true
           git add .
           git commit -m "docs(${PACKAGE}): build for ${TYPE} ${NAME}: ${SHA}" || true
-          git pull --rebase
+          git pull
           git push
