@@ -1745,6 +1745,34 @@ export function runProviderTest<
 
             expect(getAfter.data).toBe('value');
           });
+
+          test('GIVEN provider w/ data THEN returns payload AND does overwrite value at key', async () => {
+            await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+
+            const hasBefore = await provider[Method.Has]({ method: Method.Has, errors: [], key: 'key', path: [] });
+
+            expect(hasBefore.data).toBe(true);
+
+            const payload = await provider[Method.SetMany]({
+              method: Method.SetMany,
+              errors: [],
+              entries: [{ key: 'key', path: [], value: 'anotherValue' }],
+              overwrite: true
+            });
+
+            expect(typeof payload).toBe('object');
+
+            const { method, trigger, errors, entries } = payload;
+
+            expect(method).toBe(Method.SetMany);
+            expect(trigger).toBeUndefined();
+            expect(errors).toStrictEqual([]);
+            expect(entries).toEqual([{ key: 'key', path: [], value: 'anotherValue' }]);
+
+            const getAfter = await provider[Method.Get]({ method: Method.Get, errors: [], key: 'key', path: [] });
+
+            expect(getAfter.data).toBe('anotherValue');
+          });
         });
 
         describe(Method.Size, () => {
