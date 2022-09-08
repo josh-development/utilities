@@ -170,7 +170,7 @@ describe('JoshProvider', () => {
     const provider = new TestProvider({ allowMigrations: true });
 
     test('should migrate data', async () => {
-      await provider.init({ name: 'test:name' });
+      await provider.init({ name: 'name' });
     });
   });
 });

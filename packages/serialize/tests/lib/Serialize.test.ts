@@ -105,59 +105,59 @@ describe('Serialize', () => {
 
       describe(Serialize.Type.Map, () => {
         test(Serialize.Type.BigInt, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawBigInt]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawBigInt]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.BigInt, value: jsonBigInt }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.BigInt, value: jsonBigInt }]]);
         });
 
         test(Serialize.Type.Boolean, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawBoolean]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawBoolean]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.Boolean, value: jsonBoolean }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.Boolean, value: jsonBoolean }]]);
         });
 
         test(Serialize.Type.Date, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawDate]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawDate]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.Date, value: jsonDate }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.Date, value: jsonDate }]]);
         });
 
         test(Serialize.Type.Null, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawNull]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawNull]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.Null, value: jsonNull }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.Null, value: jsonNull }]]);
         });
 
         test(Serialize.Type.Number, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawNumber]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawNumber]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.Number, value: jsonNumber }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.Number, value: jsonNumber }]]);
         });
 
         test(Serialize.Type.RegExp, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawRegExp]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawRegExp]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.RegExp, value: jsonRegExp }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.RegExp, value: jsonRegExp }]]);
         });
 
         test(Serialize.Type.String, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawString]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawString]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.String, value: jsonString }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.String, value: jsonString }]]);
         });
 
         test(Serialize.Type.Undefined, () => {
-          const { type, value } = Serialize.toJSON(new Map([['test:key', rawUndefined]]));
+          const { type, value } = Serialize.toJSON(new Map([['key', rawUndefined]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['test:key', { type: Serialize.Type.Undefined, value: jsonUndefined }]]);
+          expect(value).toStrictEqual([['key', { type: Serialize.Type.Undefined, value: jsonUndefined }]]);
         });
       });
 
