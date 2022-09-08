@@ -8,7 +8,7 @@ export function resolveCommonIdentifier(identifier: string, metadata: Record<str
     case CommonIdentifiers.InvalidDataType: {
       const { key, path = [], type } = metadata;
 
-      if (typeof key === 'string') return null;
+      if (typeof key !== 'string') return null;
       if (!Array.isArray(path)) return null;
       if (typeof type !== 'string') return null;
 
@@ -28,7 +28,7 @@ export function resolveCommonIdentifier(identifier: string, metadata: Record<str
     case CommonIdentifiers.MissingData: {
       const { key, path = [] } = metadata;
 
-      if (typeof key === 'string') return null;
+      if (typeof key !== 'string') return null;
       if (!Array.isArray(path)) return null;
 
       return path.length === 0 ? `The data at "${key}" does not exist.` : `The data at "${key}.${path.join('.')}" does not exist.`;
