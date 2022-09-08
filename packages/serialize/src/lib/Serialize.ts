@@ -93,7 +93,7 @@ export namespace Serialize {
    */
   export interface JSON {
     /**
-     * The type of {@link SerializeJSON.value}
+     * The type of {@link JSON.value}
      * @since 1.0.0
      */
     type: Type;
