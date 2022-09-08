@@ -1426,7 +1426,7 @@ export function runProviderTest<
             expect(method).toBe(Method.Random);
             expect(trigger).toBeUndefined();
             expect(errors).toStrictEqual([]);
-            expect(data).toBeUndefined();
+            expect(data).toStrictEqual([]);
           });
 
           test('GIVEN provider w/ data THEN returns payload w/ data from random', async () => {
@@ -1456,7 +1456,7 @@ export function runProviderTest<
             expect(method).toBe(Method.RandomKey);
             expect(trigger).toBeUndefined();
             expect(errors).toStrictEqual([]);
-            expect(data).toBeUndefined();
+            expect(data).toStrictEqual([]);
           });
 
           test('GIVEN provider w/ data THEN returns payload w/ data from randomKey', async () => {
