@@ -10,7 +10,7 @@ const config = {
       tsconfig: '<rootDir>/tsconfig.base.json'
     }
   },
-  coveragePathIgnorePatterns: [],
+  coveragePathIgnorePatterns: ['<rootDir>/packages/provider/src/lib/decorators/'],
   reporters: ['default', 'github-actions']
 };
 
