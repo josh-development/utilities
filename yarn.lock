@@ -1033,7 +1033,7 @@ __metadata:
     jest: ^29.0.2
     reflect-metadata: ^0.1.13
     typedoc: ^0.23.14
-    typedoc-json-parser: ^3.1.0
+    typedoc-json-parser: ^3.2.0
   languageName: unknown
   linkType: soft
 
@@ -1045,7 +1045,7 @@ __metadata:
     "@favware/rollup-type-bundler": ^1.0.11
     jest: ^29.0.2
     typedoc: ^0.23.14
-    typedoc-json-parser: ^3.1.0
+    typedoc-json-parser: ^3.2.0
   languageName: unknown
   linkType: soft
 
@@ -6284,23 +6284,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-json-parser@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "typedoc-json-parser@npm:3.1.0"
+"typedoc-json-parser@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "typedoc-json-parser@npm:3.2.0"
   dependencies:
     "@favware/colorette-spinner": ^1.0.1
     colorette: ^2.0.19
     commander: ^9.4.0
     js-yaml: ^4.1.0
     tslib: ^2.4.0
-    typedoc: ^0.23.11
+    typedoc: ^0.23.14
   bin:
     typedoc-json-parser: ./dist/bin/index.js
-  checksum: 4259a95e60851ef4a14d94aa68b4fa611b1700f75f959417416231d33273333a6af9f833b9e2e9b90224e517de9e2bc96d7fb5d7e52ba64e1597c8684a2f2bca
+  checksum: dbcfc2def2eaf2b3595f7a91ea85b940925cbf75d07de4ff9a698612142803cd01f2fc811d9cbe2e0e3078d23ec57cd9ce2266a6d65c5b5548133b35a3895f4c
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.11, typedoc@npm:^0.23.14":
+"typedoc@npm:^0.23.14":
   version: 0.23.14
   resolution: "typedoc@npm:0.23.14"
   dependencies:
