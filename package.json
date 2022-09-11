@@ -29,13 +29,13 @@
     "@sapphire/ts-config": "^3.3.4",
     "@types/jest": "^29.0.0",
     "@types/node": "^17.0.31",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
-    "jest": "^29.0.2",
+    "jest": "^29.0.3",
     "jest-extended": "^3.1.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
@@ -47,8 +47,8 @@
     "ts-jest": "^28.0.8",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
-    "turbo": "^1.4.5",
-    "typescript": "^4.8.2"
+    "turbo": "^1.4.6",
+    "typescript": "^4.8.3"
   },
   "repository": {
     "type": "git",
