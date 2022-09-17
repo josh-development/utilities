@@ -24,10 +24,11 @@ export default defineConfig({
       name: 'JoshProvider',
       sourcemap: true,
       globals: {
-        '@sapphire/utilities': 'SapphireUtilities'
+        '@sapphire/utilities': 'SapphireUtilities',
+        vitest: 'Vitest'
       }
     }
   ],
-  external: ['@sapphire/utilities', 'reflect-metadata'],
+  external: ['@sapphire/utilities', 'reflect-metadata', 'vitest'],
   plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
 });
