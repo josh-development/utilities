@@ -5,7 +5,7 @@ const config = {
   testMatch: ['<rootDir>/tests/**/*.test.ts'],
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   setupFilesAfterEnv: ['jest-extended/all'],
-  globals: {
+  transform: {
     'ts-jest': {
       tsconfig: '<rootDir>/tests/tsconfig.json'
     }

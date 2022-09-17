@@ -1,8 +1,8 @@
 import type { Awaitable, Constructor } from '@sapphire/utilities';
+import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 import type { JoshProvider } from '../lib/structures/JoshProvider';
 import { CommonIdentifiers, MathOperator, Method, Payload } from '../lib/types';
 
-/* istanbul ignore next */
 export function runProviderTest<
   Provider extends Constructor<JoshProvider>,
   Options extends JoshProvider.Options = JoshProvider.Options,
@@ -354,7 +354,7 @@ export function runProviderTest<
         });
 
         describe(Method.Every, () => {
-          describe(Payload.Type.Hook, () => {
+          describe(Payload.Type.Hook.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload(true)', async () => {
               const payload = await provider[Method.Every]({
                 method: Method.Every,
@@ -404,7 +404,7 @@ export function runProviderTest<
             });
           });
 
-          describe(Payload.Type.Value, () => {
+          describe(Payload.Type.Value.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload(true)', async () => {
               const payload = await provider[Method.Every]({
                 method: Method.Every,
@@ -500,7 +500,7 @@ export function runProviderTest<
         });
 
         describe(Method.Filter, () => {
-          describe(Payload.Type.Hook, () => {
+          describe(Payload.Type.Hook.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data from filter', async () => {
               const payload = await provider[Method.Filter]({
                 method: Method.Filter,
@@ -542,7 +542,7 @@ export function runProviderTest<
             });
           });
 
-          describe(Payload.Type.Value, () => {
+          describe(Payload.Type.Value.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data from filter', async () => {
               const payload = await provider[Method.Filter]({
                 method: Method.Filter,
@@ -590,7 +590,7 @@ export function runProviderTest<
         });
 
         describe(Method.Find, () => {
-          describe(Payload.Type.Hook, () => {
+          describe(Payload.Type.Hook.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data from find', async () => {
               const payload = await provider[Method.Find]({
                 method: Method.Find,
@@ -633,7 +633,7 @@ export function runProviderTest<
             });
           });
 
-          describe(Payload.Type.Value, () => {
+          describe(Payload.Type.Value.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data from find', async () => {
               const payload = await provider[Method.Find]({
                 method: Method.Find,
@@ -970,7 +970,7 @@ export function runProviderTest<
         });
 
         describe(Method.Map, () => {
-          describe(Payload.Type.Hook, () => {
+          describe(Payload.Type.Hook.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data from map', async () => {
               const payload = await provider[Method.Map]({ method: Method.Map, errors: [], type: Payload.Type.Hook, hook: (value) => value });
 
@@ -1002,7 +1002,7 @@ export function runProviderTest<
             });
           });
 
-          describe(Payload.Type.Path, () => {
+          describe(Payload.Type.Path.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data from map', async () => {
               const payload = await provider[Method.Map]({ method: Method.Map, errors: [], type: Payload.Type.Path, path: [] });
 
@@ -1156,7 +1156,7 @@ export function runProviderTest<
         });
 
         describe(Method.Partition, () => {
-          describe(Payload.Type.Hook, () => {
+          describe(Payload.Type.Hook.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data', async () => {
               const payload = await provider[Method.Partition]({
                 method: Method.Partition,
@@ -1225,7 +1225,7 @@ export function runProviderTest<
             });
           });
 
-          describe(Payload.Type.Value, () => {
+          describe(Payload.Type.Value.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload w/o data', async () => {
               const payload = await provider[Method.Partition]({
                 method: Method.Partition,
@@ -1476,7 +1476,7 @@ export function runProviderTest<
         });
 
         describe(Method.Remove, () => {
-          describe(Payload.Type.Hook, () => {
+          describe(Payload.Type.Hook.toString(), () => {
             test('GIVEN provider w/o data at key THEN returns payload w/ missing data error', async () => {
               const payload = await provider[Method.Remove]({
                 method: Method.Remove,
@@ -1561,7 +1561,7 @@ export function runProviderTest<
             });
           });
 
-          describe(Payload.Type.Value, () => {
+          describe(Payload.Type.Value.toString(), () => {
             test('GIVEN provider w/o data at key THEN returns payload w/ missing data error', async () => {
               const payload = await provider[Method.Remove]({
                 method: Method.Remove,
@@ -1806,7 +1806,7 @@ export function runProviderTest<
         });
 
         describe(Method.Some, () => {
-          describe(Payload.Type.Hook, () => {
+          describe(Payload.Type.Hook.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload(false)', async () => {
               const payload = await provider[Method.Some]({
                 method: Method.Some,
@@ -1848,7 +1848,7 @@ export function runProviderTest<
             });
           });
 
-          describe(Payload.Type.Value, () => {
+          describe(Payload.Type.Value.toString(), () => {
             test('GIVEN provider w/o data THEN returns payload(false)', async () => {
               const payload = await provider[Method.Some]({
                 method: Method.Some,
@@ -2038,7 +2038,7 @@ export function runProviderTest<
 
         describe(Method.Each, () => {
           test('GIVEN provider w/o data THEN loops 0 times', () => {
-            const mockCallback = jest.fn(() => true);
+            const mockCallback = vi.fn(() => true);
             const payload = provider[Method.Each]({ method: Method.Each, errors: [], hook: () => mockCallback() });
 
             expect(typeof payload).toBe('object');
@@ -2046,7 +2046,7 @@ export function runProviderTest<
           });
 
           test('GIVEN provider w/ data THEN loops x times THEN clears', async () => {
-            const mockCallback = jest.fn((..._) => true);
+            const mockCallback = vi.fn((..._) => true);
 
             await provider[Method.Set]({ method: Method.Set, errors: [], key: 'firstKey', path: [], value: 'firstValue' });
             await provider[Method.Set]({ method: Method.Set, errors: [], key: 'secondKey', path: [], value: 'secondValue' });
