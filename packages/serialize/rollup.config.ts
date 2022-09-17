@@ -17,13 +17,6 @@ export default defineConfig({
       format: 'es',
       exports: 'named',
       sourcemap: true
-    },
-    {
-      file: './dist/index.umd.js',
-      format: 'umd',
-      name: 'JoshSerialize',
-      sourcemap: true,
-      globals: {}
     }
   ],
   external: [],
