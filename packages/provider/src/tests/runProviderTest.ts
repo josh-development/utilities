@@ -3,7 +3,6 @@ import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vit
 import type { JoshProvider } from '../lib/structures/JoshProvider';
 import { CommonIdentifiers, MathOperator, Method, Payload } from '../lib/types';
 
-/* istanbul ignore next */
 export function runProviderTest<
   Provider extends Constructor<JoshProvider>,
   Options extends JoshProvider.Options = JoshProvider.Options,
