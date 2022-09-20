@@ -16,7 +16,7 @@ export const createVitestConfig = (options: UserConfig = {}) =>
           '**/node_modules/**',
           '**/dist/**',
           '**/tests/**',
-          'packages/utilities/src/lib/debounce/index.ts'
+          'packages/provider/src/lib/decorators/**'
         ]
       }
     },

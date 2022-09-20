@@ -1,3 +1,7 @@
+/**
+ * An enum of methods used in this package.
+ * @since 1.0.0
+ */
 export enum Method {
   AutoKey = 'autoKey',
 

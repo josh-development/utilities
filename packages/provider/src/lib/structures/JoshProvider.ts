@@ -1,6 +1,6 @@
 import type { Awaitable, PartialRequired } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
-import type { Method, Payloads } from '../types';
+import type { Method, Payload } from '../types';
 import { JoshProviderError } from './JoshProviderError';
 
 /**
@@ -32,7 +32,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * Data migrations for this provider.
    * @since 1.0.0
    */
-  public migrations: JoshProvider.Migration[] = [];
+  public abstract migrations: JoshProvider.Migration[];
 
   public constructor(options: JoshProvider.Options = {}) {
     this.options = options;
@@ -99,7 +99,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.AutoKey](payload: Payloads.AutoKey): Awaitable<Payloads.AutoKey>;
+  public abstract [Method.AutoKey](payload: Payload.AutoKey): Awaitable<Payload.AutoKey>;
 
   /**
    * A method which clears all entries.
@@ -107,19 +107,19 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Clear](payload: Payloads.Clear): Awaitable<Payloads.Clear>;
+  public abstract [Method.Clear](payload: Payload.Clear): Awaitable<Payload.Clear>;
 
   /**
    * Decrements an entry or a path in an entry by one.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType``
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Dec](payload: Payloads.Dec): Awaitable<Payloads.Dec>;
+  public abstract [Method.Dec](payload: Payload.Dec): Awaitable<Payload.Dec>;
 
   /**
    * Deletes either the entry itself or a path in an entry.
@@ -127,7 +127,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Delete](payload: Payloads.Delete): Awaitable<Payloads.Delete>;
+  public abstract [Method.Delete](payload: Payload.Delete): Awaitable<Payload.Delete>;
 
   /**
    * Deletes multiple entries and/or a path in an entry.
@@ -135,7 +135,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.DeleteMany](payload: Payloads.DeleteMany): Awaitable<Payloads.DeleteMany>;
+  public abstract [Method.DeleteMany](payload: Payload.DeleteMany): Awaitable<Payload.DeleteMany>;
 
   /**
    * A method which mimics the functionality of [Array#forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach), except this supports asynchronous functions.
@@ -143,18 +143,18 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Each](payload: Payloads.Each<StoredValue>): Awaitable<Payloads.Each<StoredValue>>;
+  public abstract [Method.Each](payload: Payload.Each<StoredValue>): Awaitable<Payload.Each<StoredValue>>;
 
   /**
    * A method which ensures an entry exists.
    *
-   * If the key exists, it returns the value.
-   * If the key does not exist, it creates it and returns the default value.
+   * If the key exists, returns the value.
+   * If the key does not exist, creates and returns the default value.
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Ensure](payload: Payloads.Ensure<StoredValue>): Awaitable<Payloads.Ensure<StoredValue>>;
+  public abstract [Method.Ensure](payload: Payload.Ensure<StoredValue>): Awaitable<Payload.Ensure<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Map#entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries), except returns a record of key-value pairs.
@@ -162,7 +162,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Entries](payload: Payloads.Entries<StoredValue>): Awaitable<Payloads.Entries<StoredValue>>;
+  public abstract [Method.Entries](payload: Payload.Entries<StoredValue>): Awaitable<Payload.Entries<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#each(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)], except this supports asynchronous functions.
@@ -170,19 +170,19 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Every]<StoredValue>(payload: Payloads.Every.ByHook<StoredValue>): Awaitable<Payloads.Every.ByHook<StoredValue>>;
+  public abstract [Method.Every]<StoredValue>(payload: Payload.Every.ByHook<StoredValue>): Awaitable<Payload.Every.ByHook<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#each(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)], except this uses a path and a value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Every]<Value>(payload: Payloads.Every.ByValue): Awaitable<Payloads.Every.ByValue>;
-  public abstract [Method.Every]<StoredValue>(payload: Payloads.Every<StoredValue>): Awaitable<Payloads.Every<StoredValue>>;
+  public abstract [Method.Every]<Value>(payload: Payload.Every.ByValue): Awaitable<Payload.Every.ByValue>;
+  public abstract [Method.Every]<StoredValue>(payload: Payload.Every<StoredValue>): Awaitable<Payload.Every<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except this supports asynchronous functions.
@@ -190,19 +190,19 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Filter](payload: Payloads.Filter.ByHook<StoredValue>): Awaitable<Payloads.Filter.ByHook<StoredValue>>;
+  public abstract [Method.Filter](payload: Payload.Filter.ByHook<StoredValue>): Awaitable<Payload.Filter.ByHook<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except this uses a path and a value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Filter](payload: Payloads.Filter.ByValue<StoredValue>): Awaitable<Payloads.Filter.ByValue<StoredValue>>;
-  public abstract [Method.Filter](payload: Payloads.Filter<StoredValue>): Awaitable<Payloads.Filter<StoredValue>>;
+  public abstract [Method.Filter](payload: Payload.Filter.ByValue<StoredValue>): Awaitable<Payload.Filter.ByValue<StoredValue>>;
+  public abstract [Method.Filter](payload: Payload.Filter<StoredValue>): Awaitable<Payload.Filter<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find), except this supports asynchronous functions.
@@ -210,19 +210,19 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Find](payload: Payloads.Find.ByHook<StoredValue>): Awaitable<Payloads.Find.ByHook<StoredValue>>;
+  public abstract [Method.Find](payload: Payload.Find.ByHook<StoredValue>): Awaitable<Payload.Find.ByHook<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find), except this uses a path and value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Find](payload: Payloads.Find.ByValue<StoredValue>): Awaitable<Payloads.Find.ByValue<StoredValue>>;
-  public abstract [Method.Find](payload: Payloads.Find<StoredValue>): Awaitable<Payloads.Find<StoredValue>>;
+  public abstract [Method.Find](payload: Payload.Find.ByValue<StoredValue>): Awaitable<Payload.Find.ByValue<StoredValue>>;
+  public abstract [Method.Find](payload: Payload.Find<StoredValue>): Awaitable<Payload.Find<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Map#get()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get), except this has support for a path.
@@ -230,7 +230,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Get]<Value = StoredValue>(payload: Payloads.Get<Value>): Awaitable<Payloads.Get<Value>>;
+  public abstract [Method.Get]<Value = StoredValue>(payload: Payload.Get<Value>): Awaitable<Payload.Get<Value>>;
 
   /**
    * A method to get multiple entries.
@@ -238,7 +238,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.GetMany](payload: Payloads.GetMany<StoredValue>): Awaitable<Payloads.GetMany<StoredValue>>;
+  public abstract [Method.GetMany](payload: Payload.GetMany<StoredValue>): Awaitable<Payload.GetMany<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Map#has()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has), except this has support for a path.
@@ -246,19 +246,19 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Has](payload: Payloads.Has): Awaitable<Payloads.Has>;
+  public abstract [Method.Has](payload: Payload.Has): Awaitable<Payload.Has>;
 
   /**
    * Increments an entry or a path in an entry by one.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The entry or path in an entry does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType``
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Inc](payload: Payloads.Inc): Awaitable<Payloads.Inc>;
+  public abstract [Method.Inc](payload: Payload.Inc): Awaitable<Payload.Inc>;
 
   /**
    * A method which mimics the functionality of [Map#keys()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys), except returns an array.
@@ -266,7 +266,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Keys](payload: Payloads.Keys): Awaitable<Payloads.Keys>;
+  public abstract [Method.Keys](payload: Payload.Keys): Awaitable<Payload.Keys>;
 
   /**
    * A method which mimics the functionality of [Array#map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map), except supports asynchronous functions.
@@ -275,32 +275,32 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
   public abstract [Method.Map]<Value = StoredValue>(
-    payload: Payloads.Map.ByHook<StoredValue, Value>
-  ): Awaitable<Payloads.Map.ByHook<StoredValue, Value>>;
+    payload: Payload.Map.ByHook<StoredValue, Value>
+  ): Awaitable<Payload.Map.ByHook<StoredValue, Value>>;
 
   /**
    * A method which mimics the functionality of [Array#map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map), except maps over a path.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not found - `CommonIdentifiers.MissingData`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Map]<Value = StoredValue>(payload: Payloads.Map.ByPath<Value>): Awaitable<Payloads.Map.ByPath<Value>>;
-  public abstract [Method.Map]<Value = StoredValue>(payload: Payloads.Map<StoredValue, Value>): Awaitable<Payloads.Map<StoredValue, Value>>;
+  public abstract [Method.Map]<Value = StoredValue>(payload: Payload.Map.ByPath<Value>): Awaitable<Payload.Map.ByPath<Value>>;
+  public abstract [Method.Map]<Value = StoredValue>(payload: Payload.Map<StoredValue, Value>): Awaitable<Payload.Map<StoredValue, Value>>;
 
   /**
    * A method which executes a math operation a value with an operand either on the entry or a path in the entry.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data is not an integer - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Math](payload: Payloads.Math): Awaitable<Payloads.Math>;
+  public abstract [Method.Math](payload: Payload.Math): Awaitable<Payload.Math>;
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except returns both truthy and falsy entries and supports asynchronous functions.
@@ -308,52 +308,52 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Partition](payload: Payloads.Partition.ByHook<StoredValue>): Awaitable<Payloads.Partition.ByHook<StoredValue>>;
+  public abstract [Method.Partition](payload: Payload.Partition.ByHook<StoredValue>): Awaitable<Payload.Partition.ByHook<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except returns both truthy and falsy entries and validates using a path and value.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The data at the path is not found - `CommonIdentifiers.MissingData`
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Partition](payload: Payloads.Partition.ByValue<StoredValue>): Awaitable<Payloads.Partition.ByValue<StoredValue>>;
-  public abstract [Method.Partition](payload: Payloads.Partition<StoredValue>): Awaitable<Payloads.Partition<StoredValue>>;
+  public abstract [Method.Partition](payload: Payload.Partition.ByValue<StoredValue>): Awaitable<Payload.Partition.ByValue<StoredValue>>;
+  public abstract [Method.Partition](payload: Payload.Partition<StoredValue>): Awaitable<Payload.Partition<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push), except this supports a path.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data at the path is not an array - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Push]<Value>(payload: Payloads.Push<Value>): Awaitable<Payloads.Push<Value>>;
+  public abstract [Method.Push]<Value>(payload: Payload.Push<Value>): Awaitable<Payload.Push<Value>>;
 
   /**
    * A method which gets random value(s).
-   * Whether duplicates are allowed or not are controlled by `Payloads.Random#duplicates` option.
-   * The amount of values returned is controlled by `Payloads.Random#count` option.
+   * Whether duplicates are allowed or not are controlled by `Payload.Random#duplicates` option.
+   * The amount of values returned is controlled by `Payload.Random#count` option.
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Random](payload: Payloads.Random<StoredValue>): Awaitable<Payloads.Random<StoredValue>>;
+  public abstract [Method.Random](payload: Payload.Random<StoredValue>): Awaitable<Payload.Random<StoredValue>>;
 
   /**
    * A method which gets random key(s).
-   * Whether duplicates are allowed or not are controlled by `Payloads.RandomKey#duplicates` option.
-   * The amount of keys returned is controlled by `Payloads.RandomKey#count` option.
+   * Whether duplicates are allowed or not are controlled by `Payload.RandomKey#duplicates` option.
+   * The amount of keys returned is controlled by `Payload.RandomKey#count` option.
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.RandomKey](payload: Payloads.RandomKey): Awaitable<Payloads.RandomKey>;
+  public abstract [Method.RandomKey](payload: Payload.RandomKey): Awaitable<Payload.RandomKey>;
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except it removes the values filtered and uses a path and value to validate
@@ -361,20 +361,20 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Remove]<StoredValue>(payload: Payloads.Remove.ByHook<StoredValue>): Awaitable<Payloads.Remove.ByHook<StoredValue>>;
+  public abstract [Method.Remove]<StoredValue>(payload: Payload.Remove.ByHook<StoredValue>): Awaitable<Payload.Remove.ByHook<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), except it removes the values filtered and uses a path and value to validate
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
    * - The data at the path is not an array - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Remove]<Value>(payload: Payloads.Remove.ByValue): Awaitable<Payloads.Remove.ByValue>;
-  public abstract [Method.Remove]<StoredValue>(payload: Payloads.Remove<StoredValue>): Awaitable<Payloads.Remove<StoredValue>>;
+  public abstract [Method.Remove]<Value>(payload: Payload.Remove.ByValue): Awaitable<Payload.Remove.ByValue>;
+  public abstract [Method.Remove]<StoredValue>(payload: Payload.Remove<StoredValue>): Awaitable<Payload.Remove<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Map#set()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set), except this supports a path.
@@ -382,7 +382,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Set]<Value = StoredValue>(payload: Payloads.Set<Value>): Awaitable<Payloads.Set<Value>>;
+  public abstract [Method.Set]<Value = StoredValue>(payload: Payload.Set<Value>): Awaitable<Payload.Set<Value>>;
 
   /**
    * A method which sets multiple entries and/or paths in entries.
@@ -390,7 +390,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.SetMany](payload: Payloads.SetMany): Awaitable<Payloads.SetMany>;
+  public abstract [Method.SetMany](payload: Payload.SetMany): Awaitable<Payload.SetMany>;
 
   /**
    * A method which mimics the functionality of [Map#size()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size)
@@ -398,7 +398,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Size](payload: Payloads.Size): Awaitable<Payloads.Size>;
+  public abstract [Method.Size](payload: Payload.Size): Awaitable<Payload.Size>;
 
   /**
    * A method which mimics the functionality of [Array#some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some), except this supports asynchronous functions.
@@ -406,31 +406,31 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Some]<StoredValue>(payload: Payloads.Some.ByHook<StoredValue>): Awaitable<Payloads.Some.ByHook<StoredValue>>;
+  public abstract [Method.Some]<StoredValue>(payload: Payload.Some.ByHook<StoredValue>): Awaitable<Payload.Some.ByHook<StoredValue>>;
 
   /**
    * A method which mimics the functionality of [Array#some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some), except this uses a path and value to validate.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The path does not exist on an entry - `CommonIdentifiers.MissingData`
    * - The data at the path is not a primitive type - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Some]<Value>(payload: Payloads.Some.ByValue): Awaitable<Payloads.Some.ByValue>;
-  public abstract [Method.Some]<StoredValue>(payload: Payloads.Some<StoredValue>): Awaitable<Payloads.Some<StoredValue>>;
+  public abstract [Method.Some]<Value>(payload: Payload.Some.ByValue): Awaitable<Payload.Some.ByValue>;
+  public abstract [Method.Some]<StoredValue>(payload: Payload.Some<StoredValue>): Awaitable<Payload.Some<StoredValue>>;
 
   /**
    * A method which gets the stored value at a key and passes it to an asynchronous function and sets the data returned.
    *
-   * An error should be set to the payload and immediately return, if any of the following occurs:
+   * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The key does not exist - `CommonIdentifiers.MissingData`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Update]<Value>(payload: Payloads.Update<StoredValue, Value>): Awaitable<Payloads.Update<StoredValue, Value>>;
+  public abstract [Method.Update]<Value>(payload: Payload.Update<StoredValue, Value>): Awaitable<Payload.Update<StoredValue, Value>>;
 
   /**
    * A method which mimics the functionality of [Map#values()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values), except this returns an array.
@@ -438,10 +438,10 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
    */
-  public abstract [Method.Values](payload: Payloads.Values<StoredValue>): Awaitable<Payloads.Values<StoredValue>>;
+  public abstract [Method.Values](payload: Payload.Values<StoredValue>): Awaitable<Payload.Values<StoredValue>>;
 
   /**
-   * Creates an Josh provider error.
+   * Creates an instance of {@link JoshProvider} with the given options.
    * @since 1.0.0
    * @param options The options for the error.
    * @returns The error.
@@ -491,7 +491,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
         }needs migrations. Please set the "allowMigrations" option to true to run migrations automatically.`;
     }
 
-    throw new Error(`Unknown identifier: ${identifier}`);
+    throw new Error(`'${this.constructor.name}#resolveIdentifier()' received an unknown identifier: '${identifier}'`);
   }
 
   /**
@@ -541,28 +541,58 @@ export namespace JoshProvider {
      * @since 1.0.0
      */
     name: string;
-
-    /**
-     * The error of this context.
-     * @since 1.0.0
-     */
-    error?: JoshProviderError;
   }
 
+  /**
+   * A migration for the {@link JoshProvider} instance.
+   * @since 1.0.0
+   */
   export interface Migration {
+    /**
+     * The version this migration is for.
+     * @since 1.0.0
+     */
     version: Semver;
 
+    /**
+     * The method to run when the current version of the provider matches it.
+     * @since 1.0.0
+     * @param context The context for the provider to the migration.
+     */
     run(context: Context): Awaitable<void>;
   }
 
+  /**
+   * Represents a [Semver](https://semver.org/) version with an object.
+   * @since 1.0.0
+   *
+   * @example
+   * const version = { major: 1, minor: 3, patch: 9 };
+   */
   export interface Semver {
+    /**
+     * The major iteration of this version.
+     * @since 1.0.0
+     */
     major: number;
 
+    /**
+     * The minor iteration of this version.
+     * @since 1.0.0
+     */
     minor: number;
 
+    /**
+     * The patch iteration of this version.
+     * @since 1.0.0
+     */
     patch: number;
   }
 
+  /**
+   * An enum of common identifiers used within {@link JoshProvider}
+   * @since 1.0.0
+   */
   export enum CommonIdentifiers {
     MigrationNotFound = 'MigrationNotFound',
 

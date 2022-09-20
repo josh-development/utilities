@@ -1,7 +1,7 @@
 import type { Method } from '../types';
 
 /**
- * The base class for errors in `Josh`
+ * An error to be used in providers and middlewares.
  * @since 1.0.0
  */
 export class JoshProviderError extends Error {
@@ -33,7 +33,7 @@ export class JoshProviderError extends Error {
     const { name, identifier, method, origin, context } = options;
 
     super(JoshProviderError.formatMessage(options));
-    this.name = name ?? 'JoshError';
+    this.name = name ?? 'JoshProviderError';
     this.identifier = identifier;
     this.method = method ?? null;
     this.origin = origin;
@@ -45,7 +45,7 @@ export class JoshProviderError extends Error {
 
 export namespace JoshProviderError {
   /**
-   * The options for `JoshError`
+   * The options for {@link JoshProviderError}.
    * @since 1.0.0
    */
   export interface Options {
@@ -100,6 +100,10 @@ export namespace JoshProviderError {
     name: string;
   }
 
+  /**
+   * The origin type for {@link JoshProviderError.Origin}.
+   * @since 1.0.0
+   */
   export enum OriginType {
     Provider = 'provider',
 

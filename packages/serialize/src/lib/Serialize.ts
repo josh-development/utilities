@@ -1,6 +1,12 @@
 import { isObject } from './private';
 
 export namespace Serialize {
+  /**
+   * Converts data into a compatible JSON format.
+   * @since 1.0.0
+   * @param data The data to convert.
+   * @returns The converted data.
+   */
   export function toJSON(data: unknown): JSON {
     if (Array.isArray(data)) return { type: Type.Array, value: toJSONArray(data) };
     else if (typeof data === 'bigint') return { type: Type.BigInt, value: data.toString() };
@@ -30,6 +36,12 @@ export namespace Serialize {
     return Object.entries(object).reduce<Record<PropertyKey, JSON>>((json, [key, value]) => ({ ...json, [key]: toJSON(value) }), {});
   }
 
+  /**
+   * Converts data from a compatible JSON format.
+   * @since 1.0.0
+   * @param json The data to convert.
+   * @returns The converted data.
+   */
   export function fromJSON(json: JSON): unknown {
     const { type, value } = json;
 
@@ -105,6 +117,10 @@ export namespace Serialize {
     value: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | { source: string; flags: string };
   }
 
+  /**
+   * The json format type enum.
+   * @since 1.0.0
+   */
   export enum Type {
     Array = 'array',
 
