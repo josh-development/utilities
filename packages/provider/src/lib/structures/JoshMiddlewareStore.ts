@@ -46,8 +46,8 @@ export class JoshMiddlewareStore<StoredValue = unknown> extends Map<string, Josh
    * Filter middlewares by their conditions.
    * @since 1.0.0
    * @param method The method to filter by.
-   * @param trigger The filtered middlewares.
-   * @returns
+   * @param trigger The trigger to filter by.
+   * @returns The filtered middlewares.
    */
   private filterByCondition(method: Method, trigger: Trigger): JoshMiddleware<NonNullObject, StoredValue>[] {
     return Array.from(this.values()).filter((JoshMiddleware) =>

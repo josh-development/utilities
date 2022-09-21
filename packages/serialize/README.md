@@ -16,7 +16,7 @@
 
 ## Description
 
-Do you want serialize Node.js data types to a JSON compatible format? Then this is the package for you!
+A utility to serialize Node.js data types to and from a JSON compatible format.
 
 ## Features
 

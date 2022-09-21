@@ -159,7 +159,7 @@ export namespace Payload {
   export type Hook<Value, R = unknown> = (value: Value, key: string) => Awaitable<R>;
 
   /**
-   * The payload for {@link Method.Dec}
+   * The payload for {@link Method.AutoKey}
    * @since 1.0.0
    */
   export interface AutoKey extends Payload, Data<string> {
@@ -191,7 +191,7 @@ export namespace Payload {
   }
 
   /**
-   * The payload for {@link Method.Get}
+   * The payload for {@link Method.DeleteMany}
    * @since 1.0.0
    */
   export interface DeleteMany extends Payload {
@@ -227,7 +227,7 @@ export namespace Payload {
   }
 
   /**
-   * The payload for {@link Method.Get}
+   * The payload for {@link Method.Ensure}
    * @since 1.0.0
    */
   export interface Ensure<StoredValue> extends Payload, Data<StoredValue> {
