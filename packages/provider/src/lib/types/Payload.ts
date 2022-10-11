@@ -19,7 +19,7 @@ export interface Payload {
    * The metadata to use for this payload.
    * @since 1.0.0
    */
-  metadata?: Record<PropertyKey, unknown>;
+  metadata?: Payload.Metadata;
 
   /**
    * The trigger this payload is currently for.
@@ -35,6 +35,14 @@ export interface Payload {
 }
 
 export namespace Payload {
+  /**
+   * Metadata for {@link Payload}
+   * @since 1.0.0
+   */
+  export interface Metadata {
+    skipProvider?: boolean;
+  }
+
   /**
    * The key and path extension for {@link Payload}
    * @since 1.0.0
@@ -211,19 +219,7 @@ export namespace Payload {
   export interface Each<StoredValue> extends Payload {
     method: Method.Each;
 
-    /**
-     * The metadata for this payload.
-     * @since 1.0.0
-     */
-    metadata?: Each.Metadata;
-
     hook: Hook<StoredValue>;
-  }
-
-  export namespace Each {
-    export interface Metadata extends Record<PropertyKey, unknown> {
-      skipProvider?: boolean;
-    }
   }
 
   /**
