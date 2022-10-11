@@ -1,4 +1,4 @@
-import { JoshProvider, Method, Payloads } from '../../../src';
+import { JoshProvider, Method, Payload } from '../../../src';
 
 describe('JoshProvider', () => {
   describe('is a class', () => {
@@ -25,140 +25,144 @@ describe('JoshProvider', () => {
         return { major: 2, minor: 0, patch: 0 };
       }
 
-      public [Method.AutoKey](payload: Payloads.AutoKey): Payloads.AutoKey {
+      public setMetadata(_metadata: Record<string, unknown>) {
+        return this;
+      }
+
+      public [Method.AutoKey](payload: Payload.AutoKey): Payload.AutoKey {
         return payload;
       }
 
-      public [Method.Clear](payload: Payloads.Clear): Payloads.Clear {
+      public [Method.Clear](payload: Payload.Clear): Payload.Clear {
         return payload;
       }
 
-      public [Method.Dec](payload: Payloads.Dec): Payloads.Dec {
+      public [Method.Dec](payload: Payload.Dec): Payload.Dec {
         return payload;
       }
 
-      public [Method.Delete](payload: Payloads.Delete): Payloads.Delete {
+      public [Method.Delete](payload: Payload.Delete): Payload.Delete {
         return payload;
       }
 
-      public [Method.DeleteMany](payload: Payloads.DeleteMany): Payloads.DeleteMany {
+      public [Method.DeleteMany](payload: Payload.DeleteMany): Payload.DeleteMany {
         return payload;
       }
 
-      public [Method.Each](payload: Payloads.Each<StoredValue>): Payloads.Each<StoredValue> {
+      public [Method.Each](payload: Payload.Each<StoredValue>): Payload.Each<StoredValue> {
         return payload;
       }
 
-      public [Method.Ensure](payload: Payloads.Ensure<StoredValue>): Payloads.Ensure<StoredValue> {
+      public [Method.Ensure](payload: Payload.Ensure<StoredValue>): Payload.Ensure<StoredValue> {
         return payload;
       }
 
-      public [Method.Entries](payload: Payloads.Entries<StoredValue>): Payloads.Entries<StoredValue> {
+      public [Method.Entries](payload: Payload.Entries<StoredValue>): Payload.Entries<StoredValue> {
         return payload;
       }
 
-      public [Method.Every]<StoredValue>(payload: Payloads.Every.ByHook<StoredValue>): Payloads.Every.ByHook<StoredValue>;
+      public [Method.Every]<StoredValue>(payload: Payload.Every.ByHook<StoredValue>): Payload.Every.ByHook<StoredValue>;
 
-      public [Method.Every]<Value>(payload: Payloads.Every.ByValue): Payloads.Every.ByValue;
-      public [Method.Every]<StoredValue>(payload: Payloads.Every<StoredValue>): Payloads.Every<StoredValue> {
+      public [Method.Every]<Value>(payload: Payload.Every.ByValue): Payload.Every.ByValue;
+      public [Method.Every]<StoredValue>(payload: Payload.Every<StoredValue>): Payload.Every<StoredValue> {
         return payload;
       }
 
-      public [Method.Filter](payload: Payloads.Filter.ByHook<StoredValue>): Payloads.Filter.ByHook<StoredValue>;
+      public [Method.Filter](payload: Payload.Filter.ByHook<StoredValue>): Payload.Filter.ByHook<StoredValue>;
 
-      public [Method.Filter](payload: Payloads.Filter.ByValue<StoredValue>): Payloads.Filter.ByValue<StoredValue>;
-      public [Method.Filter](payload: Payloads.Filter<StoredValue>): Payloads.Filter<StoredValue> {
+      public [Method.Filter](payload: Payload.Filter.ByValue<StoredValue>): Payload.Filter.ByValue<StoredValue>;
+      public [Method.Filter](payload: Payload.Filter<StoredValue>): Payload.Filter<StoredValue> {
         return payload;
       }
 
-      public [Method.Find](payload: Payloads.Find.ByHook<StoredValue>): Payloads.Find.ByHook<StoredValue>;
+      public [Method.Find](payload: Payload.Find.ByHook<StoredValue>): Payload.Find.ByHook<StoredValue>;
 
-      public [Method.Find](payload: Payloads.Find.ByValue<StoredValue>): Payloads.Find.ByValue<StoredValue>;
-      public [Method.Find](payload: Payloads.Find<StoredValue>): Payloads.Find<StoredValue> {
+      public [Method.Find](payload: Payload.Find.ByValue<StoredValue>): Payload.Find.ByValue<StoredValue>;
+      public [Method.Find](payload: Payload.Find<StoredValue>): Payload.Find<StoredValue> {
         return payload;
       }
 
-      public [Method.Get]<Value = StoredValue>(payload: Payloads.Get<Value>): Payloads.Get<Value> {
+      public [Method.Get]<Value = StoredValue>(payload: Payload.Get<Value>): Payload.Get<Value> {
         return payload;
       }
 
-      public [Method.GetMany](payload: Payloads.GetMany<StoredValue>): Payloads.GetMany<StoredValue> {
+      public [Method.GetMany](payload: Payload.GetMany<StoredValue>): Payload.GetMany<StoredValue> {
         return payload;
       }
 
-      public [Method.Has](payload: Payloads.Has): Payloads.Has {
+      public [Method.Has](payload: Payload.Has): Payload.Has {
         return payload;
       }
 
-      public [Method.Inc](payload: Payloads.Inc): Payloads.Inc {
+      public [Method.Inc](payload: Payload.Inc): Payload.Inc {
         return payload;
       }
 
-      public [Method.Keys](payload: Payloads.Keys): Payloads.Keys {
+      public [Method.Keys](payload: Payload.Keys): Payload.Keys {
         return payload;
       }
 
-      public [Method.Map]<Value = StoredValue>(payload: Payloads.Map.ByHook<StoredValue, Value>): Payloads.Map.ByHook<StoredValue, Value>;
+      public [Method.Map]<Value = StoredValue>(payload: Payload.Map.ByHook<StoredValue, Value>): Payload.Map.ByHook<StoredValue, Value>;
 
-      public [Method.Map]<Value = StoredValue>(payload: Payloads.Map.ByPath<Value>): Payloads.Map.ByPath<Value>;
-      public [Method.Map]<Value = StoredValue>(payload: Payloads.Map<StoredValue, Value>): Payloads.Map<StoredValue, Value> {
+      public [Method.Map]<Value = StoredValue>(payload: Payload.Map.ByPath<Value>): Payload.Map.ByPath<Value>;
+      public [Method.Map]<Value = StoredValue>(payload: Payload.Map<StoredValue, Value>): Payload.Map<StoredValue, Value> {
         return payload;
       }
 
-      public [Method.Math](payload: Payloads.Math): Payloads.Math {
+      public [Method.Math](payload: Payload.Math): Payload.Math {
         return payload;
       }
 
-      public [Method.Partition](payload: Payloads.Partition.ByHook<StoredValue>): Payloads.Partition.ByHook<StoredValue>;
+      public [Method.Partition](payload: Payload.Partition.ByHook<StoredValue>): Payload.Partition.ByHook<StoredValue>;
 
-      public [Method.Partition](payload: Payloads.Partition.ByValue<StoredValue>): Payloads.Partition.ByValue<StoredValue>;
-      public [Method.Partition](payload: Payloads.Partition<StoredValue>): Payloads.Partition<StoredValue> {
+      public [Method.Partition](payload: Payload.Partition.ByValue<StoredValue>): Payload.Partition.ByValue<StoredValue>;
+      public [Method.Partition](payload: Payload.Partition<StoredValue>): Payload.Partition<StoredValue> {
         return payload;
       }
 
-      public [Method.Push]<Value>(payload: Payloads.Push<Value>): Payloads.Push<Value> {
+      public [Method.Push]<Value>(payload: Payload.Push<Value>): Payload.Push<Value> {
         return payload;
       }
 
-      public [Method.Random](payload: Payloads.Random<StoredValue>): Payloads.Random<StoredValue> {
+      public [Method.Random](payload: Payload.Random<StoredValue>): Payload.Random<StoredValue> {
         return payload;
       }
 
-      public [Method.RandomKey](payload: Payloads.RandomKey): Payloads.RandomKey {
+      public [Method.RandomKey](payload: Payload.RandomKey): Payload.RandomKey {
         return payload;
       }
 
-      public [Method.Remove]<StoredValue>(payload: Payloads.Remove.ByHook<StoredValue>): Payloads.Remove.ByHook<StoredValue>;
+      public [Method.Remove]<StoredValue>(payload: Payload.Remove.ByHook<StoredValue>): Payload.Remove.ByHook<StoredValue>;
 
-      public [Method.Remove]<Value>(payload: Payloads.Remove.ByValue): Payloads.Remove.ByValue;
-      public [Method.Remove]<StoredValue>(payload: Payloads.Remove<StoredValue>): Payloads.Remove<StoredValue> {
+      public [Method.Remove]<Value>(payload: Payload.Remove.ByValue): Payload.Remove.ByValue;
+      public [Method.Remove]<StoredValue>(payload: Payload.Remove<StoredValue>): Payload.Remove<StoredValue> {
         return payload;
       }
 
-      public [Method.Set]<Value = StoredValue>(payload: Payloads.Set<Value>): Payloads.Set<Value> {
+      public [Method.Set]<Value = StoredValue>(payload: Payload.Set<Value>): Payload.Set<Value> {
         return payload;
       }
 
-      public [Method.SetMany](payload: Payloads.SetMany): Payloads.SetMany {
+      public [Method.SetMany](payload: Payload.SetMany): Payload.SetMany {
         return payload;
       }
 
-      public [Method.Size](payload: Payloads.Size): Payloads.Size {
+      public [Method.Size](payload: Payload.Size): Payload.Size {
         return payload;
       }
 
-      public [Method.Some]<StoredValue>(payload: Payloads.Some.ByHook<StoredValue>): Payloads.Some.ByHook<StoredValue>;
+      public [Method.Some]<StoredValue>(payload: Payload.Some.ByHook<StoredValue>): Payload.Some.ByHook<StoredValue>;
 
-      public [Method.Some]<Value>(payload: Payloads.Some.ByValue): Payloads.Some.ByValue;
-      public [Method.Some]<StoredValue>(payload: Payloads.Some<StoredValue>): Payloads.Some<StoredValue> {
+      public [Method.Some]<Value>(payload: Payload.Some.ByValue): Payload.Some.ByValue;
+      public [Method.Some]<StoredValue>(payload: Payload.Some<StoredValue>): Payload.Some<StoredValue> {
         return payload;
       }
 
-      public [Method.Update]<Value>(payload: Payloads.Update<StoredValue, Value>): Payloads.Update<StoredValue, Value> {
+      public [Method.Update]<Value>(payload: Payload.Update<StoredValue, Value>): Payload.Update<StoredValue, Value> {
         return payload;
       }
 
-      public [Method.Values](payload: Payloads.Values<StoredValue>): Payloads.Values<StoredValue> {
+      public [Method.Values](payload: Payload.Values<StoredValue>): Payload.Values<StoredValue> {
         return payload;
       }
 
