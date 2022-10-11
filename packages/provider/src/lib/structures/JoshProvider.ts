@@ -474,7 +474,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * @param metadata The metadata to use.
    * @returns The resolved identifier message.
    */
-  protected resolveIdentifier(identifier: string, metadata: Record<string, unknown>): string {
+  protected resolveIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string {
     const result = resolveCommonIdentifier(identifier, metadata);
 
     if (result !== null) return result;

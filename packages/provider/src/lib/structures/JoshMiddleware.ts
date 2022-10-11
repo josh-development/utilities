@@ -310,7 +310,7 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
    * @param metadata The metadata for the identifier.
    * @returns The resolved identifier message.
    */
-  protected resolveIdentifier(identifier: string, metadata: Record<string, unknown>): string {
+  protected resolveIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string {
     const result = resolveCommonIdentifier(identifier, metadata);
 
     if (result !== null) return result;
