@@ -1,6 +1,6 @@
-import type { Awaitable, NonNullObject, PartialRequired } from '@sapphire/utilities';
+import type { Awaitable, PartialRequired } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
-import { Method, Payload, Trigger } from '../types';
+import { Method, Payload, Semver, Trigger } from '../types';
 import type { JoshMiddlewareStore } from './JoshMiddlewareStore';
 import type { JoshProvider } from './JoshProvider';
 import { JoshProviderError } from './JoshProviderError';
@@ -33,7 +33,7 @@ import { JoshProviderError } from './JoshProviderError';
  * ```
  */
 
-export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unknown> {
+export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context, StoredValue = unknown> {
   /**
    * The store for this JoshMiddleware.
    * @since 1.0.0
@@ -53,6 +53,12 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
   public readonly conditions: JoshMiddleware.Conditions;
 
   /**
+   * Data migrations for this middleware.
+   * @since 1.0.0
+   */
+  public readonly migrations: JoshMiddleware.Migration<StoredValue>[] = [];
+
+  /**
    * The context data for this JoshMiddleware.
    * @since 1.0.0
    */
@@ -70,6 +76,12 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
   }
 
   /**
+   * The semver version of this provider.
+   * @since 1.0.0
+   */
+  public abstract get version(): Semver;
+
+  /**
    * The provider that is used with the current Josh.
    * @since 1.0.0
    */
@@ -85,8 +97,33 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
    * @param store The store to set to `this`.
    * @returns Returns the current JoshMiddleware class.
    */
-  public init(store: JoshMiddlewareStore<StoredValue>): Awaitable<this> {
+  public async init(store: JoshMiddlewareStore<StoredValue>): Promise<this> {
     this.store = store;
+
+    const version = await this.fetchVersion(this.context, store);
+
+    if (version.major < this.version.major) {
+      const { allowMigrations } = this.context;
+
+      if (!allowMigrations) throw this.error(JoshMiddleware.CommonIdentifiers.NeedsMigration);
+
+      const migration = this.migrations.find(
+        (migration) =>
+          migration.version.major === version.major && migration.version.minor <= version.minor && migration.version.patch <= version.patch
+      );
+
+      if (migration === undefined) throw this.error(JoshMiddleware.CommonIdentifiers.MigrationNotFound, { version });
+
+      const { major, minor, patch } = version;
+
+      console.log(`[${this.constructor.name}]: Running migration for ${major}.${minor}.${patch}`);
+
+      await migration.run(this.context, store);
+
+      console.log(
+        `[${this.constructor.name}]: Migration for version ${major}.${minor}.${patch} ran successfully. This middleware is now up-to-date with the latest version (${this.version.major}.${this.version.minor}.${this.version.patch})`
+      );
+    }
 
     return this;
   }
@@ -279,8 +316,20 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
     if (result !== null) return result;
 
     switch (identifier) {
+      case JoshMiddleware.CommonIdentifiers.MigrationNotFound: {
+        const { version } = metadata;
+        const { major, minor, patch } = version as Semver;
+
+        return `Migration not found for version ${major}.${minor}.${patch}.`;
+      }
+
       case JoshMiddleware.CommonIdentifiers.NameNotFound:
         return 'No name was provided for this JoshMiddleware.';
+
+      case JoshMiddleware.CommonIdentifiers.NeedsMigration:
+        return `[${this.constructor.name}]: The middleware ${
+          this.name?.length ? `with the name "${this.name}" ` : ''
+        }needs migrations. Please set the "allowMigrations" option to true to run migrations automatically.`;
 
       case JoshMiddleware.CommonIdentifiers.StoreNotFound:
         return 'The "store" property is undefined. This usually means this JoshMiddleware has not been initiated.';
@@ -288,6 +337,8 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
 
     throw new Error(`'${this.constructor.name}#resolveIdentifier()' received an unknown identifier: '${identifier}'`);
   }
+
+  protected abstract fetchVersion(context: JoshMiddleware.Context, store: JoshMiddlewareStore<StoredValue>): Awaitable<Semver>;
 }
 
 export namespace JoshMiddleware {
@@ -307,6 +358,23 @@ export namespace JoshMiddleware {
      * @since 1.0.0
      */
     conditions: Conditions;
+
+    /**
+     * The migrations for this JoshMiddleware.
+     * @since 1.0.0
+     */
+    migrations?: Migration;
+  }
+
+  /**
+   * The context data for {@link JoshMiddleware}
+   * @since 1.0.0
+   */
+  export interface Context {
+    /**
+     * Whether to allow automatic middleware data migrations.
+     */
+    allowMigrations?: boolean;
   }
 
   /**
@@ -328,6 +396,25 @@ export namespace JoshMiddleware {
   }
 
   /**
+   * A migration for the {@link JoshMiddleware} instance.
+   * @since 1.0.0
+   */
+  export interface Migration<StoredValue = unknown> {
+    /**
+     * The version this migration is for.
+     * @since 1.0.0
+     */
+    version: Semver;
+
+    /**
+     * The method to run when the current version of the middleware matches it.
+     * @since 1.0.0
+     * @param store The store for the middleware to the migration.
+     */
+    run(context: Context, store: JoshMiddlewareStore<StoredValue>): Awaitable<void>;
+  }
+
+  /**
    * The options in an object for {@link JoshMiddleware}
    * @since 1.0.0
    */
@@ -346,7 +433,11 @@ export namespace JoshMiddleware {
   }
 
   export enum CommonIdentifiers {
+    MigrationNotFound = 'MigrationNotFound',
+
     NameNotFound = 'nameNotFound',
+
+    NeedsMigration = 'needsMigration',
 
     StoreNotFound = 'storeNotFound'
   }

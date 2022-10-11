@@ -1,6 +1,6 @@
 import type { Awaitable, PartialRequired } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
-import type { Method, Payload } from '../types';
+import type { Method, Payload, Semver } from '../types';
 import { JoshProviderError } from './JoshProviderError';
 
 /**
@@ -42,7 +42,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    * The semver version of this provider.
    * @since 1.0.0
    */
-  public abstract get version(): JoshProvider.Semver;
+  public abstract get version(): Semver;
 
   /**
    * Initialize the provider.
@@ -70,7 +70,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
     if (version.major < this.version.major) {
       const { allowMigrations } = this.options;
 
-      if (!allowMigrations) throw this.error(JoshProvider.CommonIdentifiers.NeedsMigrations);
+      if (!allowMigrations) throw this.error(JoshProvider.CommonIdentifiers.NeedsMigration);
 
       const migration = this.migrations.find(
         (migration) =>
@@ -90,7 +90,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
       );
     }
 
-    return Promise.resolve(context);
+    return context;
   }
 
   /**
@@ -480,12 +480,12 @@ export abstract class JoshProvider<StoredValue = unknown> {
     switch (identifier) {
       case JoshProvider.CommonIdentifiers.MigrationNotFound: {
         const { version } = metadata;
-        const { major, minor, patch } = version as JoshProvider.Semver;
+        const { major, minor, patch } = version as Semver;
 
         return `Migration not found for version ${major}.${minor}.${patch}.`;
       }
 
-      case JoshProvider.CommonIdentifiers.NeedsMigrations:
+      case JoshProvider.CommonIdentifiers.NeedsMigration:
         return `[${this.constructor.name}]: The provider ${
           this.name?.length ? `with the name "${this.name}" ` : ''
         }needs migrations. Please set the "allowMigrations" option to true to run migrations automatically.`;
@@ -494,19 +494,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
     throw new Error(`'${this.constructor.name}#resolveIdentifier()' received an unknown identifier: '${identifier}'`);
   }
 
-  /**
-   * Resolves a version.
-   * @since 1.0.0
-   * @param version The version to resolve.
-   * @returns The resolved version.
-   */
-  protected resolveVersion(version: string): JoshProvider.Semver {
-    const [major, minor, patch] = version.split('.').map(Number);
-
-    return { major, minor, patch };
-  }
-
-  protected abstract fetchVersion(context: JoshProvider.Context): Awaitable<JoshProvider.Semver>;
+  protected abstract fetchVersion(context: JoshProvider.Context): Awaitable<Semver>;
 }
 
 export namespace JoshProvider {
@@ -563,39 +551,12 @@ export namespace JoshProvider {
   }
 
   /**
-   * Represents a [Semver](https://semver.org/) version with an object.
-   * @since 1.0.0
-   *
-   * @example
-   * const version = { major: 1, minor: 3, patch: 9 };
-   */
-  export interface Semver {
-    /**
-     * The major iteration of this version.
-     * @since 1.0.0
-     */
-    major: number;
-
-    /**
-     * The minor iteration of this version.
-     * @since 1.0.0
-     */
-    minor: number;
-
-    /**
-     * The patch iteration of this version.
-     * @since 1.0.0
-     */
-    patch: number;
-  }
-
-  /**
    * An enum of common identifiers used within {@link JoshProvider}
    * @since 1.0.0
    */
   export enum CommonIdentifiers {
     MigrationNotFound = 'MigrationNotFound',
 
-    NeedsMigrations = 'needsMigration'
+    NeedsMigration = 'needsMigration'
   }
 }
