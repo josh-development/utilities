@@ -8,7 +8,6 @@ import { createProxy } from './utils/createProxy';
  * Decorator function that applies given options to {@link JoshMiddleware} class.
  * @since 1.0.0
  * @param options The middleware options.
- *
  * @example
  * ```typescript
  * import { ApplyMiddlewareOptions, Middleware } from '@joshdb/provider';
