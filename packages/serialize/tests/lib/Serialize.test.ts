@@ -314,7 +314,9 @@ describe('Serialize', () => {
     });
 
     test('GIVEN unknown type THEN throws error', () => {
-      expect(() => Serialize.toJSON(() => true)).toThrowError(new TypeError('Serialize received an unknown type while formatting.'));
+      expect(() => Serialize.toJSON(() => true)).toThrowError(
+        new TypeError('Serialize received an unknown type while formatting: "Function", see @joshdb/transform for custom serialization')
+      );
     });
   });
 

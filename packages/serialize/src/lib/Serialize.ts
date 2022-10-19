@@ -21,7 +21,9 @@ export namespace Serialize {
     else if (typeof data === 'string') return { type: Type.String, value: data };
     else if (data === undefined) return { type: Type.Undefined, value: 'undefined' };
 
-    throw new TypeError('Serialize received an unknown type while formatting.');
+    throw new TypeError(
+      `Serialize received an unknown type while formatting: "${data.constructor.name}", see @joshdb/transform for custom serialization`
+    );
   }
 
   function toJSONArray(array: unknown[]): JSON[] {
