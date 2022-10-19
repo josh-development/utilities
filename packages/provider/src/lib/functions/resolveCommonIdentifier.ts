@@ -1,5 +1,12 @@
 import { CommonIdentifiers } from '../types';
 
+/**
+ * Resolves a common identifier to a string.
+ * @since 1.0.0
+ * @param identifier The identifier to resolve.
+ * @param metadata The metadata for the identifier.
+ * @returns The resolved identifier message or `null`.
+ */
 export function resolveCommonIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string | null {
   switch (identifier) {
     case CommonIdentifiers.InvalidCount:

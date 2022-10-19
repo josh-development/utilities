@@ -3,6 +3,11 @@ import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vit
 import type { JoshProvider } from '../lib/structures/JoshProvider';
 import { CommonIdentifiers, MathOperator, Method, Payload } from '../lib/types';
 
+/**
+ * Executes tests for a given provider.
+ * @since 1.0.0
+ * @param options The options for the test.
+ */
 export function runProviderTest<
   Provider extends Constructor<JoshProvider>,
   Options extends JoshProvider.Options = JoshProvider.Options,

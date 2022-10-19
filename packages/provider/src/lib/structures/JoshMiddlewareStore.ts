@@ -9,7 +9,7 @@ import type { JoshProvider } from './JoshProvider';
  */
 export class JoshMiddlewareStore<StoredValue = unknown> extends Map<string, JoshMiddleware<NonNullObject, StoredValue>> {
   /**
-   * The link {@link JoshProvider} instance for this store.
+   * The {@link JoshProvider} instance for this store.
    * @since 1.0.0
    */
   public provider: JoshProvider<StoredValue>;
@@ -26,7 +26,7 @@ export class JoshMiddlewareStore<StoredValue = unknown> extends Map<string, Josh
    * Get pre provider middlewares by method.
    * @since 1.0.0
    * @param method The method to filter by.
-   * @returns The middlewares after filtered.
+   * @returns The filtered middlewares
    */
   public getPreMiddlewares(method: Method): JoshMiddleware<NonNullObject, StoredValue>[] {
     return this.filterByCondition(method, Trigger.PreProvider);
@@ -36,7 +36,7 @@ export class JoshMiddlewareStore<StoredValue = unknown> extends Map<string, Josh
    * Get post provider middlewares by method.
    * @since 1.0.0
    * @param method The method to filter by.
-   * @returns The middlewares after filtered.
+   * @returns The filtered middlewares.
    */
   public getPostMiddlewares(method: Method): JoshMiddleware<NonNullObject, StoredValue>[] {
     return this.filterByCondition(method, Trigger.PostProvider);
@@ -45,13 +45,15 @@ export class JoshMiddlewareStore<StoredValue = unknown> extends Map<string, Josh
   /**
    * Filter middlewares by their conditions.
    * @since 1.0.0
-   * @param method
-   * @param trigger
-   * @returns
+   * @param method The method to filter by.
+   * @param trigger The trigger to filter by.
+   * @returns The filtered middlewares.
    */
   private filterByCondition(method: Method, trigger: Trigger): JoshMiddleware<NonNullObject, StoredValue>[] {
     return Array.from(this.values()).filter((JoshMiddleware) =>
-      trigger === Trigger.PreProvider ? JoshMiddleware.conditions.pre.includes(method) : JoshMiddleware.conditions.post.includes(method)
+      trigger === Trigger.PreProvider
+        ? JoshMiddleware.conditions[Trigger.PreProvider].includes(method)
+        : JoshMiddleware.conditions[Trigger.PostProvider].includes(method)
     );
   }
 }

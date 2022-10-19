@@ -16,12 +16,12 @@
 
 ## Description
 
-A serialize utility to be able to convert nodejs data types into a json compatible format.
+A utility to serialize Node.js data types to and from a JSON compatible format.
 
 ## Features
 
 - Written in TypeScript
-- Offers CommonJS, ESM and UMD bundles
+- Offers ESM and CommonJS support
 - Fully tested
 
 ## Installation
@@ -30,4 +30,14 @@ You can use the following command to install this package, or replace `npm insta
 
 ```sh
 npm install @joshdb/serialize
+```
+
+## Quick Start
+
+```typescript
+import { Serialize } from '@joshdb/serialize';
+
+Serialize.toJSON('Hello World!'); // { type: 'string', value: 'Hello World!' }
+
+Serialize.fromJSON({ type: 'string', value: 'Hello World!' }); // 'Hello World!'
 ```

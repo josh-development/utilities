@@ -1,7 +1,5 @@
 /packages/serialize/**/*.ts @RealShadowNova
-/packages/serialize/README.md @RealShadowNova
 /packages/provider/**/*.ts @RealShadowNova
-/packages/provider/README.md @RealShadowNova
 
 /.github/ @RealShadowNova
 /.husky/ @RealShadowNova

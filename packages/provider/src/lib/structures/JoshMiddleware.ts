@@ -1,6 +1,6 @@
-import type { Awaitable, NonNullObject, PartialRequired } from '@sapphire/utilities';
+import type { Awaitable, PartialRequired } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
-import { Method, Payload, Payloads } from '../types';
+import { Method, Payload, Semver, Trigger } from '../types';
 import type { JoshMiddlewareStore } from './JoshMiddlewareStore';
 import type { JoshProvider } from './JoshProvider';
 import { JoshProviderError } from './JoshProviderError';
@@ -33,7 +33,7 @@ import { JoshProviderError } from './JoshProviderError';
  * ```
  */
 
-export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unknown> {
+export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context, StoredValue = unknown> {
   /**
    * The store for this JoshMiddleware.
    * @since 1.0.0
@@ -52,6 +52,16 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
    */
   public readonly conditions: JoshMiddleware.Conditions;
 
+  /**
+   * Data migrations for this middleware.
+   * @since 1.0.0
+   */
+  public readonly migrations: JoshMiddleware.Migration<StoredValue>[] = [];
+
+  /**
+   * The context data for this JoshMiddleware.
+   * @since 1.0.0
+   */
   protected context: ContextData;
 
   public constructor(context: ContextData, options: Partial<JoshMiddleware.Options> = {}) {
@@ -62,8 +72,14 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
     if (!name) throw this.error(JoshMiddleware.CommonIdentifiers.NameNotFound);
 
     this.name = name;
-    this.conditions = conditions ?? { pre: [], post: [] };
+    this.conditions = conditions ?? { [Trigger.PreProvider]: [], [Trigger.PostProvider]: [] };
   }
+
+  /**
+   * The semver version of this provider.
+   * @since 1.0.0
+   */
+  public abstract get version(): Semver;
 
   /**
    * The provider that is used with the current Josh.
@@ -81,146 +97,171 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
    * @param store The store to set to `this`.
    * @returns Returns the current JoshMiddleware class.
    */
-  public init(store: JoshMiddlewareStore<StoredValue>): Awaitable<this> {
+  public async init(store: JoshMiddlewareStore<StoredValue>): Promise<this> {
     this.store = store;
+
+    const version = await this.fetchVersion(this.context, store);
+
+    if (version.major < this.version.major) {
+      const { allowMigrations } = this.context;
+
+      if (!allowMigrations) throw this.error(JoshMiddleware.CommonIdentifiers.NeedsMigration);
+
+      const migration = this.migrations.find(
+        (migration) =>
+          migration.version.major === version.major && migration.version.minor <= version.minor && migration.version.patch <= version.patch
+      );
+
+      if (migration === undefined) throw this.error(JoshMiddleware.CommonIdentifiers.MigrationNotFound, { version });
+
+      const { major, minor, patch } = version;
+
+      console.log(`[${this.constructor.name}]: Running migration for ${major}.${minor}.${patch}`);
+
+      await migration.run(this.context, store);
+
+      console.log(
+        `[${this.constructor.name}]: Migration for version ${major}.${minor}.${patch} ran successfully. This middleware is now up-to-date with the latest version (${this.version.major}.${this.version.minor}.${this.version.patch})`
+      );
+    }
 
     return this;
   }
 
-  public [Method.AutoKey](payload: Payloads.AutoKey): Awaitable<Payloads.AutoKey> {
+  public [Method.AutoKey](payload: Payload.AutoKey): Awaitable<Payload.AutoKey> {
     return payload;
   }
 
-  public [Method.Clear](payload: Payloads.Clear): Awaitable<Payloads.Clear> {
+  public [Method.Clear](payload: Payload.Clear): Awaitable<Payload.Clear> {
     return payload;
   }
 
-  public [Method.Dec](payload: Payloads.Dec): Awaitable<Payloads.Dec> {
+  public [Method.Dec](payload: Payload.Dec): Awaitable<Payload.Dec> {
     return payload;
   }
 
-  public [Method.Delete](payload: Payloads.Delete): Awaitable<Payloads.Delete> {
+  public [Method.Delete](payload: Payload.Delete): Awaitable<Payload.Delete> {
     return payload;
   }
 
-  public [Method.DeleteMany](payload: Payloads.DeleteMany): Awaitable<Payloads.DeleteMany> {
+  public [Method.DeleteMany](payload: Payload.DeleteMany): Awaitable<Payload.DeleteMany> {
     return payload;
   }
 
-  public [Method.Each](payload: Payloads.Each<StoredValue>): Awaitable<Payloads.Each<StoredValue>> {
+  public [Method.Each](payload: Payload.Each<StoredValue>): Awaitable<Payload.Each<StoredValue>> {
     return payload;
   }
 
-  public [Method.Ensure](payload: Payloads.Ensure<StoredValue>): Awaitable<Payloads.Ensure<StoredValue>> {
+  public [Method.Ensure](payload: Payload.Ensure<StoredValue>): Awaitable<Payload.Ensure<StoredValue>> {
     return payload;
   }
 
-  public [Method.Entries](payload: Payloads.Entries<StoredValue>): Awaitable<Payloads.Entries<StoredValue>> {
+  public [Method.Entries](payload: Payload.Entries<StoredValue>): Awaitable<Payload.Entries<StoredValue>> {
     return payload;
   }
 
-  public [Method.Every]<StoredValue>(payload: Payloads.Every.ByHook<StoredValue>): Awaitable<Payloads.Every.ByHook<StoredValue>>;
-  public [Method.Every](payload: Payloads.Every.ByValue): Awaitable<Payloads.Every.ByValue>;
-  public [Method.Every]<StoredValue>(payload: Payloads.Every<StoredValue>): Awaitable<Payloads.Every<StoredValue>>;
-  public [Method.Every]<StoredValue>(payload: Payloads.Every<StoredValue>): Awaitable<Payloads.Every<StoredValue>> {
+  public [Method.Every]<StoredValue>(payload: Payload.Every.ByHook<StoredValue>): Awaitable<Payload.Every.ByHook<StoredValue>>;
+  public [Method.Every](payload: Payload.Every.ByValue): Awaitable<Payload.Every.ByValue>;
+  public [Method.Every]<StoredValue>(payload: Payload.Every<StoredValue>): Awaitable<Payload.Every<StoredValue>>;
+  public [Method.Every]<StoredValue>(payload: Payload.Every<StoredValue>): Awaitable<Payload.Every<StoredValue>> {
     return payload;
   }
 
-  public [Method.Filter](payload: Payloads.Filter.ByHook<StoredValue>): Awaitable<Payloads.Filter.ByHook<StoredValue>>;
-  public [Method.Filter](payload: Payloads.Filter.ByValue<StoredValue>): Awaitable<Payloads.Filter.ByValue<StoredValue>>;
-  public [Method.Filter](payload: Payloads.Filter<StoredValue>): Awaitable<Payloads.Filter<StoredValue>>;
-  public [Method.Filter](payload: Payloads.Filter<StoredValue>): Awaitable<Payloads.Filter<StoredValue>> {
+  public [Method.Filter](payload: Payload.Filter.ByHook<StoredValue>): Awaitable<Payload.Filter.ByHook<StoredValue>>;
+  public [Method.Filter](payload: Payload.Filter.ByValue<StoredValue>): Awaitable<Payload.Filter.ByValue<StoredValue>>;
+  public [Method.Filter](payload: Payload.Filter<StoredValue>): Awaitable<Payload.Filter<StoredValue>>;
+  public [Method.Filter](payload: Payload.Filter<StoredValue>): Awaitable<Payload.Filter<StoredValue>> {
     return payload;
   }
 
-  public [Method.Find](payload: Payloads.Find.ByHook<StoredValue>): Awaitable<Payloads.Find.ByHook<StoredValue>>;
-  public [Method.Find](payload: Payloads.Find.ByValue<StoredValue>): Awaitable<Payloads.Find.ByValue<StoredValue>>;
-  public [Method.Find](payload: Payloads.Find<StoredValue>): Awaitable<Payloads.Find<StoredValue>>;
-  public [Method.Find](payload: Payloads.Find<StoredValue>): Awaitable<Payloads.Find<StoredValue>> {
+  public [Method.Find](payload: Payload.Find.ByHook<StoredValue>): Awaitable<Payload.Find.ByHook<StoredValue>>;
+  public [Method.Find](payload: Payload.Find.ByValue<StoredValue>): Awaitable<Payload.Find.ByValue<StoredValue>>;
+  public [Method.Find](payload: Payload.Find<StoredValue>): Awaitable<Payload.Find<StoredValue>>;
+  public [Method.Find](payload: Payload.Find<StoredValue>): Awaitable<Payload.Find<StoredValue>> {
     return payload;
   }
 
-  public [Method.Get]<Value>(payload: Payloads.Get<Value>): Awaitable<Payloads.Get<Value>> {
+  public [Method.Get]<Value>(payload: Payload.Get<Value>): Awaitable<Payload.Get<Value>> {
     return payload;
   }
 
-  public [Method.GetMany](payload: Payloads.GetMany<StoredValue>): Awaitable<Payloads.GetMany<StoredValue>> {
+  public [Method.GetMany](payload: Payload.GetMany<StoredValue>): Awaitable<Payload.GetMany<StoredValue>> {
     return payload;
   }
 
-  public [Method.Has](payload: Payloads.Has): Awaitable<Payloads.Has> {
+  public [Method.Has](payload: Payload.Has): Awaitable<Payload.Has> {
     return payload;
   }
 
-  public [Method.Inc](payload: Payloads.Inc): Awaitable<Payloads.Inc> {
+  public [Method.Inc](payload: Payload.Inc): Awaitable<Payload.Inc> {
     return payload;
   }
 
-  public [Method.Keys](payload: Payloads.Keys): Awaitable<Payloads.Keys> {
+  public [Method.Keys](payload: Payload.Keys): Awaitable<Payload.Keys> {
     return payload;
   }
 
-  public [Method.Map]<Value = StoredValue>(payload: Payloads.Map.ByHook<StoredValue, Value>): Awaitable<Payloads.Map.ByHook<StoredValue, Value>>;
-  public [Method.Map]<Value>(payload: Payloads.Map.ByPath<Value>): Awaitable<Payloads.Map.ByPath<Value>>;
-  public [Method.Map]<Value = StoredValue>(payload: Payloads.Map<StoredValue, Value>): Awaitable<Payloads.Map<StoredValue, Value>>;
-  public [Method.Map]<Value = StoredValue>(payload: Payloads.Map<StoredValue, Value>): Awaitable<Payloads.Map<StoredValue, Value>> {
+  public [Method.Map]<Value = StoredValue>(payload: Payload.Map.ByHook<StoredValue, Value>): Awaitable<Payload.Map.ByHook<StoredValue, Value>>;
+  public [Method.Map]<Value>(payload: Payload.Map.ByPath<Value>): Awaitable<Payload.Map.ByPath<Value>>;
+  public [Method.Map]<Value = StoredValue>(payload: Payload.Map<StoredValue, Value>): Awaitable<Payload.Map<StoredValue, Value>>;
+  public [Method.Map]<Value = StoredValue>(payload: Payload.Map<StoredValue, Value>): Awaitable<Payload.Map<StoredValue, Value>> {
     return payload;
   }
 
-  public [Method.Math](payload: Payloads.Math): Awaitable<Payloads.Math> {
+  public [Method.Math](payload: Payload.Math): Awaitable<Payload.Math> {
     return payload;
   }
 
-  public [Method.Partition](payload: Payloads.Partition.ByHook<StoredValue>): Awaitable<Payloads.Partition.ByHook<StoredValue>>;
-  public [Method.Partition](payload: Payloads.Partition.ByValue<StoredValue>): Awaitable<Payloads.Partition.ByValue<StoredValue>>;
-  public [Method.Partition](payload: Payloads.Partition<StoredValue>): Awaitable<Payloads.Partition<StoredValue>>;
-  public [Method.Partition](payload: Payloads.Partition<StoredValue>): Awaitable<Payloads.Partition<StoredValue>> {
+  public [Method.Partition](payload: Payload.Partition.ByHook<StoredValue>): Awaitable<Payload.Partition.ByHook<StoredValue>>;
+  public [Method.Partition](payload: Payload.Partition.ByValue<StoredValue>): Awaitable<Payload.Partition.ByValue<StoredValue>>;
+  public [Method.Partition](payload: Payload.Partition<StoredValue>): Awaitable<Payload.Partition<StoredValue>>;
+  public [Method.Partition](payload: Payload.Partition<StoredValue>): Awaitable<Payload.Partition<StoredValue>> {
     return payload;
   }
 
-  public [Method.Push]<Value>(payload: Payloads.Push<Value>): Awaitable<Payloads.Push<Value>> {
+  public [Method.Push]<Value>(payload: Payload.Push<Value>): Awaitable<Payload.Push<Value>> {
     return payload;
   }
 
-  public [Method.Random](payload: Payloads.Random<StoredValue>): Awaitable<Payloads.Random<StoredValue>> {
+  public [Method.Random](payload: Payload.Random<StoredValue>): Awaitable<Payload.Random<StoredValue>> {
     return payload;
   }
 
-  public [Method.RandomKey](payload: Payloads.RandomKey): Awaitable<Payloads.RandomKey> {
+  public [Method.RandomKey](payload: Payload.RandomKey): Awaitable<Payload.RandomKey> {
     return payload;
   }
 
-  public [Method.Remove]<StoredValue>(payload: Payloads.Remove.ByHook<StoredValue>): Awaitable<Payloads.Remove.ByHook<StoredValue>>;
-  public [Method.Remove](payload: Payloads.Remove.ByValue): Awaitable<Payloads.Remove.ByValue>;
-  public [Method.Remove]<StoredValue>(payload: Payloads.Remove<StoredValue>): Awaitable<Payloads.Remove<StoredValue>>;
-  public [Method.Remove]<StoredValue>(payload: Payloads.Remove<StoredValue>): Awaitable<Payloads.Remove<StoredValue>> {
+  public [Method.Remove]<StoredValue>(payload: Payload.Remove.ByHook<StoredValue>): Awaitable<Payload.Remove.ByHook<StoredValue>>;
+  public [Method.Remove](payload: Payload.Remove.ByValue): Awaitable<Payload.Remove.ByValue>;
+  public [Method.Remove]<StoredValue>(payload: Payload.Remove<StoredValue>): Awaitable<Payload.Remove<StoredValue>>;
+  public [Method.Remove]<StoredValue>(payload: Payload.Remove<StoredValue>): Awaitable<Payload.Remove<StoredValue>> {
     return payload;
   }
 
-  public [Method.Set]<Value>(payload: Payloads.Set<Value>): Awaitable<Payloads.Set<Value>> {
+  public [Method.Set]<Value>(payload: Payload.Set<Value>): Awaitable<Payload.Set<Value>> {
     return payload;
   }
 
-  public [Method.SetMany](payload: Payloads.SetMany): Awaitable<Payloads.SetMany> {
+  public [Method.SetMany](payload: Payload.SetMany): Awaitable<Payload.SetMany> {
     return payload;
   }
 
-  public [Method.Size](payload: Payloads.Size): Awaitable<Payloads.Size> {
+  public [Method.Size](payload: Payload.Size): Awaitable<Payload.Size> {
     return payload;
   }
 
-  public [Method.Some]<StoredValue>(payload: Payloads.Some.ByHook<StoredValue>): Awaitable<Payloads.Some.ByHook<StoredValue>>;
-  public [Method.Some]<Value>(payload: Payloads.Some.ByValue): Awaitable<Payloads.Some.ByValue>;
-  public [Method.Some]<StoredValue>(payload: Payloads.Some<StoredValue>): Awaitable<Payloads.Some<StoredValue>>;
-  public [Method.Some]<StoredValue>(payload: Payloads.Some<StoredValue>): Awaitable<Payloads.Some<StoredValue>> {
+  public [Method.Some]<StoredValue>(payload: Payload.Some.ByHook<StoredValue>): Awaitable<Payload.Some.ByHook<StoredValue>>;
+  public [Method.Some]<Value>(payload: Payload.Some.ByValue): Awaitable<Payload.Some.ByValue>;
+  public [Method.Some]<StoredValue>(payload: Payload.Some<StoredValue>): Awaitable<Payload.Some<StoredValue>>;
+  public [Method.Some]<StoredValue>(payload: Payload.Some<StoredValue>): Awaitable<Payload.Some<StoredValue>> {
     return payload;
   }
 
-  public [Method.Update]<Value = StoredValue>(payload: Payloads.Update<StoredValue, Value>): Awaitable<Payloads.Update<StoredValue, Value>> {
+  public [Method.Update]<Value = StoredValue>(payload: Payload.Update<StoredValue, Value>): Awaitable<Payload.Update<StoredValue, Value>> {
     return payload;
   }
 
-  public [Method.Values](payload: Payloads.Values<StoredValue>): Awaitable<Payloads.Values<StoredValue>> {
+  public [Method.Values](payload: Payload.Values<StoredValue>): Awaitable<Payload.Values<StoredValue>> {
     return payload;
   }
 
@@ -238,7 +279,7 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
   }
 
   /**
-   * Creates an Josh provider error.
+   * Creates an instance of {@link JoshProvider} with the given options.
    * @since 1.0.0
    * @param options The options for the error.
    * @returns The error.
@@ -263,27 +304,41 @@ export class JoshMiddleware<ContextData extends NonNullObject, StoredValue = unk
   }
 
   /**
-   * Resolves an identifier.
+   * Resolves an identifier to a string.
    * @since 1.0.0
    * @param identifier The identifier to resolve.
-   * @param metadata The metadata to use.
+   * @param metadata The metadata for the identifier.
    * @returns The resolved identifier message.
    */
-  protected resolveIdentifier(identifier: string, metadata: Record<string, unknown>): string {
+  protected resolveIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string {
     const result = resolveCommonIdentifier(identifier, metadata);
 
     if (result !== null) return result;
 
     switch (identifier) {
+      case JoshMiddleware.CommonIdentifiers.MigrationNotFound: {
+        const { version } = metadata;
+        const { major, minor, patch } = version as Semver;
+
+        return `Migration not found for version ${major}.${minor}.${patch}.`;
+      }
+
       case JoshMiddleware.CommonIdentifiers.NameNotFound:
         return 'No name was provided for this JoshMiddleware.';
+
+      case JoshMiddleware.CommonIdentifiers.NeedsMigration:
+        return `[${this.constructor.name}]: The middleware ${
+          this.name?.length ? `with the name "${this.name}" ` : ''
+        }needs migrations. Please set the "allowMigrations" option to true to run migrations automatically.`;
 
       case JoshMiddleware.CommonIdentifiers.StoreNotFound:
         return 'The "store" property is undefined. This usually means this JoshMiddleware has not been initiated.';
     }
 
-    throw new Error(`Unknown identifier: ${identifier}`);
+    throw new Error(`'${this.constructor.name}#resolveIdentifier()' received an unknown identifier: '${identifier}'`);
   }
+
+  protected abstract fetchVersion(context: JoshMiddleware.Context, store: JoshMiddlewareStore<StoredValue>): Awaitable<Semver>;
 }
 
 export namespace JoshMiddleware {
@@ -303,6 +358,23 @@ export namespace JoshMiddleware {
      * @since 1.0.0
      */
     conditions: Conditions;
+
+    /**
+     * The migrations for this JoshMiddleware.
+     * @since 1.0.0
+     */
+    migrations?: Migration;
+  }
+
+  /**
+   * The context data for {@link JoshMiddleware}
+   * @since 1.0.0
+   */
+  export interface Context {
+    /**
+     * Whether to allow automatic middleware data migrations.
+     */
+    allowMigrations?: boolean;
   }
 
   /**
@@ -311,16 +383,35 @@ export namespace JoshMiddleware {
    */
   export interface Conditions {
     /**
-     * The `pre` provider method conditions to run at.
+     * The {@link Trigger.PreProvider} method conditions to run at.
      * @since 1.0.0
      */
-    pre: Method[];
+    [Trigger.PreProvider]: Method[];
 
     /**
-     * The `post` provider method conditions to run at.
+     * The `{@link Trigger.PostProvider} method conditions to run at.
      * @since 1.0.0
      */
-    post: Method[];
+    [Trigger.PostProvider]: Method[];
+  }
+
+  /**
+   * A migration for the {@link JoshMiddleware} instance.
+   * @since 1.0.0
+   */
+  export interface Migration<StoredValue = unknown> {
+    /**
+     * The version this migration is for.
+     * @since 1.0.0
+     */
+    version: Semver;
+
+    /**
+     * The method to run when the current version of the middleware matches it.
+     * @since 1.0.0
+     * @param store The store for the middleware to the migration.
+     */
+    run(context: Context, store: JoshMiddlewareStore<StoredValue>): Awaitable<void>;
   }
 
   /**
@@ -342,7 +433,11 @@ export namespace JoshMiddleware {
   }
 
   export enum CommonIdentifiers {
+    MigrationNotFound = 'MigrationNotFound',
+
     NameNotFound = 'nameNotFound',
+
+    NeedsMigration = 'needsMigration',
 
     StoreNotFound = 'storeNotFound'
   }

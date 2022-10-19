@@ -1,21 +1,21 @@
-import { Method, Payload, Payloads } from '../../types';
+import { Method, Payload } from '../../types';
 
 /**
- * Validates whether the given payload is `Payloads.Every.ByHook`
+ * Validates whether the given payload is `Payload.Every.ByHook`
  * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */
-export function isEveryByHookPayload<StoredValue>(payload: Payloads.Every<StoredValue>): payload is Payloads.Every.ByHook<StoredValue> {
+export function isEveryByHookPayload<StoredValue>(payload: Payload.Every<StoredValue>): payload is Payload.Every.ByHook<StoredValue> {
   return payload.method === Method.Every && payload.type === Payload.Type.Hook;
 }
 
 /**
- * Validates whether the given payload is `Payloads.Every.ByValue`
+ * Validates whether the given payload is `Payload.Every.ByValue`
  * @since 1.0.0
  * @param payload The payload to validate.
  * @returns Validation boolean.
  */
-export function isEveryByValuePayload<StoredPayload>(payload: Payloads.Every<StoredPayload>): payload is Payloads.Every.ByValue {
+export function isEveryByValuePayload<StoredPayload>(payload: Payload.Every<StoredPayload>): payload is Payload.Every.ByValue {
   return payload.method === Method.Every && payload.type === Payload.Type.Value;
 }
