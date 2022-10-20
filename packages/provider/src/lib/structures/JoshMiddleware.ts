@@ -279,7 +279,7 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
   }
 
   /**
-   * Creates an instance of {@link JoshProvider} with the given options.
+   * Creates an instance of {@link JoshProviderError} with the given options.
    * @since 1.0.0
    * @param options The options for the error.
    * @returns The error.

@@ -443,7 +443,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
   public abstract [Method.Values](payload: Payload.Values<StoredValue>): Awaitable<Payload.Values<StoredValue>>;
 
   /**
-   * Creates an instance of {@link JoshProvider} with the given options.
+   * Creates an instance of {@link JoshProviderError} with the given options.
    * @since 1.0.0
    * @param options The options for the error.
    * @returns The error.
