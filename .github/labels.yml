@@ -38,6 +38,8 @@
   color: '24853c'
 - name: packages:eslint-config
   color: 'fbca04'
+- name: packages:prettier-config
+  color: 'fbca04'
 - name: packages:provider
   color: 'fbca04'
 - name: packages:serialize
