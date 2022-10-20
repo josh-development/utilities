@@ -36,6 +36,8 @@
   color: 'c66037'
 - name: needs rebase & merge
   color: '24853c'
+- name: packages:eslint-config
+  color: 'fbca04'
 - name: packages:provider
   color: 'fbca04'
 - name: packages:serialize
