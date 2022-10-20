@@ -93,7 +93,11 @@ export abstract class JoshProvider<StoredValue = unknown> {
     return context;
   }
 
-  public abstract setMetadata(metadata: Record<string, unknown>): Awaitable<this>;
+  public abstract deleteMetadata(key: string): Awaitable<void>;
+
+  public abstract getMetadata<Metadata = Record<string, unknown>>(): Awaitable<Metadata>;
+
+  public abstract setMetadata(key: string, value: unknown): Awaitable<void>;
 
   /**
    * A method which generates a unique automatic key. This key must be unique and cannot overlap other keys.
