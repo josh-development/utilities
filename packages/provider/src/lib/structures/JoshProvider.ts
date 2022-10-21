@@ -95,7 +95,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   public abstract deleteMetadata(key: string): Awaitable<void>;
 
-  public abstract getMetadata<Metadata = Record<string, unknown>>(): Awaitable<Metadata>;
+  public abstract getMetadata(key: string): Awaitable<unknown>;
 
   public abstract setMetadata(key: string, value: unknown): Awaitable<void>;
 
