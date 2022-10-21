@@ -67,7 +67,11 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
     const version = await this.fetchVersion(context);
 
-    if (version.major < this.version.major) {
+    if (
+      version.major < this.version.major ||
+      (version.major === this.version.major && version.minor < this.version.minor) ||
+      (version.major === this.version.major && version.minor === this.version.minor && version.patch < this.version.patch)
+    ) {
       const { allowMigrations } = this.options;
 
       if (!allowMigrations) throw this.error(JoshProvider.CommonIdentifiers.NeedsMigration);
