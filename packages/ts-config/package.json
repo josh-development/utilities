@@ -1,0 +1,49 @@
+{
+  "name": "@joshdb/ts-config",
+  "version": "1.0.0",
+  "description": "Standard TypeScript config for the Josh Project",
+  "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
+  "contributors": [
+    "Hezekiah Hendry <hezekiah.hendry@gmail.com>"
+  ],
+  "main": "tsconfig.json",
+  "exports": {
+    "import": "./tsconfig.json",
+    "require": "./tsconfig.json"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "bump": "cliff-jumper",
+    "check-update": "cliff-jumper --dry-run"
+  },
+  "dependencies": {
+    "@sapphire/ts-config": "^3.3.4"
+  },
+  "devDependencies": {
+    "@favware/cliff-jumper": "^1.8.8",
+    "gen-esm-wrapper": "^1.1.3",
+    "typedoc": "^0.23.15",
+    "typedoc-json-parser": "^6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josh-development/utilities.git"
+  },
+  "files": [
+    "tsconfig.json"
+  ],
+  "engines": {
+    "node": ">=16.6.0",
+    "npm": ">=7"
+  },
+  "keywords": [
+    "eslint"
+  ],
+  "bugs": {
+    "url": "https://github.com/josh-development/utilities/issues"
+  },
+  "homepage": "https://josh.evie.dev",
+  "publishConfig": {
+    "access": "public"
+  }
+}
