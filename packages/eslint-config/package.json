@@ -1,0 +1,56 @@
+{
+  "name": "@joshdb/eslint-config",
+  "version": "1.0.0",
+  "description": "Standard ESLint config for the Josh Project",
+  "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
+  "contributors": [
+    "Hezekiah Hendry <hezekiah.hendry@gmail.com>"
+  ],
+  "main": "eslint-config.json",
+  "exports": {
+    "import": "./eslint-config.json",
+    "require": "./eslint-config.json"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint src tests --ext ts --fix -c ../../.eslintrc",
+    "bump": "cliff-jumper",
+    "check-update": "cliff-jumper --dry-run"
+  },
+  "dependencies": {
+    "@sapphire/eslint-config": "^4.3.8",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@favware/cliff-jumper": "^1.8.8",
+    "typedoc": "^0.23.15",
+    "typedoc-json-parser": "^6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josh-development/utilities.git"
+  },
+  "files": [
+    "eslint-config.json"
+  ],
+  "engines": {
+    "node": ">=16.6.0",
+    "npm": ">=7"
+  },
+  "keywords": [
+    "eslint"
+  ],
+  "bugs": {
+    "url": "https://github.com/josh-development/utilities/issues"
+  },
+  "homepage": "https://josh.evie.dev",
+  "publishConfig": {
+    "access": "public"
+  }
+}

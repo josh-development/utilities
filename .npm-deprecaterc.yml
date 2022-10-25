@@ -1,4 +1,5 @@
 name: '*next*'
 package:
+  - '@joshdb/eslint-config'
   - '@joshdb/provider'
   - '@joshdb/serialize'
