@@ -1,0 +1,49 @@
+{
+  "name": "@joshdb/prettier-config",
+  "version": "1.0.0",
+  "description": "Standard Prettier config for the Josh Project",
+  "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
+  "contributors": [
+    "Hezekiah Hendry <hezekiah.hendry@gmail.com>"
+  ],
+  "main": ".prettierrc.json",
+  "exports": {
+    "import": "./.prettierrc.json",
+    "require": "./.prettierrc.json"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint src tests --ext ts --fix -c ../../.eslintrc",
+    "bump": "cliff-jumper",
+    "check-update": "cliff-jumper --dry-run"
+  },
+  "dependencies": {
+    "prettier": "^2.7.1"
+  },
+  "devDependencies": {
+    "@favware/cliff-jumper": "^1.8.8",
+    "typedoc": "^0.23.15",
+    "typedoc-json-parser": "^6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josh-development/utilities.git"
+  },
+  "files": [
+    ".prettierrc.json"
+  ],
+  "engines": {
+    "node": ">=16.6.0",
+    "npm": ">=7"
+  },
+  "keywords": [
+    "eslint"
+  ],
+  "bugs": {
+    "url": "https://github.com/josh-development/utilities/issues"
+  },
+  "homepage": "https://josh.evie.dev",
+  "publishConfig": {
+    "access": "public"
+  }
+}
