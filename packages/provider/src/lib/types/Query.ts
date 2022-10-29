@@ -1,4 +1,4 @@
-export interface QueryOptions<Value> {
+export interface QueryOperators<Value> {
   ne?: Value;
   gt?: Value;
   gte?: Value;
@@ -9,13 +9,13 @@ export interface QueryOptions<Value> {
   regex?: RegExp;
 }
 
-export interface QueryOptionsValue<Value> extends QueryOptions<Value> {
-  path?: [];
-}
-
-// TODO: Need Nova's ts expertise to match type of Value with the path specified
+export type QueryOptions<Value> =
+  | {
+      [key in keyof Value]: QueryOptions<Value[keyof Value]> | Value;
+    }
+  | QueryOperators<Value>;
 
 export interface Query<StoredValue> {
-  key?: string | QueryOptions<string>;
-  value?: StoredValue | QueryOptionsValue<StoredValue>;
+  key?: string | QueryOperators<string>;
+  value?: StoredValue | QueryOptions<StoredValue>;
 }
