@@ -406,7 +406,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
     prettier: ^2.7.1
-    typedoc: ^0.23.15
+    typedoc: ^0.23.19
     typedoc-json-parser: ^7.0.1
     typescript: ^4.8.4
   languageName: unknown
@@ -418,7 +418,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^1.8.8
     prettier: ^2.7.1
-    typedoc: ^0.23.15
+    typedoc: ^0.23.19
     typedoc-json-parser: ^7.0.1
   languageName: unknown
   linkType: soft
@@ -430,11 +430,11 @@ __metadata:
     "@favware/cliff-jumper": ^1.8.8
     "@favware/rollup-type-bundler": ^1.0.11
     "@sapphire/utilities": ^3.11.0
-    "@vitest/coverage-c8": ^0.24.3
+    "@vitest/coverage-c8": ^0.24.4
     reflect-metadata: ^0.1.13
-    typedoc: ^0.23.17
+    typedoc: ^0.23.19
     typedoc-json-parser: ^7.0.1
-    vitest: ^0.24.3
+    vitest: ^0.24.4
   languageName: unknown
   linkType: soft
 
@@ -444,10 +444,10 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": ^1.8.8
     "@favware/rollup-type-bundler": ^1.0.11
-    "@vitest/coverage-c8": ^0.24.3
-    typedoc: ^0.23.17
+    "@vitest/coverage-c8": ^0.24.4
+    typedoc: ^0.23.19
     typedoc-json-parser: ^7.0.1
-    vitest: ^0.24.3
+    vitest: ^0.24.4
   languageName: unknown
   linkType: soft
 
@@ -458,7 +458,7 @@ __metadata:
     "@favware/cliff-jumper": ^1.8.8
     "@sapphire/ts-config": ^3.3.4
     gen-esm-wrapper: ^1.1.3
-    typedoc: ^0.23.15
+    typedoc: ^0.23.19
     typedoc-json-parser: ^7.0.1
   languageName: unknown
   linkType: soft
@@ -730,7 +730,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.33.1, @typescript-eslint/eslint-plugin@npm:^5.40.1, @typescript-eslint/eslint-plugin@npm:^5.41.0":
+"@typescript-eslint/eslint-plugin@npm:^5.33.1, @typescript-eslint/eslint-plugin@npm:^5.41.0":
   version: 5.41.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.41.0"
   dependencies:
@@ -752,7 +752,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.33.1, @typescript-eslint/parser@npm:^5.40.1, @typescript-eslint/parser@npm:^5.41.0":
+"@typescript-eslint/parser@npm:^5.33.1, @typescript-eslint/parser@npm:^5.41.0":
   version: 5.41.0
   resolution: "@typescript-eslint/parser@npm:5.41.0"
   dependencies:
@@ -849,13 +849,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:^0.24.3":
-  version: 0.24.3
-  resolution: "@vitest/coverage-c8@npm:0.24.3"
+"@vitest/coverage-c8@npm:^0.24.4":
+  version: 0.24.4
+  resolution: "@vitest/coverage-c8@npm:0.24.4"
   dependencies:
     c8: ^7.12.0
-    vitest: 0.24.3
-  checksum: 75f79fcf7cee7dbdfa4b8978aa80d791288e5975ed6ca723d8b4985ea744c3b022138075065058a9a679346910ae054e23f6ee922b779e8f6e7b88baf0a496fa
+    vitest: 0.24.4
+  checksum: 433cd6b085ab91e9d7d1a427c805fe8aa2760e44900c2e6f1f6654113a5a1a6295e9d3e41f2cd141b707c1904a63a511fed3e2a886606d7625ba8b5145dd076a
   languageName: node
   linkType: hard
 
@@ -4204,9 +4204,9 @@ __metadata:
     "@sapphire/eslint-config": ^4.3.8
     "@sapphire/ts-config": ^3.3.4
     "@types/node": ^18.11.8
-    "@typescript-eslint/eslint-plugin": ^5.40.1
-    "@typescript-eslint/parser": ^5.40.1
-    "@vitest/coverage-c8": ^0.24.3
+    "@typescript-eslint/eslint-plugin": ^5.41.0
+    "@typescript-eslint/parser": ^5.41.0
+    "@vitest/coverage-c8": ^0.24.4
     eslint: ^8.26.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
@@ -4220,9 +4220,9 @@ __metadata:
     rollup-plugin-typescript2: ^0.34.1
     ts-node: ^10.9.1
     tslib: ^2.4.0
-    turbo: ^1.5.6
+    turbo: ^1.6.2
     typescript: ^4.8.4
-    vitest: ^0.24.3
+    vitest: ^0.24.4
   languageName: unknown
   linkType: soft
 
@@ -4647,7 +4647,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinybench@npm:^2.3.0":
+"tinybench@npm:^2.3.1":
   version: 2.3.1
   resolution: "tinybench@npm:2.3.1"
   checksum: 74d45fa546d964a8123f98847fc59550945ed7f0d3e5a4ce0f9596d836b51c1d340c2ae0277a8023c15dc9ea3d7cb948a79173bfc46338c9b367c6323ea1eaf3
@@ -4761,58 +4761,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.6.1":
-  version: 1.6.1
-  resolution: "turbo-darwin-64@npm:1.6.1"
+"turbo-darwin-64@npm:1.6.2":
+  version: 1.6.2
+  resolution: "turbo-darwin-64@npm:1.6.2"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.6.1":
-  version: 1.6.1
-  resolution: "turbo-darwin-arm64@npm:1.6.1"
+"turbo-darwin-arm64@npm:1.6.2":
+  version: 1.6.2
+  resolution: "turbo-darwin-arm64@npm:1.6.2"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.6.1":
-  version: 1.6.1
-  resolution: "turbo-linux-64@npm:1.6.1"
+"turbo-linux-64@npm:1.6.2":
+  version: 1.6.2
+  resolution: "turbo-linux-64@npm:1.6.2"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.6.1":
-  version: 1.6.1
-  resolution: "turbo-linux-arm64@npm:1.6.1"
+"turbo-linux-arm64@npm:1.6.2":
+  version: 1.6.2
+  resolution: "turbo-linux-arm64@npm:1.6.2"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.6.1":
-  version: 1.6.1
-  resolution: "turbo-windows-64@npm:1.6.1"
+"turbo-windows-64@npm:1.6.2":
+  version: 1.6.2
+  resolution: "turbo-windows-64@npm:1.6.2"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.6.1":
-  version: 1.6.1
-  resolution: "turbo-windows-arm64@npm:1.6.1"
+"turbo-windows-arm64@npm:1.6.2":
+  version: 1.6.2
+  resolution: "turbo-windows-arm64@npm:1.6.2"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^1.5.6":
-  version: 1.6.1
-  resolution: "turbo@npm:1.6.1"
+"turbo@npm:^1.6.2":
+  version: 1.6.2
+  resolution: "turbo@npm:1.6.2"
   dependencies:
-    turbo-darwin-64: 1.6.1
-    turbo-darwin-arm64: 1.6.1
-    turbo-linux-64: 1.6.1
-    turbo-linux-arm64: 1.6.1
-    turbo-windows-64: 1.6.1
-    turbo-windows-arm64: 1.6.1
+    turbo-darwin-64: 1.6.2
+    turbo-darwin-arm64: 1.6.2
+    turbo-linux-64: 1.6.2
+    turbo-linux-arm64: 1.6.2
+    turbo-windows-64: 1.6.2
+    turbo-windows-arm64: 1.6.2
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -4828,7 +4828,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 45e89ff34d877c28181e4b61e0f7bca792c88b0446eb2fbdfe433119cf70a4d4897c8c62744f687aea597161387de80a3fed606eb8b8857cb6c6ab3ad563681e
+  checksum: d32365bdd617d4ef4edbc332784ac303d77627aeb9107a6616f5d1ab7082f84da04905609c0daa39dd3a6841b2b52e46326135e98e29dab4b7f5464758d11513
   languageName: node
   linkType: hard
 
@@ -4907,23 +4907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.15, typedoc@npm:^0.23.17":
-  version: 0.23.18
-  resolution: "typedoc@npm:0.23.18"
-  dependencies:
-    lunr: ^2.3.9
-    marked: ^4.0.19
-    minimatch: ^5.1.0
-    shiki: ^0.11.1
-  peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x
-  bin:
-    typedoc: bin/typedoc
-  checksum: 2cf1ae57865e53545ba4cbdd8a441870b7a4ad74e421d43f4b731e4643adc82c3a2e89fa9cf1f600f908d9d12da818bcd1d26970c9dce9493a8d8ec5b649b594
-  languageName: node
-  linkType: hard
-
-"typedoc@npm:^0.23.18":
+"typedoc@npm:^0.23.18, typedoc@npm:^0.23.19":
   version: 0.23.19
   resolution: "typedoc@npm:0.23.19"
   dependencies:
@@ -5087,9 +5071,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:0.24.3, vitest@npm:^0.24.3":
-  version: 0.24.3
-  resolution: "vitest@npm:0.24.3"
+"vitest@npm:0.24.4, vitest@npm:^0.24.4":
+  version: 0.24.4
+  resolution: "vitest@npm:0.24.4"
   dependencies:
     "@types/chai": ^4.3.3
     "@types/chai-subset": ^1.3.3
@@ -5098,7 +5082,7 @@ __metadata:
     debug: ^4.3.4
     local-pkg: ^0.4.2
     strip-literal: ^0.4.2
-    tinybench: ^2.3.0
+    tinybench: ^2.3.1
     tinypool: ^0.3.0
     tinyspy: ^1.0.2
     vite: ^3.0.0
@@ -5121,7 +5105,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: dd954f57396b81df466dd4346aa6c95709a1b3c2409d5526d3172fa34ec684f756a855f885778929a6b903a22b2517ff79d22f936fb3e4d7d54ff24e8e577459
+  checksum: 5e6072ce6b85e8130a1a44012350887984577f6e120c3b13128a576b1c80c3bf7a5bcc458b3989e3f3ece70301f102781aaa53ea7c2cb0730ee7fc3dc51df300
   languageName: node
   linkType: hard
 
