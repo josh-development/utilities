@@ -2388,24 +2388,32 @@ export function runProviderTest<
         });
 
         describe('metadata', () => {
+          beforeAll(async () => {
+            await provider.deleteMetadata('key');
+          });
+
           test('GIVEN provider w/o metadata THEN sets metadata', async () => {
             await provider.setMetadata('key', 'value');
           });
 
           test('GIVEN provider w/ metadata THEN gets metadata', async () => {
+            await provider.setMetadata('key', 'value');
+
             const metadata = await provider.getMetadata('key');
 
             expect(metadata).toBe('value');
           });
 
           test('GIVEN provider w/ metadata THEN overwrites metadata', async () => {
+            await provider.setMetadata('key', 'value');
+
             const metadata = await provider.setMetadata('key', 'value1');
 
             expect(metadata).toBe(undefined);
             expect(await provider.getMetadata('key')).toBe('value1');
           });
 
-          test('GIVEN provider w/ metadata THEN deleted metadata', async () => {
+          test('GIVEN provider w/ metadata THEN delete metadata', async () => {
             await provider.setMetadata('key', 'value');
 
             expect(await provider.getMetadata('key')).toBe('value');
