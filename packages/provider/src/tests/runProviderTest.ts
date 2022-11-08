@@ -13,7 +13,7 @@ export function runProviderTest<
   Options extends JoshProvider.Options = JoshProvider.Options,
   CleanupProvider extends JoshProvider = JoshProvider
 >(options: ProviderTestOptions<Provider, Options, CleanupProvider>): void {
-  const { providerConstructor: Provider, providerOptions = {}, cleanup, serialization } = options;
+  const { providerConstructor: Provider, providerOptions = {}, cleanup, serialization = true } = options;
 
   for (const serialize of serialization ? [true, false] : [true]) {
     describe(`${Provider.prototype.constructor.name} - Serialization ${serialize ? 'Enabled' : 'Disabled'}`, () => {
