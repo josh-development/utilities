@@ -135,7 +135,7 @@ export namespace Serialize {
    */
   export interface JSON {
     /**
-     * The type of {@link JSON.value}
+     * The type of {@link JSON.v}
      * @since 1.0.0
      */
     t: Type;
