@@ -27,15 +27,29 @@ export namespace Serialize {
   }
 
   function toJSONArray(array: unknown[]): JSON[] {
-    return array.reduce<JSON[]>((json, value) => [...json, toJSON(value)], []);
+    const json: JSON[] = [];
+
+    for (const value of array) json.push(toJSON(value));
+    return json;
   }
 
   function toJSONEntries(entries: [PropertyKey, unknown][]): [PropertyKey, JSON][] {
-    return entries.reduce<[PropertyKey, JSON][]>((json, [key, value]) => [...json, [key, toJSON(value)]], []);
+    const json: [PropertyKey, JSON][] = [];
+
+    for (const [key, value] of entries) json.push([key, toJSON(value)]);
+    return json;
   }
 
   function toJSONObject(object: Record<PropertyKey, unknown>): Record<PropertyKey, JSON> {
-    return Object.entries(object).reduce<Record<PropertyKey, JSON>>((json, [key, value]) => ({ ...json, [key]: toJSON(value) }), {});
+    const json: Record<PropertyKey, JSON> = {};
+
+    for (const key in object) {
+      if ({}.hasOwnProperty.call(object, key)) {
+        json[key] = toJSON(object[key]);
+      }
+    }
+
+    return json;
   }
 
   /**
@@ -106,7 +120,12 @@ export namespace Serialize {
   function fromJSONObject(json: Record<PropertyKey, JSON>): Record<PropertyKey, unknown> {
     const obj: Record<PropertyKey, unknown> = {};
 
-    for (const [key, value] of Object.entries(json)) obj[key] = fromJSON(value);
+    for (const key in json) {
+      if ({}.hasOwnProperty.call(json, key)) {
+        obj[key] = fromJSON(json[key]);
+      }
+    }
+
     return obj;
   }
 
