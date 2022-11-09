@@ -16,7 +16,7 @@ export namespace Serialize {
     else if (data === null) return { t: Type.Null, v: null };
     else if (typeof data === 'number') return { t: Type.Number, v: data };
     else if (isObject(data)) return { t: Type.Object, v: toJSONObject(data) };
-    else if (data instanceof RegExp) return { t: Type.RegExp, v: { sr: data.source, f: data.flags } };
+    else if (data instanceof RegExp) return { t: Type.RegExp, v: { 0: data.source, 1: data.flags } };
     else if (data instanceof Set) return { t: Type.Set, v: toJSONArray(Array.from(data)) };
     else if (typeof data === 'string') return { t: Type.String, v: data };
     else if (data === undefined) return { t: Type.Undefined, v: 'undefined' };
@@ -87,7 +87,7 @@ export namespace Serialize {
         return fromJSONObject(value as Record<PropertyKey, JSON>);
 
       case Type.RegExp:
-        return new RegExp((value as { sr: string; f: string }).sr, (value as { sr: string; f: string }).f);
+        return new RegExp((value as { 0: string; 1: string })['0'], (value as { 0: string; 1: string })['1']);
 
       case Type.Set:
         return new Set(fromJSONArray(value as JSON[]));
@@ -144,7 +144,7 @@ export namespace Serialize {
      * The value for this json.
      * @since 1.0.0
      */
-    v: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | { sr: string; f: string };
+    v: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | { 0: string; 1: string };
   }
 
   /**
@@ -152,28 +152,28 @@ export namespace Serialize {
    * @since 1.0.0
    */
   export enum Type {
-    Array = 'a',
+    Array = 0,
 
-    BigInt = 'bi',
+    BigInt = 11,
 
-    Boolean = 'b',
+    Boolean = 2,
 
-    Date = 'd',
+    Date = 3,
 
-    Map = 'm',
+    Map = 4,
 
-    Null = 'nl',
+    Null = 5,
 
-    Number = 'n',
+    Number = 6,
 
-    Object = 'o',
+    Object = 7,
 
-    RegExp = 'r',
+    RegExp = 10,
 
-    Set = 'se',
+    Set = 9,
 
-    String = 's',
+    String = 8,
 
-    Undefined = 'u'
+    Undefined = 1
   }
 }
