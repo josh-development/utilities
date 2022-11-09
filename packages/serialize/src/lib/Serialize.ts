@@ -8,18 +8,18 @@ export namespace Serialize {
    * @returns The converted data.
    */
   export function toJSON(data: unknown): JSON {
-    if (Array.isArray(data)) return { type: Type.Array, value: toJSONArray(data) };
-    else if (typeof data === 'bigint') return { type: Type.BigInt, value: data.toString() };
-    else if (typeof data === 'boolean') return { type: Type.Boolean, value: data };
-    else if (data instanceof Date) return { type: Type.Date, value: data.toJSON() };
-    else if (data instanceof Map) return { type: Type.Map, value: toJSONEntries(Array.from(data)) };
-    else if (data === null) return { type: Type.Null, value: null };
-    else if (typeof data === 'number') return { type: Type.Number, value: data };
-    else if (isObject(data)) return { type: Type.Object, value: toJSONObject(data) };
-    else if (data instanceof RegExp) return { type: Type.RegExp, value: { source: data.source, flags: data.flags } };
-    else if (data instanceof Set) return { type: Type.Set, value: toJSONArray(Array.from(data)) };
-    else if (typeof data === 'string') return { type: Type.String, value: data };
-    else if (data === undefined) return { type: Type.Undefined, value: 'undefined' };
+    if (Array.isArray(data)) return { t: Type.Array, v: toJSONArray(data) };
+    else if (typeof data === 'bigint') return { t: Type.BigInt, v: data.toString() };
+    else if (typeof data === 'boolean') return { t: Type.Boolean, v: data };
+    else if (data instanceof Date) return { t: Type.Date, v: data.toJSON() };
+    else if (data instanceof Map) return { t: Type.Map, v: toJSONEntries(Array.from(data)) };
+    else if (data === null) return { t: Type.Null, v: null };
+    else if (typeof data === 'number') return { t: Type.Number, v: data };
+    else if (isObject(data)) return { t: Type.Object, v: toJSONObject(data) };
+    else if (data instanceof RegExp) return { t: Type.RegExp, v: { sr: data.source, f: data.flags } };
+    else if (data instanceof Set) return { t: Type.Set, v: toJSONArray(Array.from(data)) };
+    else if (typeof data === 'string') return { t: Type.String, v: data };
+    else if (data === undefined) return { t: Type.Undefined, v: 'undefined' };
 
     throw new TypeError(
       `Serialize received an unknown type while formatting: "${data.constructor.name}", see @joshdb/transform for custom serialization`
@@ -45,7 +45,7 @@ export namespace Serialize {
    * @returns The converted data.
    */
   export function fromJSON(json: JSON): unknown {
-    const { type, value } = json;
+    const { t: type, v: value } = json;
 
     switch (type) {
       case Type.Array:
@@ -73,7 +73,7 @@ export namespace Serialize {
         return fromJSONObject(value as Record<PropertyKey, JSON>);
 
       case Type.RegExp:
-        return new RegExp((value as { source: string; flags: string }).source, (value as { source: string; flags: string }).flags);
+        return new RegExp((value as { sr: string; f: string }).sr, (value as { sr: string; f: string }).f);
 
       case Type.Set:
         return new Set(fromJSONArray(value as JSON[]));
@@ -90,15 +90,24 @@ export namespace Serialize {
   }
 
   function fromJSONArray(json: JSON[]): unknown[] {
-    return json.reduce<unknown[]>((raw, value) => [...raw, fromJSON(value)], []);
+    const arr: unknown[] = [];
+
+    for (const value of json) arr.push(fromJSON(value));
+    return arr;
   }
 
   function fromJSONMap(json: [PropertyKey, JSON][]): [PropertyKey, unknown][] {
-    return json.reduce<[PropertyKey, unknown][]>((raw, [key, value]) => [...raw, [key, fromJSON(value)]], []);
+    const arr: [PropertyKey, unknown][] = [];
+
+    for (const [key, value] of json) arr.push([key, fromJSON(value)]);
+    return arr;
   }
 
   function fromJSONObject(json: Record<PropertyKey, JSON>): Record<PropertyKey, unknown> {
-    return Object.entries(json).reduce<Record<PropertyKey, unknown>>((raw, [key, value]) => ({ ...raw, [key]: fromJSON(value) }), {});
+    const obj: Record<PropertyKey, unknown> = {};
+
+    for (const [key, value] of Object.entries(json)) obj[key] = fromJSON(value);
+    return obj;
   }
 
   /**
@@ -110,13 +119,13 @@ export namespace Serialize {
      * The type of {@link JSON.value}
      * @since 1.0.0
      */
-    type: Type;
+    t: Type;
 
     /**
      * The value for this json.
      * @since 1.0.0
      */
-    value: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | { source: string; flags: string };
+    v: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | { sr: string; f: string };
   }
 
   /**
@@ -124,28 +133,28 @@ export namespace Serialize {
    * @since 1.0.0
    */
   export enum Type {
-    Array = 'array',
+    Array = 'a',
 
-    BigInt = 'bigint',
+    BigInt = 'bi',
 
-    Boolean = 'boolean',
+    Boolean = 'b',
 
-    Date = 'date',
+    Date = 'd',
 
-    Map = 'map',
+    Map = 'm',
 
-    Null = 'null',
+    Null = 'nl',
 
-    Number = 'number',
+    Number = 'n',
 
-    Object = 'object',
+    Object = 'o',
 
-    RegExp = 'regexp',
+    RegExp = 'r',
 
-    Set = 'set',
+    Set = 'se',
 
-    String = 'string',
+    String = 's',
 
-    Undefined = 'undefined'
+    Undefined = 'u'
   }
 }
