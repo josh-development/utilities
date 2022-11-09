@@ -539,5 +539,3 @@ describe('Serialize', () => {
     });
   });
 });
-
-console.log(JSON.stringify(Serialize.toJSON({ test: true, foo: 'bar', hello: RegExp(/a/), date: new Date() })));
