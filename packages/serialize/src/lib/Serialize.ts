@@ -16,8 +16,9 @@ export namespace Serialize {
     else if (data === null) return { [Keying.Type]: Type.Null, [Keying.Value]: null };
     else if (typeof data === 'number') return { [Keying.Type]: Type.Number, [Keying.Value]: data };
     else if (isObject(data)) return { [Keying.Type]: Type.Object, [Keying.Value]: toJSONObject(data) };
-    else if (data instanceof RegExp) return { [Keying.Type]: Type.RegExp, [Keying.Value]: { s: data.source, f: data.flags } };
-    else if (data instanceof Set) return { [Keying.Type]: Type.Set, [Keying.Value]: toJSONArray(Array.from(data)) };
+    else if (data instanceof RegExp) {
+      return { [Keying.Type]: Type.RegExp, [Keying.Value]: { [Keying.Source]: data.source, [Keying.Flags]: data.flags } };
+    } else if (data instanceof Set) return { [Keying.Type]: Type.Set, [Keying.Value]: toJSONArray(Array.from(data)) };
     else if (typeof data === 'string') return { [Keying.Type]: Type.String, [Keying.Value]: data };
     else if (data === undefined) return { [Keying.Type]: Type.Undefined, [Keying.Value]: 'undefined' };
 
@@ -44,7 +45,7 @@ export namespace Serialize {
     const json: Record<PropertyKey, JSON> = {};
 
     for (const key in object) {
-      if ({}.hasOwnProperty.call(object, key)) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
         json[key] = toJSON(object[key]);
       }
     }
@@ -87,7 +88,7 @@ export namespace Serialize {
         return fromJSONObject(value as Record<PropertyKey, JSON>);
 
       case Type.RegExp:
-        return new RegExp((value as { s: string; f: string }).s, (value as { s: string; f: string }).f);
+        return new RegExp((value as Regex)[Keying.Source], (value as Regex)[Keying.Flags]);
 
       case Type.Set:
         return new Set(fromJSONArray(value as JSON[]));
@@ -121,7 +122,7 @@ export namespace Serialize {
     const obj: Record<PropertyKey, unknown> = {};
 
     for (const key in json) {
-      if ({}.hasOwnProperty.call(json, key)) {
+      if (Object.prototype.hasOwnProperty.call(json, key)) {
         obj[key] = fromJSON(json[key]);
       }
     }
@@ -131,7 +132,17 @@ export namespace Serialize {
 
   export enum Keying {
     Type = 't',
-    Value = 'v'
+
+    Value = 'v',
+
+    Source = 's',
+
+    Flags = 'f'
+  }
+  export interface Regex {
+    [Keying.Source]: string;
+
+    [Keying.Flags]: string;
   }
   /**
    * The json format type interface.
@@ -148,7 +159,7 @@ export namespace Serialize {
      * The value for this json.
      * @since 1.0.0
      */
-    [Keying.Value]: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | { s: string; f: string };
+    [Keying.Value]: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | Regex;
   }
 
   /**

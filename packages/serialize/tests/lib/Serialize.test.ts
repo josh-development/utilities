@@ -14,7 +14,7 @@ describe('Serialize', () => {
   const jsonDate = rawDate.toJSON();
   const jsonNull = rawNull;
   const jsonNumber = rawNumber;
-  const jsonRegExp = { s: rawRegExp.source, f: rawRegExp.flags };
+  const jsonRegExp = { [Serialize.Keying.Source]: rawRegExp.source, [Serialize.Keying.Flags]: rawRegExp.flags };
   const jsonString = rawString;
   const jsonUndefined = `${rawUndefined}`;
 
