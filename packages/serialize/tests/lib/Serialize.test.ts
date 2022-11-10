@@ -26,78 +26,78 @@ describe('Serialize', () => {
     describe('can format raw data', () => {
       describe(Serialize.Type.Array.toString(), () => {
         test(Serialize.Type.BigInt.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawBigInt]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawBigInt]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]);
         });
 
         test(Serialize.Type.Boolean.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawBoolean]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawBoolean]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]);
         });
 
         test(Serialize.Type.Date.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawDate]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawDate]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]);
         });
 
         test(Serialize.Type.Null.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawNull]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawNull]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]);
         });
 
         test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawNumber]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawNumber]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]);
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawRegExp]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawRegExp]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]);
         });
 
         test(Serialize.Type.String.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawString]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawString]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]);
         });
 
         test(Serialize.Type.Undefined.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON([rawUndefined]);
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawUndefined]);
 
           expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]);
         });
       });
 
       test(Serialize.Type.BigInt.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawBigInt);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawBigInt);
 
         expect(type).toBe(Serialize.Type.BigInt);
         expect(value).toStrictEqual(jsonBigInt);
       });
 
       test(Serialize.Type.Boolean.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawBoolean);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawBoolean);
 
         expect(type).toBe(Serialize.Type.Boolean);
         expect(value).toStrictEqual(jsonBoolean);
       });
 
       test(Serialize.Type.Date.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawDate);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawDate);
 
         expect(type).toBe(Serialize.Type.Date);
         expect(value).toStrictEqual(jsonDate);
@@ -105,71 +105,71 @@ describe('Serialize', () => {
 
       describe(Serialize.Type.Map.toString(), () => {
         test(Serialize.Type.BigInt.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawBigInt]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawBigInt]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]]);
         });
 
         test(Serialize.Type.Boolean.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawBoolean]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawBoolean]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]]);
         });
 
         test(Serialize.Type.Date.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawDate]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawDate]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]]);
         });
 
         test(Serialize.Type.Null.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawNull]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawNull]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]]);
         });
 
         test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawNumber]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawNumber]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]]);
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawRegExp]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawRegExp]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]]);
         });
 
         test(Serialize.Type.String.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawString]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawString]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]]);
         });
 
         test(Serialize.Type.Undefined.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Map([['key', rawUndefined]]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawUndefined]]));
 
           expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined }]]);
+          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]]);
         });
       });
 
       test(Serialize.Type.Null.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawNull);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawNull);
 
         expect(type).toBe(Serialize.Type.Null);
         expect(value).toStrictEqual(jsonNull);
       });
 
       test(Serialize.Type.Number.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawNumber);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawNumber);
 
         expect(type).toBe(Serialize.Type.Number);
         expect(value).toStrictEqual(jsonNumber);
@@ -177,64 +177,64 @@ describe('Serialize', () => {
 
       describe(Serialize.Type.Object.toString(), () => {
         test(Serialize.Type.BigInt.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawBigInt });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawBigInt });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt } });
         });
 
         test(Serialize.Type.Boolean.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawBoolean });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawBoolean });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean } });
         });
 
         test(Serialize.Type.Date.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawDate });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawDate });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate } });
         });
 
         test(Serialize.Type.Null.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawNull });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawNull });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull } });
         });
 
         test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawNumber });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawNumber });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawRegExp });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawRegExp });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp } });
         });
 
         test(Serialize.Type.String.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawString });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawString });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString } });
         });
 
         test(Serialize.Type.Undefined.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON({ key: rawUndefined });
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawUndefined });
 
           expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined } });
+          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined } });
         });
       });
 
       test(Serialize.Type.RegExp.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawRegExp);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawRegExp);
 
         expect(type).toBe(Serialize.Type.RegExp);
         expect(value).toStrictEqual(jsonRegExp);
@@ -242,71 +242,71 @@ describe('Serialize', () => {
 
       describe(Serialize.Type.Set.toString(), () => {
         test(Serialize.Type.BigInt.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawBigInt]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawBigInt]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]);
         });
 
         test(Serialize.Type.Boolean.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawBoolean]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawBoolean]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]);
         });
 
         test(Serialize.Type.Date.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawDate]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawDate]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]);
         });
 
         test(Serialize.Type.Null.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawNull]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawNull]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]);
         });
 
         test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawNumber]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawNumber]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]);
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawRegExp]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawRegExp]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]);
         });
 
         test(Serialize.Type.String.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawString]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawString]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]);
         });
 
         test(Serialize.Type.Undefined.toString(), () => {
-          const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(new Set([rawUndefined]));
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawUndefined]));
 
           expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined }]);
+          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]);
         });
       });
 
       test(Serialize.Type.String.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawString);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawString);
 
         expect(type).toBe(Serialize.Type.String);
         expect(value).toStrictEqual(jsonString);
       });
 
       test(Serialize.Type.Undefined.toString(), () => {
-        const { [Serialize.Names.Type]: type, [Serialize.Names.Value]: value } = Serialize.toJSON(rawUndefined);
+        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawUndefined);
 
         expect(type).toBe(Serialize.Type.Undefined);
         expect(value).toStrictEqual(jsonUndefined);
@@ -330,8 +330,8 @@ describe('Serialize', () => {
         test(Serialize.Type.BigInt.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]
             })
           ).toStrictEqual([rawBigInt]);
         });
@@ -339,8 +339,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Boolean.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]
             })
           ).toStrictEqual([rawBoolean]);
         });
@@ -348,8 +348,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Date.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]
             })
           ).toStrictEqual([rawDate]);
         });
@@ -357,8 +357,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Null.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]
             })
           ).toStrictEqual([rawNull]);
         });
@@ -366,8 +366,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Number.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
             })
           ).toStrictEqual([rawNumber]);
         });
@@ -375,8 +375,8 @@ describe('Serialize', () => {
         test(Serialize.Type.RegExp.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]
             })
           ).toStrictEqual([rawRegExp]);
         });
@@ -384,8 +384,8 @@ describe('Serialize', () => {
         test(Serialize.Type.String.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]
             })
           ).toStrictEqual([rawString]);
         });
@@ -393,31 +393,31 @@ describe('Serialize', () => {
         test(Serialize.Type.Undefined.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Array,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined }]
+              [Serialize.Keying.Type]: Serialize.Type.Array,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]
             })
           ).toStrictEqual([rawUndefined]);
         });
       });
 
       test(Serialize.Type.BigInt.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt })).toBe(rawBigInt);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt })).toBe(rawBigInt);
       });
 
       test(Serialize.Type.Boolean.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean })).toBe(rawBoolean);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean })).toBe(rawBoolean);
       });
 
       test(Serialize.Type.Date.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate })).toStrictEqual(rawDate);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate })).toStrictEqual(rawDate);
       });
 
       describe(Serialize.Type.Map.toString(), () => {
         test(Serialize.Type.BigInt.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]]
             })
           ).toStrictEqual(new Map([['key', rawBigInt]]));
         });
@@ -425,8 +425,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Boolean.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]]
             })
           ).toStrictEqual(new Map([['key', rawBoolean]]));
         });
@@ -434,8 +434,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Date.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]]
             })
           ).toStrictEqual(new Map([['key', rawDate]]));
         });
@@ -443,8 +443,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Null.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]]
             })
           ).toStrictEqual(new Map([['key', rawNull]]));
         });
@@ -452,8 +452,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Number.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]]
             })
           ).toStrictEqual(new Map([['key', rawNumber]]));
         });
@@ -461,8 +461,8 @@ describe('Serialize', () => {
         test(Serialize.Type.RegExp.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]]
             })
           ).toStrictEqual(new Map([['key', rawRegExp]]));
         });
@@ -470,8 +470,8 @@ describe('Serialize', () => {
         test(Serialize.Type.String.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]]
             })
           ).toStrictEqual(new Map([['key', rawString]]));
         });
@@ -479,27 +479,27 @@ describe('Serialize', () => {
         test(Serialize.Type.Undefined.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Map,
-              [Serialize.Names.Value]: [['key', { [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined }]]
+              [Serialize.Keying.Type]: Serialize.Type.Map,
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]]
             })
           ).toStrictEqual(new Map([['key', rawUndefined]]));
         });
       });
 
       test(Serialize.Type.Null.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull })).toBe(rawNull);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull })).toBe(rawNull);
       });
 
       test(Serialize.Type.Number.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber })).toBe(rawNumber);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber })).toBe(rawNumber);
       });
 
       describe(Serialize.Type.Object.toString(), () => {
         test(Serialize.Type.BigInt.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt } }
             })
           ).toStrictEqual({
             key: rawBigInt
@@ -509,8 +509,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Boolean.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean } }
             })
           ).toStrictEqual({
             key: rawBoolean
@@ -520,8 +520,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Date.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate } }
             })
           ).toStrictEqual({
             key: rawDate
@@ -531,8 +531,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Null.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull } }
             })
           ).toStrictEqual({
             key: rawNull
@@ -542,8 +542,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Number.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } }
             })
           ).toStrictEqual({
             key: rawNumber
@@ -553,8 +553,8 @@ describe('Serialize', () => {
         test(Serialize.Type.RegExp.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp } }
             })
           ).toStrictEqual({
             key: rawRegExp
@@ -564,8 +564,8 @@ describe('Serialize', () => {
         test(Serialize.Type.String.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString } }
             })
           ).toStrictEqual({
             key: rawString
@@ -575,8 +575,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Undefined.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Object,
-              [Serialize.Names.Value]: { key: { [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined } }
+              [Serialize.Keying.Type]: Serialize.Type.Object,
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined } }
             })
           ).toStrictEqual({
             key: rawUndefined
@@ -585,15 +585,15 @@ describe('Serialize', () => {
       });
 
       test(Serialize.Type.RegExp.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp })).toStrictEqual(rawRegExp);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp })).toStrictEqual(rawRegExp);
       });
 
       describe(Serialize.Type.Set.toString(), () => {
         test(Serialize.Type.BigInt.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.BigInt, [Serialize.Names.Value]: jsonBigInt }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]
             })
           ).toStrictEqual(new Set([rawBigInt]));
         });
@@ -601,8 +601,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Boolean.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Boolean, [Serialize.Names.Value]: jsonBoolean }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]
             })
           ).toStrictEqual(new Set([rawBoolean]));
         });
@@ -610,8 +610,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Date.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Date, [Serialize.Names.Value]: jsonDate }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]
             })
           ).toStrictEqual(new Set([rawDate]));
         });
@@ -619,8 +619,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Null.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Null, [Serialize.Names.Value]: jsonNull }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]
             })
           ).toStrictEqual(new Set([rawNull]));
         });
@@ -628,8 +628,8 @@ describe('Serialize', () => {
         test(Serialize.Type.Number.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Number, [Serialize.Names.Value]: jsonNumber }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
             })
           ).toStrictEqual(new Set([rawNumber]));
         });
@@ -637,8 +637,8 @@ describe('Serialize', () => {
         test(Serialize.Type.RegExp.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.RegExp, [Serialize.Names.Value]: jsonRegExp }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]
             })
           ).toStrictEqual(new Set([rawRegExp]));
         });
@@ -646,8 +646,8 @@ describe('Serialize', () => {
         test(Serialize.Type.String.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]
             })
           ).toStrictEqual(new Set([rawString]));
         });
@@ -655,25 +655,25 @@ describe('Serialize', () => {
         test(Serialize.Type.Undefined.toString(), () => {
           expect(
             Serialize.fromJSON({
-              [Serialize.Names.Type]: Serialize.Type.Set,
-              [Serialize.Names.Value]: [{ [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined }]
+              [Serialize.Keying.Type]: Serialize.Type.Set,
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]
             })
           ).toStrictEqual(new Set([rawUndefined]));
         });
       });
 
       test(Serialize.Type.String.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.String, [Serialize.Names.Value]: jsonString })).toBe(rawString);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString })).toBe(rawString);
       });
 
       test(Serialize.Type.Undefined.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Names.Type]: Serialize.Type.Undefined, [Serialize.Names.Value]: jsonUndefined })).toBe(rawUndefined);
+        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined })).toBe(rawUndefined);
       });
     });
 
     test('GIVEN unknown type THEN throws error', () => {
       // @ts-expect-error 2322 - Type 'function' is not assignable to type 'Serialize.Type'.
-      expect(() => Serialize.fromJSON({ [Serialize.Names.Type]: 'function' })).toThrowError('Serialize received an unknown type.');
+      expect(() => Serialize.fromJSON({ [Serialize.Keying.Type]: 'function' })).toThrowError('Serialize received an unknown type.');
     });
   });
 });
