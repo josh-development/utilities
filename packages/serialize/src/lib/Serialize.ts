@@ -8,18 +8,19 @@ export namespace Serialize {
    * @returns The converted data.
    */
   export function toJSON(data: unknown): JSON {
-    if (Array.isArray(data)) return { type: Type.Array, value: toJSONArray(data) };
-    else if (typeof data === 'bigint') return { type: Type.BigInt, value: data.toString() };
-    else if (typeof data === 'boolean') return { type: Type.Boolean, value: data };
-    else if (data instanceof Date) return { type: Type.Date, value: data.toJSON() };
-    else if (data instanceof Map) return { type: Type.Map, value: toJSONEntries(Array.from(data)) };
-    else if (data === null) return { type: Type.Null, value: null };
-    else if (typeof data === 'number') return { type: Type.Number, value: data };
-    else if (isObject(data)) return { type: Type.Object, value: toJSONObject(data) };
-    else if (data instanceof RegExp) return { type: Type.RegExp, value: { source: data.source, flags: data.flags } };
-    else if (data instanceof Set) return { type: Type.Set, value: toJSONArray(Array.from(data)) };
-    else if (typeof data === 'string') return { type: Type.String, value: data };
-    else if (data === undefined) return { type: Type.Undefined, value: 'undefined' };
+    if (Array.isArray(data)) return { [Keying.Type]: Type.Array, [Keying.Value]: toJSONArray(data) };
+    else if (typeof data === 'bigint') return { [Keying.Type]: Type.BigInt, [Keying.Value]: data.toString() };
+    else if (typeof data === 'boolean') return { [Keying.Type]: Type.Boolean, [Keying.Value]: data };
+    else if (data instanceof Date) return { [Keying.Type]: Type.Date, [Keying.Value]: data.toJSON() };
+    else if (data instanceof Map) return { [Keying.Type]: Type.Map, [Keying.Value]: toJSONEntries(Array.from(data)) };
+    else if (data === null) return { [Keying.Type]: Type.Null, [Keying.Value]: null };
+    else if (typeof data === 'number') return { [Keying.Type]: Type.Number, [Keying.Value]: data };
+    else if (isObject(data)) return { [Keying.Type]: Type.Object, [Keying.Value]: toJSONObject(data) };
+    else if (data instanceof RegExp) {
+      return { [Keying.Type]: Type.RegExp, [Keying.Value]: { [Keying.Source]: data.source, [Keying.Flags]: data.flags } };
+    } else if (data instanceof Set) return { [Keying.Type]: Type.Set, [Keying.Value]: toJSONArray(Array.from(data)) };
+    else if (typeof data === 'string') return { [Keying.Type]: Type.String, [Keying.Value]: data };
+    else if (data === undefined) return { [Keying.Type]: Type.Undefined, [Keying.Value]: 'undefined' };
 
     throw new TypeError(
       `Serialize received an unknown type while formatting: "${data.constructor.name}", see @joshdb/transform for custom serialization`
@@ -27,15 +28,29 @@ export namespace Serialize {
   }
 
   function toJSONArray(array: unknown[]): JSON[] {
-    return array.reduce<JSON[]>((json, value) => [...json, toJSON(value)], []);
+    const json: JSON[] = [];
+
+    for (const value of array) json.push(toJSON(value));
+    return json;
   }
 
   function toJSONEntries(entries: [PropertyKey, unknown][]): [PropertyKey, JSON][] {
-    return entries.reduce<[PropertyKey, JSON][]>((json, [key, value]) => [...json, [key, toJSON(value)]], []);
+    const json: [PropertyKey, JSON][] = [];
+
+    for (const [key, value] of entries) json.push([key, toJSON(value)]);
+    return json;
   }
 
   function toJSONObject(object: Record<PropertyKey, unknown>): Record<PropertyKey, JSON> {
-    return Object.entries(object).reduce<Record<PropertyKey, JSON>>((json, [key, value]) => ({ ...json, [key]: toJSON(value) }), {});
+    const json: Record<PropertyKey, JSON> = {};
+
+    for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        json[key] = toJSON(object[key]);
+      }
+    }
+
+    return json;
   }
 
   /**
@@ -45,7 +60,7 @@ export namespace Serialize {
    * @returns The converted data.
    */
   export function fromJSON(json: JSON): unknown {
-    const { type, value } = json;
+    const { [Keying.Type]: type, [Keying.Value]: value } = json;
 
     switch (type) {
       case Type.Array:
@@ -73,7 +88,7 @@ export namespace Serialize {
         return fromJSONObject(value as Record<PropertyKey, JSON>);
 
       case Type.RegExp:
-        return new RegExp((value as { source: string; flags: string }).source, (value as { source: string; flags: string }).flags);
+        return new RegExp((value as Regex)[Keying.Source], (value as Regex)[Keying.Flags]);
 
       case Type.Set:
         return new Set(fromJSONArray(value as JSON[]));
@@ -90,33 +105,61 @@ export namespace Serialize {
   }
 
   function fromJSONArray(json: JSON[]): unknown[] {
-    return json.reduce<unknown[]>((raw, value) => [...raw, fromJSON(value)], []);
+    const arr: unknown[] = [];
+
+    for (const value of json) arr.push(fromJSON(value));
+    return arr;
   }
 
   function fromJSONMap(json: [PropertyKey, JSON][]): [PropertyKey, unknown][] {
-    return json.reduce<[PropertyKey, unknown][]>((raw, [key, value]) => [...raw, [key, fromJSON(value)]], []);
+    const arr: [PropertyKey, unknown][] = [];
+
+    for (const [key, value] of json) arr.push([key, fromJSON(value)]);
+    return arr;
   }
 
   function fromJSONObject(json: Record<PropertyKey, JSON>): Record<PropertyKey, unknown> {
-    return Object.entries(json).reduce<Record<PropertyKey, unknown>>((raw, [key, value]) => ({ ...raw, [key]: fromJSON(value) }), {});
+    const obj: Record<PropertyKey, unknown> = {};
+
+    for (const key in json) {
+      if (Object.prototype.hasOwnProperty.call(json, key)) {
+        obj[key] = fromJSON(json[key]);
+      }
+    }
+
+    return obj;
   }
 
+  export enum Keying {
+    Type = 't',
+
+    Value = 'v',
+
+    Source = 's',
+
+    Flags = 'f'
+  }
+  export interface Regex {
+    [Keying.Source]: string;
+
+    [Keying.Flags]: string;
+  }
   /**
    * The json format type interface.
    * @since 1.0.0
    */
   export interface JSON {
     /**
-     * The type of {@link JSON.value}
+     * The type of {@link JSON.v}
      * @since 1.0.0
      */
-    type: Type;
+    [Keying.Type]: Type;
 
     /**
      * The value for this json.
      * @since 1.0.0
      */
-    value: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | { source: string; flags: string };
+    [Keying.Value]: string | number | boolean | null | JSON[] | [PropertyKey, JSON][] | Record<PropertyKey, JSON> | Regex;
   }
 
   /**
@@ -124,28 +167,28 @@ export namespace Serialize {
    * @since 1.0.0
    */
   export enum Type {
-    Array = 'array',
+    Array = 0,
 
-    BigInt = 'bigint',
+    BigInt = 11,
 
-    Boolean = 'boolean',
+    Boolean = 2,
 
-    Date = 'date',
+    Date = 3,
 
-    Map = 'map',
+    Map = 4,
 
-    Null = 'null',
+    Null = 5,
 
-    Number = 'number',
+    Number = 6,
 
-    Object = 'object',
+    Object = 7,
 
-    RegExp = 'regexp',
+    RegExp = 10,
 
-    Set = 'set',
+    Set = 9,
 
-    String = 'string',
+    String = 8,
 
-    Undefined = 'undefined'
+    Undefined = 1
   }
 }
