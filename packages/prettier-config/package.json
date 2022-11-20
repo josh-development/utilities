@@ -21,8 +21,8 @@
     "prettier": "^2.7.1"
   },
   "devDependencies": {
-    "@favware/cliff-jumper": "^1.8.8",
-    "typedoc": "^0.23.20",
+    "@favware/cliff-jumper": "^1.9.0",
+    "typedoc": "^0.23.21",
     "typedoc-json-parser": "^7.0.1"
   },
   "repository": {
