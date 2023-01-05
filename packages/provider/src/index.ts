@@ -7,4 +7,3 @@ export * from './lib/structures/JoshMiddlewareStore';
 export * from './lib/structures/JoshProvider';
 export * from './lib/structures/JoshProviderError';
 export * from './lib/types';
-export * from './tests/runProviderTest';
