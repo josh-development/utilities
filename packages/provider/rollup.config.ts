@@ -24,7 +24,7 @@ const main = defineConfig({
 });
 
 const tests = defineConfig({
-  input: './src/tests/runProviderTest.ts',
+  input: './src/tests/index.ts',
   output: [
     {
       file: './dist/tests.js',
