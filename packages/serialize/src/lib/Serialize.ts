@@ -14,8 +14,12 @@ export namespace Serialize {
     else if (data instanceof Date) return { [Keying.Type]: Type.Date, [Keying.Value]: data.toJSON() };
     else if (data instanceof Map) return { [Keying.Type]: Type.Map, [Keying.Value]: toJSONEntries(Array.from(data)) };
     else if (data === null) return { [Keying.Type]: Type.Null, [Keying.Value]: null };
-    else if (typeof data === 'number') return { [Keying.Type]: Type.Number, [Keying.Value]: data };
-    else if (isObject(data)) return { [Keying.Type]: Type.Object, [Keying.Value]: toJSONObject(data) };
+    else if (typeof data === 'number') {
+      if (Number.isNaN(data)) return { [Keying.Type]: Type.Number, [Keying.Value]: 'NaN' };
+      if ([Infinity, -Infinity].includes(data)) return { [Keying.Type]: Type.Number, [Keying.Value]: String(data) };
+
+      return { [Keying.Type]: Type.Number, [Keying.Value]: data };
+    } else if (isObject(data)) return { [Keying.Type]: Type.Object, [Keying.Value]: toJSONObject(data) };
     else if (data instanceof RegExp) {
       return { [Keying.Type]: Type.RegExp, [Keying.Value]: { [Keying.Source]: data.source, [Keying.Flags]: data.flags } };
     } else if (data instanceof Set) return { [Keying.Type]: Type.Set, [Keying.Value]: toJSONArray(Array.from(data)) };
@@ -82,6 +86,8 @@ export namespace Serialize {
         return null;
 
       case Type.Number:
+        if (typeof value === 'string') return Number(value);
+
         return value;
 
       case Type.Object:

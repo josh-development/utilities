@@ -53,11 +53,34 @@ describe('Serialize', () => {
           expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]);
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawNumber]);
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([rawNumber]);
 
-          expect(type).toBe(Serialize.Type.Array);
-          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]);
+            expect(type).toBe(Serialize.Type.Array);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]);
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([NaN]);
+
+            expect(type).toBe(Serialize.Type.Array);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]);
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([Infinity]);
+
+            expect(type).toBe(Serialize.Type.Array);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]);
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON([-Infinity]);
+
+            expect(type).toBe(Serialize.Type.Array);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]);
+          });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
@@ -132,11 +155,34 @@ describe('Serialize', () => {
           expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]]);
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawNumber]]));
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', rawNumber]]));
 
-          expect(type).toBe(Serialize.Type.Map);
-          expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]]);
+            expect(type).toBe(Serialize.Type.Map);
+            expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]]);
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', NaN]]));
+
+            expect(type).toBe(Serialize.Type.Map);
+            expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]]);
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', Infinity]]));
+
+            expect(type).toBe(Serialize.Type.Map);
+            expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]]);
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Map([['key', -Infinity]]));
+
+            expect(type).toBe(Serialize.Type.Map);
+            expect(value).toStrictEqual([['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]]);
+          });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
@@ -168,11 +214,34 @@ describe('Serialize', () => {
         expect(value).toStrictEqual(jsonNull);
       });
 
-      test(Serialize.Type.Number.toString(), () => {
-        const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawNumber);
+      describe(Serialize.Type.Number.toString(), () => {
+        test('GIVEN number THEN returns number', () => {
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(rawNumber);
 
-        expect(type).toBe(Serialize.Type.Number);
-        expect(value).toStrictEqual(jsonNumber);
+          expect(type).toBe(Serialize.Type.Number);
+          expect(value).toStrictEqual(jsonNumber);
+        });
+
+        test('GIVEN NaN THEN returns NaN', () => {
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(NaN);
+
+          expect(type).toBe(Serialize.Type.Number);
+          expect(value).toStrictEqual('NaN');
+        });
+
+        test('GIVEN Infinity THEN returns Infinity', () => {
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(Infinity);
+
+          expect(type).toBe(Serialize.Type.Number);
+          expect(value).toStrictEqual('Infinity');
+        });
+
+        test('GIVEN -Infinity THEN returns -Infinity', () => {
+          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(-Infinity);
+
+          expect(type).toBe(Serialize.Type.Number);
+          expect(value).toStrictEqual('-Infinity');
+        });
       });
 
       describe(Serialize.Type.Object.toString(), () => {
@@ -204,11 +273,34 @@ describe('Serialize', () => {
           expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull } });
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawNumber });
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: rawNumber });
 
-          expect(type).toBe(Serialize.Type.Object);
-          expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } });
+            expect(type).toBe(Serialize.Type.Object);
+            expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } });
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: NaN });
+
+            expect(type).toBe(Serialize.Type.Object);
+            expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' } });
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: Infinity });
+
+            expect(type).toBe(Serialize.Type.Object);
+            expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' } });
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON({ key: -Infinity });
+
+            expect(type).toBe(Serialize.Type.Object);
+            expect(value).toStrictEqual({ key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' } });
+          });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
@@ -269,11 +361,34 @@ describe('Serialize', () => {
           expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]);
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawNumber]));
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([rawNumber]));
 
-          expect(type).toBe(Serialize.Type.Set);
-          expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]);
+            expect(type).toBe(Serialize.Type.Set);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]);
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([NaN]));
+
+            expect(type).toBe(Serialize.Type.Set);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]);
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([Infinity]));
+
+            expect(type).toBe(Serialize.Type.Set);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]);
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            const { [Serialize.Keying.Type]: type, [Serialize.Keying.Value]: value } = Serialize.toJSON(new Set([-Infinity]));
+
+            expect(type).toBe(Serialize.Type.Set);
+            expect(value).toStrictEqual([{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]);
+          });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
@@ -363,13 +478,42 @@ describe('Serialize', () => {
           ).toStrictEqual([rawNull]);
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          expect(
-            Serialize.fromJSON({
-              [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
-            })
-          ).toStrictEqual([rawNumber]);
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Array,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
+              })
+            ).toStrictEqual([rawNumber]);
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Array,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]
+              })
+            ).toStrictEqual([NaN]);
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Array,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]
+              })
+            ).toStrictEqual([Infinity]);
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Array,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]
+              })
+            ).toStrictEqual([-Infinity]);
+          });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
@@ -449,13 +593,42 @@ describe('Serialize', () => {
           ).toStrictEqual(new Map([['key', rawNull]]));
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          expect(
-            Serialize.fromJSON({
-              [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]]
-            })
-          ).toStrictEqual(new Map([['key', rawNumber]]));
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Map,
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]]
+              })
+            ).toStrictEqual(new Map([['key', rawNumber]]));
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Map,
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]]
+              })
+            ).toStrictEqual(new Map([['key', NaN]]));
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Map,
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]]
+              })
+            ).toStrictEqual(new Map([['key', Infinity]]));
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Map,
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]]
+              })
+            ).toStrictEqual(new Map([['key', -Infinity]]));
+          });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
@@ -490,8 +663,22 @@ describe('Serialize', () => {
         expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull })).toBe(rawNull);
       });
 
-      test(Serialize.Type.Number.toString(), () => {
-        expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber })).toBe(rawNumber);
+      describe(Serialize.Type.Number.toString(), () => {
+        test('GIVEN number THEN returns number', () => {
+          expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber })).toBe(rawNumber);
+        });
+
+        test('GIVEN NaN THEN returns NaN', () => {
+          expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' })).toBe(NaN);
+        });
+
+        test('GIVEN Infinity THEN returns Infinity', () => {
+          expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' })).toBe(Infinity);
+        });
+
+        test('GIVEN -Infinity THEN returns -Infinity', () => {
+          expect(Serialize.fromJSON({ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' })).toBe(-Infinity);
+        });
       });
 
       describe(Serialize.Type.Object.toString(), () => {
@@ -539,14 +726,49 @@ describe('Serialize', () => {
           });
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          expect(
-            Serialize.fromJSON({
-              [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } }
-            })
-          ).toStrictEqual({
-            key: rawNumber
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Object,
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } }
+              })
+            ).toStrictEqual({
+              key: rawNumber
+            });
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Object,
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' } }
+              })
+            ).toStrictEqual({
+              key: NaN
+            });
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Object,
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' } }
+              })
+            ).toStrictEqual({
+              key: Infinity
+            });
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Object,
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' } }
+              })
+            ).toStrictEqual({
+              key: -Infinity
+            });
           });
         });
 
@@ -625,13 +847,42 @@ describe('Serialize', () => {
           ).toStrictEqual(new Set([rawNull]));
         });
 
-        test(Serialize.Type.Number.toString(), () => {
-          expect(
-            Serialize.fromJSON({
-              [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
-            })
-          ).toStrictEqual(new Set([rawNumber]));
+        describe(Serialize.Type.Number.toString(), () => {
+          test('GIVEN number THEN returns number', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Set,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
+              })
+            ).toStrictEqual(new Set([rawNumber]));
+          });
+
+          test('GIVEN NaN THEN returns NaN', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Set,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]
+              })
+            ).toStrictEqual(new Set([NaN]));
+          });
+
+          test('GIVEN Infinity THEN returns Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Set,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]
+              })
+            ).toStrictEqual(new Set([Infinity]));
+          });
+
+          test('GIVEN -Infinity THEN returns -Infinity', () => {
+            expect(
+              Serialize.fromJSON({
+                [Serialize.Keying.Type]: Serialize.Type.Set,
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]
+              })
+            ).toStrictEqual(new Set([-Infinity]));
+          });
         });
 
         test(Serialize.Type.RegExp.toString(), () => {
