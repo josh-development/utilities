@@ -18,7 +18,7 @@
     "check-update": "cliff-jumper --dry-run"
   },
   "dependencies": {
-    "prettier": "^2.8.3"
+    "prettier": "^2.8.4"
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^1.10.0",
