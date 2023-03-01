@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@sapphire/eslint-config": "^4.3.8",
-    "@typescript-eslint/eslint-plugin": "^5.53.0",
-    "@typescript-eslint/parser": "^5.53.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^1.10.0",
-    "typedoc": "^0.23.25",
-    "typedoc-json-parser": "^7.1.0"
+    "typedoc": "^0.23.26",
+    "typedoc-json-parser": "^7.2.0"
   },
   "repository": {
     "type": "git",
