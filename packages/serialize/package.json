@@ -2,6 +2,7 @@
   "name": "@joshdb/serialize",
   "version": "1.0.0",
   "description": "A serialize utility to be able to convert nodejs data types into a json compatible format",
+  "deprecated": "@joshdb/serialize is no longer maintained. Please use better-serialize instead.",
   "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
   "contributors": [
     "Hezekiah Hendry <hezekiah.hendry@gmail.com>"
