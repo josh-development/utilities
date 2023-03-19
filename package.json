@@ -57,5 +57,5 @@
   "lint-staged": {
     "*.{mjs,js,ts}": "eslint --fix --ext mjs,js,ts"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.5.0"
 }
