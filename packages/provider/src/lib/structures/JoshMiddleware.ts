@@ -1,6 +1,6 @@
 import type { Awaitable, PartialRequired } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
-import { Method, Payload, Semver, Trigger } from '../types';
+import { Method, Payload, Trigger, type Semver } from '../types';
 import type { JoshMiddlewareStore } from './JoshMiddlewareStore';
 import type { JoshProvider } from './JoshProvider';
 import { JoshProviderError } from './JoshProviderError';
