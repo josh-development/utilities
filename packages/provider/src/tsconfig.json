@@ -5,7 +5,9 @@
     "outDir": "../dist",
     "composite": true,
     "tsBuildInfoFile": "../dist/.tsbuildinfo",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["."]
 }
