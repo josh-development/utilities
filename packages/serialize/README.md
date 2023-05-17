@@ -12,6 +12,8 @@
 
 [![Support Server](https://discord.com/api/guilds/298508738623438848/embed.png?style=banner2)](https://discord.gg/N7ZKH3P)
 
+This package has been deprecated. Please use the [better-serialize](https://github.com/RealShadowNova/better-serialize) instead.
+
 </div>
 
 ## Description
