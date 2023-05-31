@@ -54,7 +54,10 @@
   },
   "files": [
     "dist",
-    "!dist/*.tsbuildinfo"
+    "!dist/*.tsbuildinfo",
+    "tests.js",
+    "tests.mjs",
+    "tests.d.ts"
   ],
   "engines": {
     "node": ">=16.6.0",
