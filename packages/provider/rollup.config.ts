@@ -3,7 +3,7 @@ import { defineConfig } from 'rollup';
 import cleaner from 'rollup-plugin-cleaner';
 import typescript from 'rollup-plugin-typescript2';
 
-const main = defineConfig({
+const lib = defineConfig({
   input: './src/index.ts',
   output: [
     {
@@ -20,7 +20,7 @@ const main = defineConfig({
     }
   ],
   external: ['@sapphire/utilities', 'reflect-metadata'],
-  plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
+  plugins: [typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
 });
 
 const tests = defineConfig({
@@ -40,9 +40,9 @@ const tests = defineConfig({
     }
   ],
   external: ['@sapphire/utilities', 'reflect-metadata', 'vitest'],
-  plugins: [typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
+  plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
 });
 
-const config = [tests, main];
+const config = [tests, lib];
 
 export default defineConfig(config);
