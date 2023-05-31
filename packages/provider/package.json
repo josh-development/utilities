@@ -24,7 +24,12 @@
     "types": [
       "./dist/index.js",
       "./dist/tests.js"
-    ]
+    ],
+    "./tests": {
+      "import": "./tests.mjs",
+      "require": "./tests.js",
+      "types": "./tests.d.ts"
+    }
   },
   "sideEffects": false,
   "scripts": {
