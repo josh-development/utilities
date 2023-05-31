@@ -27,13 +27,13 @@ const tests = defineConfig({
   input: './src/tests/index.ts',
   output: [
     {
-      file: './dist/tests.js',
+      file: './dist/tests/index.js',
       format: 'cjs',
       exports: 'named',
       sourcemap: true
     },
     {
-      file: './dist/tests.mjs',
+      file: './dist/tests/index.mjs',
       format: 'es',
       exports: 'named',
       sourcemap: true
