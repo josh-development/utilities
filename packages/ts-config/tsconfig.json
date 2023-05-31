@@ -5,6 +5,6 @@
     "noEmitHelpers": true,
     "lib": ["ESNext"],
     "target": "ES2021",
-    "module": "Node16"
+    "module": "ESNext"
   }
 }
