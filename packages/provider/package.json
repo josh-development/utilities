@@ -32,7 +32,7 @@
     "docs": "typedoc-json-parser",
     "lint": "eslint src tests --ext ts --fix -c ../../.eslintrc",
     "build": "rollup -c rollup.config.ts",
-    "prepack": "rollup-type-bundler",
+    "prepack": "yarn build",
     "bump": "cliff-jumper",
     "check-update": "cliff-jumper --dry-run"
   },
@@ -42,8 +42,8 @@
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^2.0.1",
-    "@favware/rollup-type-bundler": "^1.0.11",
     "@vitest/coverage-c8": "^0.31.1",
+    "rollup": "^2.79.1",
     "typedoc": "^0.24.7",
     "typedoc-json-parser": "^8.1.2",
     "vitest": "^0.31.1"

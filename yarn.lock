@@ -656,10 +656,10 @@ __metadata:
   resolution: "@joshdb/provider@workspace:packages/provider"
   dependencies:
     "@favware/cliff-jumper": ^2.0.1
-    "@favware/rollup-type-bundler": ^1.0.11
     "@sapphire/utilities": ^3.11.2
     "@vitest/coverage-c8": ^0.31.1
     reflect-metadata: ^0.1.13
+    rollup: ^2.79.1
     typedoc: ^0.24.7
     typedoc-json-parser: ^8.1.2
     vitest: ^0.31.1
