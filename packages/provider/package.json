@@ -13,22 +13,15 @@
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "import": [
-      "./dist/index.mjs",
-      "./dist/tests.mjs"
-    ],
-    "require": [
-      "./dist/index.js",
-      "./dist/tests.js"
-    ],
-    "types": [
-      "./dist/index.js",
-      "./dist/tests.js"
-    ],
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
     "./tests": {
-      "import": "./tests.mjs",
-      "require": "./tests.js",
-      "types": "./tests.d.ts"
+      "types": "./dist/tests/index.d.ts",
+      "import": "./dist/tests/index.mjs",
+      "require": "./dist/tests/index.js"
     }
   },
   "sideEffects": false,
