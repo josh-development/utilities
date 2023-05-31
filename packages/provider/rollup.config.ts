@@ -43,6 +43,6 @@ const tests = defineConfig({
   plugins: [typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
 });
 
-const config = [main, tests];
+const config = [tests, main];
 
 export default defineConfig(config);
