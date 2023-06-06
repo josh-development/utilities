@@ -40,11 +40,11 @@
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^2.0.1",
-    "@vitest/coverage-c8": "^0.31.1",
+    "@vitest/coverage-c8": "^0.32.0",
     "rollup": "^2.79.1",
-    "typedoc": "^0.24.7",
+    "typedoc": "^0.24.8",
     "typedoc-json-parser": "^8.1.2",
-    "vitest": "^0.31.1"
+    "vitest": "^0.32.0"
   },
   "repository": {
     "type": "git",
