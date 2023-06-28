@@ -1,5 +1,6 @@
 {
   "name": "@joshdb/ts-config",
+  "private": true,
   "version": "1.0.0",
   "description": "Standard TypeScript config for the Josh Project",
   "author": "Évelyne Lachance <eslachance@gmail.com> (https://evie.codes/)",
@@ -44,6 +45,6 @@
   },
   "homepage": "https://josh.evie.dev",
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   }
 }
