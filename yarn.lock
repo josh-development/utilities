@@ -654,7 +654,7 @@ __metadata:
     prettier: ^2.8.8
     typedoc: ^0.24.8
     typedoc-json-parser: ^8.1.2
-    typescript: ~5.1.5
+    typescript: ^5.1.5
   languageName: unknown
   linkType: soft
 
@@ -6161,7 +6161,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~5.1.5":
+"typescript@npm:^5.1.5":
   version: 5.1.5
   resolution: "typescript@npm:5.1.5"
   bin:
@@ -6201,7 +6201,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@~5.1.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.1.5#~builtin<compat/typescript>":
   version: 5.1.5
   resolution: "typescript@patch:typescript@npm%3A5.1.5#~builtin<compat/typescript>::version=5.1.5&hash=5da071"
   bin:
