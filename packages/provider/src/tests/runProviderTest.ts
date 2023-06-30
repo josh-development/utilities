@@ -1,5 +1,6 @@
 import type { Awaitable, Constructor } from '@sapphire/utilities';
 import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
+import { doMath } from '../lib/functions';
 import type { JoshProvider } from '../lib/structures/JoshProvider';
 import { CommonIdentifiers, MathOperator, Method, Payload } from '../lib/types';
 
@@ -1348,6 +1349,44 @@ export function runProviderTest<
             expect(operator).toBe(MathOperator.Addition);
             expect(operand).toBe(1);
           });
+
+          for (const operator of Object.values(MathOperator)) {
+            test(`GIVEN provider w/ data at key THEN returns payload and applies math (${operator})`, async () => {
+              const value = 50;
+
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value });
+
+              const operand = 5;
+              const payload = await provider[Method.Math]({
+                method: Method.Math,
+                key: 'key',
+                path: [],
+                errors: [],
+                operator,
+                operand
+              });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, errors, key, path, operator: providerOperator } = payload;
+
+              expect(method).toBe(Method.Math);
+              expect(trigger).toBeUndefined();
+              expect(errors).toStrictEqual([]);
+              expect(key).toBe('key');
+              expect(path).toEqual([]);
+              expect(providerOperator).toBe(operator);
+
+              const getPayload = await provider[Method.Get]({
+                method: Method.Get,
+                errors: [],
+                key: 'key',
+                path: []
+              });
+
+              expect(getPayload.data).toBe(doMath(operator, value, operand));
+            });
+          }
         });
 
         describe(Method.Partition, () => {

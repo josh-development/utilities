@@ -1,3 +1,4 @@
+export * from './doMath';
 export * from './resolveCommonIdentifier';
-export * from './validators';
 export * from './resolveVersion';
+export * from './validators';
