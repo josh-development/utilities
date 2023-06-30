@@ -1805,7 +1805,7 @@ export function runProviderTest<
 
           describe('Duplicates Are Allowed', () => {
             test('GIVEN provider w/o data THEN adds error', async () => {
-              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, duplicates: false });
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, duplicates: true });
 
               expect(typeof payload).toBe('object');
 
@@ -1821,7 +1821,7 @@ export function runProviderTest<
             test('GIVEN provider w/ 1 doc THEN returns payload w/ data from randomKey', async () => {
               await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
 
-              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 2, duplicates: false });
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 2, duplicates: true });
 
               expect(typeof payload).toBe('object');
 
@@ -1836,7 +1836,7 @@ export function runProviderTest<
             test('GIVEN provider w/ data THEN returns payload w/ data from randomKey', async () => {
               await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
 
-              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, duplicates: false });
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, duplicates: true });
 
               expect(typeof payload).toBe('object');
 
