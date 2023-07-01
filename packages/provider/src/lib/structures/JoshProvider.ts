@@ -347,12 +347,12 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which gets random value(s).
-   * Whether duplicates are allowed or not are controlled by `Payload.Random#duplicates` option.
+   * Whether duplicates are allowed or not are controlled by `Payload.Random#unique` option.
    * The amount of values returned is controlled by `Payload.Random#count` option.
    *
    * An error should be pushed to the payload and immediately return, if any of the following occurs:
-   * - The provider size is 0, and duplicates is enabled - `CommonIdentifiers.MissingData`
-   * - Duplicates is disabled and the provider size is less then the count - `CommonIdentifiers.InvalidCount`
+   * - Unique is disabled and the provider size is 0 - `CommonIdentifiers.MissingData`
+   * - Unique is enabled and the provider size is less then the count - `CommonIdentifiers.InvalidCount`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
@@ -361,12 +361,12 @@ export abstract class JoshProvider<StoredValue = unknown> {
 
   /**
    * A method which gets random key(s).
-   * Whether duplicates are allowed or not are controlled by `Payload.RandomKey#duplicates` option.
+   * Whether duplicates are allowed or not are controlled by `Payload.RandomKey#unique` option.
    * The amount of keys returned is controlled by `Payload.RandomKey#count` option.
    *
    * An error should be pushed to the payload and immediately return, if any of the following occurs:
-   * - The provider size is 0, and duplicates is enabled - `CommonIdentifiers.MissingData`
-   * - Duplicates is disabled and the provider size is less then the count - `CommonIdentifiers.InvalidCount`
+   * - Unique is disabled and the provider size is 0  - `CommonIdentifiers.MissingData`
+   * - Unique is enabled and the provider size is less then the count - `CommonIdentifiers.InvalidCount`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.

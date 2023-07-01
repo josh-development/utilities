@@ -496,10 +496,10 @@ export namespace Payload {
     count: number;
 
     /**
-     * Whether to allow duplicate values.
+     * Whether values must be unique or not.
      * @since 1.0.0
      */
-    duplicates: boolean;
+    unique: boolean;
   }
 
   /**
@@ -516,10 +516,10 @@ export namespace Payload {
     count: number;
 
     /**
-     * Whether to allow duplicate keys.
+     * Whether keys must be unique or not.
      * @since 1.0.0
      */
-    duplicates: boolean;
+    unique: boolean;
   }
 
   /**
