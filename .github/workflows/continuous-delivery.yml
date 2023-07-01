@@ -41,6 +41,10 @@ jobs:
           yarn config set npmPublishRegistry "https://registry.yarnpkg.com"
 
           for d in packages/*; do
+            if [[ grep -q '"private": true' $d/package.json ]]; then
+              continue
+            fi
+
             pushd $d
 
             yarn bump --preid "${TAG}.$(git rev-parse --verify --short HEAD)"
