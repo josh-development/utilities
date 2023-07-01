@@ -1661,94 +1661,192 @@ export function runProviderTest<
         });
 
         describe(Method.Random, () => {
-          test('GIVEN provider w/o data THEN returns payload w/o data from random', async () => {
-            const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 1, duplicates: false });
+          describe('Values must be unique', () => {
+            test('GIVEN provider w/o data THEN adds error', async () => {
+              const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 1, unique: true });
 
-            expect(typeof payload).toBe('object');
+              expect(typeof payload).toBe('object');
 
-            const { method, trigger, errors, data } = payload;
+              const { method, trigger, errors, data } = payload;
 
-            expect(method).toBe(Method.Random);
-            expect(trigger).toBeUndefined();
-            expect(errors).toStrictEqual([]);
-            expect(data).toStrictEqual([]);
+              expect(method).toBe(Method.Random);
+              expect(trigger).toBeUndefined();
+              expect(errors.length).toBe(1);
+              expect(errors[0].identifier).toBe(CommonIdentifiers.InvalidCount);
+              expect(data).toBe(undefined);
+            });
+
+            test('GIVEN provider w/ 1 doc THEN adds error w/ count > 1', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+
+              const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 2, unique: true });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, errors, data } = payload;
+
+              expect(method).toBe(Method.Random);
+              expect(trigger).toBeUndefined();
+              expect(errors.length).toBe(1);
+              expect(errors[0].identifier).toBe(CommonIdentifiers.InvalidCount);
+              expect(data).toBe(undefined);
+            });
+
+            test('GIVEN provider w/ data THEN returns payload w/ data from random', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+
+              const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 1, unique: true });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, errors, data } = payload;
+
+              expect(method).toBe(Method.Random);
+              expect(trigger).toBeUndefined();
+              expect(errors).toStrictEqual([]);
+              expect(data).toEqual(['value']);
+            });
           });
 
-          test('GIVEN provider w/ 1 doc THEN adds error w/ count > 1', async () => {
-            await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+          describe("Values don't have to be unique", () => {
+            test('GIVEN provider w/o data THEN adds error', async () => {
+              const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 1, unique: false });
 
-            const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 2, duplicates: false });
+              expect(typeof payload).toBe('object');
 
-            expect(typeof payload).toBe('object');
+              const { method, trigger, errors, data } = payload;
 
-            const { method, trigger, errors, data } = payload;
+              expect(method).toBe(Method.Random);
+              expect(trigger).toBeUndefined();
+              expect(errors.length).toBe(1);
+              expect(errors[0].identifier).toBe(CommonIdentifiers.MissingData);
+              expect(data).toBe(undefined);
+            });
 
-            expect(method).toBe(Method.Random);
-            expect(trigger).toBeUndefined();
-            expect(errors.length).toBe(1);
-            expect(errors[0].identifier).toBe(CommonIdentifiers.InvalidCount);
-            expect(data).toBe(undefined);
-          });
+            test('GIVEN provider w/ 1 doc THEN returns payload w/ data from random', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
 
-          test('GIVEN provider w/ data THEN returns payload w/ data from random', async () => {
-            await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+              const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 2, unique: false });
 
-            const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 1, duplicates: false });
+              expect(typeof payload).toBe('object');
 
-            expect(typeof payload).toBe('object');
+              const { method, trigger, errors, data } = payload;
 
-            const { method, trigger, errors, data } = payload;
+              expect(method).toBe(Method.Random);
+              expect(trigger).toBeUndefined();
+              expect(errors).toStrictEqual([]);
+              expect(data).toEqual(['value', 'value']);
+            });
 
-            expect(method).toBe(Method.Random);
-            expect(trigger).toBeUndefined();
-            expect(errors).toStrictEqual([]);
-            expect(data).toEqual(['value']);
+            test('GIVEN provider w/ data THEN returns payload w/ data from random', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+
+              const payload = await provider[Method.Random]({ method: Method.Random, errors: [], count: 1, unique: false });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, errors, data } = payload;
+
+              expect(method).toBe(Method.Random);
+              expect(trigger).toBeUndefined();
+              expect(errors).toStrictEqual([]);
+              expect(data).toEqual(['value']);
+            });
           });
         });
 
         describe(Method.RandomKey, () => {
-          test('GIVEN provider w/o data THEN returns payload w/o data from randomKey', async () => {
-            const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, duplicates: false });
+          describe('Values must be unique', () => {
+            test('GIVEN provider w/o data THEN adds error', async () => {
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, unique: true });
 
-            expect(typeof payload).toBe('object');
+              expect(typeof payload).toBe('object');
 
-            const { method, trigger, errors, data } = payload;
+              const { method, trigger, errors, data } = payload;
 
-            expect(method).toBe(Method.RandomKey);
-            expect(trigger).toBeUndefined();
-            expect(errors).toStrictEqual([]);
-            expect(data).toStrictEqual([]);
+              expect(method).toBe(Method.RandomKey);
+              expect(trigger).toBeUndefined();
+              expect(errors.length).toBe(1);
+              expect(errors[0].identifier).toBe(CommonIdentifiers.InvalidCount);
+              expect(data).toBe(undefined);
+            });
+
+            test('GIVEN provider w/ 1 doc THEN adds error w/ count > 1', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 2, unique: true });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, errors, data } = payload;
+
+              expect(method).toBe(Method.RandomKey);
+              expect(trigger).toBeUndefined();
+              expect(errors.length).toBe(1);
+              expect(errors[0].identifier).toBe(CommonIdentifiers.InvalidCount);
+              expect(data).toBe(undefined);
+            });
+
+            test('GIVEN provider w/ data THEN returns payload w/ data from randomKey', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, unique: true });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, errors, data } = payload;
+
+              expect(method).toBe(Method.RandomKey);
+              expect(trigger).toBeUndefined();
+              expect(errors).toStrictEqual([]);
+              expect(data).toEqual(['key']);
+            });
           });
 
-          test('GIVEN provider w/ 1 doc THEN adds error w/ count > 1', async () => {
-            await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+          describe("Values don't have to be unique", () => {
+            test('GIVEN provider w/o data THEN adds error', async () => {
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, unique: false });
 
-            const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 2, duplicates: false });
+              expect(typeof payload).toBe('object');
 
-            expect(typeof payload).toBe('object');
+              const { method, trigger, errors, data } = payload;
 
-            const { method, trigger, errors, data } = payload;
+              expect(method).toBe(Method.RandomKey);
+              expect(trigger).toBeUndefined();
+              expect(errors.length).toBe(1);
+              expect(errors[0].identifier).toBe(CommonIdentifiers.MissingData);
+              expect(data).toBe(undefined);
+            });
 
-            expect(method).toBe(Method.RandomKey);
-            expect(trigger).toBeUndefined();
-            expect(errors.length).toBe(1);
-            expect(errors[0].identifier).toBe(CommonIdentifiers.InvalidCount);
-            expect(data).toBe(undefined);
-          });
+            test('GIVEN provider w/ 1 doc THEN returns payload w/ data from randomKey', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
 
-          test('GIVEN provider w/ data THEN returns payload w/ data from randomKey', async () => {
-            await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 2, unique: false });
 
-            const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, duplicates: false });
+              expect(typeof payload).toBe('object');
 
-            expect(typeof payload).toBe('object');
+              const { method, trigger, errors, data } = payload;
 
-            const { method, trigger, errors, data } = payload;
+              expect(method).toBe(Method.RandomKey);
+              expect(trigger).toBeUndefined();
+              expect(errors).toStrictEqual([]);
+              expect(data).toEqual(['key', 'key']);
+            });
 
-            expect(method).toBe(Method.RandomKey);
-            expect(trigger).toBeUndefined();
-            expect(errors).toStrictEqual([]);
-            expect(data).toEqual(['key']);
+            test('GIVEN provider w/ data THEN returns payload w/ data from randomKey', async () => {
+              await provider[Method.Set]({ method: Method.Set, errors: [], key: 'key', path: [], value: 'value' });
+
+              const payload = await provider[Method.RandomKey]({ method: Method.RandomKey, errors: [], count: 1, unique: false });
+
+              expect(typeof payload).toBe('object');
+
+              const { method, trigger, errors, data } = payload;
+
+              expect(method).toBe(Method.RandomKey);
+              expect(trigger).toBeUndefined();
+              expect(errors).toStrictEqual([]);
+              expect(data).toEqual(['key']);
+            });
           });
         });
 
