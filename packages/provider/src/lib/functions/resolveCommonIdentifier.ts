@@ -33,8 +33,9 @@ export function resolveCommonIdentifier(identifier: string, metadata: Record<str
     }
 
     case CommonIdentifiers.MissingData: {
-      const { key, path = [] } = metadata;
+      const { key, path = [], duplicates, count } = metadata;
 
+      if (typeof duplicates === 'boolean' && typeof count === 'number') return `There is no data present.`;
       if (typeof key !== 'string') return null;
       if (!Array.isArray(path)) return null;
 
