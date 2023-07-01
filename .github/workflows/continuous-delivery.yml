@@ -41,7 +41,7 @@ jobs:
           yarn config set npmPublishRegistry "https://registry.yarnpkg.com"
 
           for d in packages/*; do
-            if [[ grep -q '"private": true' $d/package.json ]]; then
+            if grep -q '"private": true' "$d/package.json"; then
               continue
             fi
 
