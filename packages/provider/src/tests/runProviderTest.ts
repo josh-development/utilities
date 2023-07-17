@@ -40,7 +40,9 @@ export function runProviderTest<
 
         afterAll(async () => {
           await provider[Method.Clear]({ method: Method.Clear, errors: [] });
-          if (typeof cleanup === 'function') await cleanup(provider as CleanupProvider);
+          if (typeof cleanup === 'function') {
+            await cleanup(provider as CleanupProvider);
+          }
         });
 
         describe(Method.AutoKey, () => {

@@ -8,23 +8,39 @@ export namespace Serialize {
    * @returns The converted data.
    */
   export function toJSON(data: unknown): JSON {
-    if (Array.isArray(data)) return { [Keying.Type]: Type.Array, [Keying.Value]: toJSONArray(data) };
-    else if (typeof data === 'bigint') return { [Keying.Type]: Type.BigInt, [Keying.Value]: data.toString() };
-    else if (typeof data === 'boolean') return { [Keying.Type]: Type.Boolean, [Keying.Value]: data };
-    else if (data instanceof Date) return { [Keying.Type]: Type.Date, [Keying.Value]: data.toJSON() };
-    else if (data instanceof Map) return { [Keying.Type]: Type.Map, [Keying.Value]: toJSONEntries(Array.from(data)) };
-    else if (data === null) return { [Keying.Type]: Type.Null, [Keying.Value]: null };
-    else if (typeof data === 'number') {
-      if (Number.isNaN(data)) return { [Keying.Type]: Type.Number, [Keying.Value]: 'NaN' };
-      if ([Infinity, -Infinity].includes(data)) return { [Keying.Type]: Type.Number, [Keying.Value]: String(data) };
+    if (Array.isArray(data)) {
+      return { [Keying.Type]: Type.Array, [Keying.Value]: toJSONArray(data) };
+    } else if (typeof data === 'bigint') {
+      return { [Keying.Type]: Type.BigInt, [Keying.Value]: data.toString() };
+    } else if (typeof data === 'boolean') {
+      return { [Keying.Type]: Type.Boolean, [Keying.Value]: data };
+    } else if (data instanceof Date) {
+      return { [Keying.Type]: Type.Date, [Keying.Value]: data.toJSON() };
+    } else if (data instanceof Map) {
+      return { [Keying.Type]: Type.Map, [Keying.Value]: toJSONEntries(Array.from(data)) };
+    } else if (data === null) {
+      return { [Keying.Type]: Type.Null, [Keying.Value]: null };
+    } else if (typeof data === 'number') {
+      if (Number.isNaN(data)) {
+        return { [Keying.Type]: Type.Number, [Keying.Value]: 'NaN' };
+      }
+
+      if ([Infinity, -Infinity].includes(data)) {
+        return { [Keying.Type]: Type.Number, [Keying.Value]: String(data) };
+      }
 
       return { [Keying.Type]: Type.Number, [Keying.Value]: data };
-    } else if (isObject(data)) return { [Keying.Type]: Type.Object, [Keying.Value]: toJSONObject(data) };
-    else if (data instanceof RegExp) {
+    } else if (isObject(data)) {
+      return { [Keying.Type]: Type.Object, [Keying.Value]: toJSONObject(data) };
+    } else if (data instanceof RegExp) {
       return { [Keying.Type]: Type.RegExp, [Keying.Value]: { [Keying.Source]: data.source, [Keying.Flags]: data.flags } };
-    } else if (data instanceof Set) return { [Keying.Type]: Type.Set, [Keying.Value]: toJSONArray(Array.from(data)) };
-    else if (typeof data === 'string') return { [Keying.Type]: Type.String, [Keying.Value]: data };
-    else if (data === undefined) return { [Keying.Type]: Type.Undefined, [Keying.Value]: 'undefined' };
+    } else if (data instanceof Set) {
+      return { [Keying.Type]: Type.Set, [Keying.Value]: toJSONArray(Array.from(data)) };
+    } else if (typeof data === 'string') {
+      return { [Keying.Type]: Type.String, [Keying.Value]: data };
+    } else if (data === undefined) {
+      return { [Keying.Type]: Type.Undefined, [Keying.Value]: 'undefined' };
+    }
 
     throw new TypeError(
       `Serialize received an unknown type while formatting: "${data.constructor.name}", see @joshdb/transform for custom serialization`
@@ -34,14 +50,20 @@ export namespace Serialize {
   function toJSONArray(array: unknown[]): JSON[] {
     const json: JSON[] = [];
 
-    for (const value of array) json.push(toJSON(value));
+    for (const value of array) {
+      json.push(toJSON(value));
+    }
+
     return json;
   }
 
   function toJSONEntries(entries: [PropertyKey, unknown][]): [PropertyKey, JSON][] {
     const json: [PropertyKey, JSON][] = [];
 
-    for (const [key, value] of entries) json.push([key, toJSON(value)]);
+    for (const [key, value] of entries) {
+      json.push([key, toJSON(value)]);
+    }
+
     return json;
   }
 
@@ -86,7 +108,9 @@ export namespace Serialize {
         return null;
 
       case Type.Number:
-        if (typeof value === 'string') return Number(value);
+        if (typeof value === 'string') {
+          return Number(value);
+        }
 
         return value;
 
@@ -113,14 +137,20 @@ export namespace Serialize {
   function fromJSONArray(json: JSON[]): unknown[] {
     const arr: unknown[] = [];
 
-    for (const value of json) arr.push(fromJSON(value));
+    for (const value of json) {
+      arr.push(fromJSON(value));
+    }
+
     return arr;
   }
 
   function fromJSONMap(json: [PropertyKey, JSON][]): [PropertyKey, unknown][] {
     const arr: [PropertyKey, unknown][] = [];
 
-    for (const [key, value] of json) arr.push([key, fromJSON(value)]);
+    for (const [key, value] of json) {
+      arr.push([key, fromJSON(value)]);
+    }
+
     return arr;
   }
 

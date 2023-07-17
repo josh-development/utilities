@@ -67,7 +67,7 @@
       }
     ],
     "@typescript-eslint/no-namespace": "off",
-    "curly": ["error", "multi-line"],
+    "curly": ["error"],
     "no-lone-blocks": "error",
     "no-tabs": "error",
     "padding-line-between-statements": [

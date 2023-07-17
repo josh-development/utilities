@@ -74,14 +74,18 @@ export abstract class JoshProvider<StoredValue = unknown> {
     ) {
       const { allowMigrations } = this.options;
 
-      if (!allowMigrations) throw this.error(JoshProvider.CommonIdentifiers.NeedsMigration);
+      if (!allowMigrations) {
+        throw this.error(JoshProvider.CommonIdentifiers.NeedsMigration);
+      }
 
       const migration = this.migrations.find(
         (migration) =>
           migration.version.major === version.major && migration.version.minor <= version.minor && migration.version.patch <= version.patch
       );
 
-      if (migration === undefined) throw this.error(JoshProvider.CommonIdentifiers.MigrationNotFound, { version });
+      if (migration === undefined) {
+        throw this.error(JoshProvider.CommonIdentifiers.MigrationNotFound, { version });
+      }
 
       const { major, minor, patch } = version;
 
@@ -493,7 +497,9 @@ export abstract class JoshProvider<StoredValue = unknown> {
   protected resolveIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string {
     const result = resolveCommonIdentifier(identifier, metadata);
 
-    if (result !== null) return result;
+    if (result !== null) {
+      return result;
+    }
 
     switch (identifier) {
       case JoshProvider.CommonIdentifiers.MigrationNotFound: {
