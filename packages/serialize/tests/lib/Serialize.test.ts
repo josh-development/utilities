@@ -446,7 +446,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }],
             })
           ).toStrictEqual([rawBigInt]);
         });
@@ -455,7 +455,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }],
             })
           ).toStrictEqual([rawBoolean]);
         });
@@ -464,7 +464,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }],
             })
           ).toStrictEqual([rawDate]);
         });
@@ -473,7 +473,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }],
             })
           ).toStrictEqual([rawNull]);
         });
@@ -483,7 +483,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Array,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }],
               })
             ).toStrictEqual([rawNumber]);
           });
@@ -492,7 +492,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Array,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }],
               })
             ).toStrictEqual([NaN]);
           });
@@ -501,7 +501,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Array,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }],
               })
             ).toStrictEqual([Infinity]);
           });
@@ -510,7 +510,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Array,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }],
               })
             ).toStrictEqual([-Infinity]);
           });
@@ -520,7 +520,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }],
             })
           ).toStrictEqual([rawRegExp]);
         });
@@ -529,7 +529,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }],
             })
           ).toStrictEqual([rawString]);
         });
@@ -538,7 +538,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Array,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }],
             })
           ).toStrictEqual([rawUndefined]);
         });
@@ -561,7 +561,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]]
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]],
             })
           ).toStrictEqual(new Map([['key', rawBigInt]]));
         });
@@ -570,7 +570,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]]
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]],
             })
           ).toStrictEqual(new Map([['key', rawBoolean]]));
         });
@@ -579,7 +579,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]]
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]],
             })
           ).toStrictEqual(new Map([['key', rawDate]]));
         });
@@ -588,7 +588,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]]
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]],
             })
           ).toStrictEqual(new Map([['key', rawNull]]));
         });
@@ -598,7 +598,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Map,
-                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]]
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]],
               })
             ).toStrictEqual(new Map([['key', rawNumber]]));
           });
@@ -607,7 +607,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Map,
-                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]]
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]],
               })
             ).toStrictEqual(new Map([['key', NaN]]));
           });
@@ -616,7 +616,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Map,
-                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]]
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]],
               })
             ).toStrictEqual(new Map([['key', Infinity]]));
           });
@@ -625,7 +625,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Map,
-                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]]
+                [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]],
               })
             ).toStrictEqual(new Map([['key', -Infinity]]));
           });
@@ -635,7 +635,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]]
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]],
             })
           ).toStrictEqual(new Map([['key', rawRegExp]]));
         });
@@ -644,7 +644,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]]
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]],
             })
           ).toStrictEqual(new Map([['key', rawString]]));
         });
@@ -653,7 +653,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Map,
-              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]]
+              [Serialize.Keying.Value]: [['key', { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]],
             })
           ).toStrictEqual(new Map([['key', rawUndefined]]));
         });
@@ -686,10 +686,10 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt } }
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt } },
             })
           ).toStrictEqual({
-            key: rawBigInt
+            key: rawBigInt,
           });
         });
 
@@ -697,10 +697,10 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean } }
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean } },
             })
           ).toStrictEqual({
-            key: rawBoolean
+            key: rawBoolean,
           });
         });
 
@@ -708,10 +708,10 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate } }
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate } },
             })
           ).toStrictEqual({
-            key: rawDate
+            key: rawDate,
           });
         });
 
@@ -719,10 +719,10 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull } }
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull } },
             })
           ).toStrictEqual({
-            key: rawNull
+            key: rawNull,
           });
         });
 
@@ -731,10 +731,10 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Object,
-                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } }
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber } },
               })
             ).toStrictEqual({
-              key: rawNumber
+              key: rawNumber,
             });
           });
 
@@ -742,10 +742,10 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Object,
-                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' } }
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' } },
               })
             ).toStrictEqual({
-              key: NaN
+              key: NaN,
             });
           });
 
@@ -753,10 +753,10 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Object,
-                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' } }
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' } },
               })
             ).toStrictEqual({
-              key: Infinity
+              key: Infinity,
             });
           });
 
@@ -764,10 +764,10 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Object,
-                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' } }
+                [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' } },
               })
             ).toStrictEqual({
-              key: -Infinity
+              key: -Infinity,
             });
           });
         });
@@ -776,10 +776,10 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp } }
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp } },
             })
           ).toStrictEqual({
-            key: rawRegExp
+            key: rawRegExp,
           });
         });
 
@@ -787,10 +787,10 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString } }
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString } },
             })
           ).toStrictEqual({
-            key: rawString
+            key: rawString,
           });
         });
 
@@ -798,10 +798,10 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Object,
-              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined } }
+              [Serialize.Keying.Value]: { key: { [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined } },
             })
           ).toStrictEqual({
-            key: rawUndefined
+            key: rawUndefined,
           });
         });
       });
@@ -815,7 +815,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.BigInt, [Serialize.Keying.Value]: jsonBigInt }],
             })
           ).toStrictEqual(new Set([rawBigInt]));
         });
@@ -824,7 +824,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Boolean, [Serialize.Keying.Value]: jsonBoolean }],
             })
           ).toStrictEqual(new Set([rawBoolean]));
         });
@@ -833,7 +833,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Date, [Serialize.Keying.Value]: jsonDate }],
             })
           ).toStrictEqual(new Set([rawDate]));
         });
@@ -842,7 +842,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Null, [Serialize.Keying.Value]: jsonNull }],
             })
           ).toStrictEqual(new Set([rawNull]));
         });
@@ -852,7 +852,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Set,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: jsonNumber }],
               })
             ).toStrictEqual(new Set([rawNumber]));
           });
@@ -861,7 +861,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Set,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'NaN' }],
               })
             ).toStrictEqual(new Set([NaN]));
           });
@@ -870,7 +870,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Set,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: 'Infinity' }],
               })
             ).toStrictEqual(new Set([Infinity]));
           });
@@ -879,7 +879,7 @@ describe('Serialize', () => {
             expect(
               Serialize.fromJSON({
                 [Serialize.Keying.Type]: Serialize.Type.Set,
-                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }]
+                [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Number, [Serialize.Keying.Value]: '-Infinity' }],
               })
             ).toStrictEqual(new Set([-Infinity]));
           });
@@ -889,7 +889,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.RegExp, [Serialize.Keying.Value]: jsonRegExp }],
             })
           ).toStrictEqual(new Set([rawRegExp]));
         });
@@ -898,7 +898,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.String, [Serialize.Keying.Value]: jsonString }],
             })
           ).toStrictEqual(new Set([rawString]));
         });
@@ -907,7 +907,7 @@ describe('Serialize', () => {
           expect(
             Serialize.fromJSON({
               [Serialize.Keying.Type]: Serialize.Type.Set,
-              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }]
+              [Serialize.Keying.Value]: [{ [Serialize.Keying.Type]: Serialize.Type.Undefined, [Serialize.Keying.Value]: jsonUndefined }],
             })
           ).toStrictEqual(new Set([rawUndefined]));
         });

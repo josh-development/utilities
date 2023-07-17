@@ -300,14 +300,14 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
       return new JoshProviderError({
         identifier: options,
         origin: { type: JoshProviderError.OriginType.Middleware, name: this.constructor.name.replace(/Middleware/, '') },
-        message: this.resolveIdentifier(options, metadata)
+        message: this.resolveIdentifier(options, metadata),
       });
     }
 
     return new JoshProviderError({
       ...options,
       name: options.name ?? `${this.constructor.name}Error`,
-      origin: { type: JoshProviderError.OriginType.Middleware, name: this.constructor.name.replace(/Middleware/, '') }
+      origin: { type: JoshProviderError.OriginType.Middleware, name: this.constructor.name.replace(/Middleware/, '') },
     });
   }
 
@@ -449,6 +449,6 @@ export namespace JoshMiddleware {
 
     NeedsMigration = 'needsMigration',
 
-    StoreNotFound = 'storeNotFound'
+    StoreNotFound = 'storeNotFound',
   }
 }

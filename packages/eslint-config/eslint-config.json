@@ -98,7 +98,21 @@
         ],
         "next": "*"
       },
-      { "blankLine": "always", "prev": "*", "next": ["case", "default"] }
+      { "blankLine": "always", "prev": "*", "next": ["case", "default", "interface", "type"] }
+    ],
+    "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never",
+        "enums": "always-multiline",
+        "generics": "never",
+        "tuples": "always-multiline"
+      }
     ]
   }
 }

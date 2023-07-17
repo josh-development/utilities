@@ -11,5 +11,5 @@ export enum CommonIdentifiers {
 
   MissingData = 'missingData',
 
-  MissingValue = 'missingValue'
+  MissingValue = 'missingValue',
 }

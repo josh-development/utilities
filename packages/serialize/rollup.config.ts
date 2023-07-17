@@ -10,15 +10,15 @@ export default defineConfig({
       file: './dist/index.js',
       format: 'cjs',
       exports: 'named',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       file: './dist/index.mjs',
       format: 'es',
       exports: 'named',
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
   external: [],
-  plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
+  plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })],
 });

@@ -16,8 +16,8 @@ describe('JoshProvider', () => {
       {
         version: { major: 1, minor: 0, patch: 0 },
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        run() {}
-      }
+        run() {},
+      },
     ];
 
     public get version() {

@@ -107,6 +107,6 @@ export namespace JoshProviderError {
   export enum OriginType {
     Provider = 'provider',
 
-    Middleware = 'middleware'
+    Middleware = 'middleware',
   }
 }

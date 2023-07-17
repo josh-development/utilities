@@ -26,7 +26,7 @@ export function ApplyMiddlewareOptions(options: PartialRequired<JoshMiddleware.O
         const post = Reflect.getMetadata(Trigger.PostProvider, target.constructor) ?? [];
 
         return new ctor(context, { ...options, conditions: { [Trigger.PreProvider]: pre, [Trigger.PostProvider]: post } });
-      }
+      },
     })
   );
 }

@@ -13,5 +13,5 @@ export enum MathOperator {
 
   Remainder = 'remainder',
 
-  Exponent = 'exponent'
+  Exponent = 'exponent',
 }

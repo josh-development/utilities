@@ -10,17 +10,17 @@ const lib = defineConfig({
       file: './dist/index.js',
       format: 'cjs',
       exports: 'named',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       file: './dist/index.mjs',
       format: 'es',
       exports: 'named',
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
   external: ['@sapphire/utilities', 'reflect-metadata'],
-  plugins: [typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
+  plugins: [typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })],
 });
 
 const tests = defineConfig({
@@ -30,17 +30,17 @@ const tests = defineConfig({
       file: './dist/tests/index.js',
       format: 'cjs',
       exports: 'named',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       file: './dist/tests/index.mjs',
       format: 'es',
       exports: 'named',
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
   external: ['@sapphire/utilities', 'reflect-metadata', 'vitest'],
-  plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })]
+  plugins: [cleaner({ targets: ['./dist'] }), typescript({ tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json') })],
 });
 
 const config = [tests, lib];

@@ -173,7 +173,7 @@ export namespace Serialize {
 
     Source = 's',
 
-    Flags = 'f'
+    Flags = 'f',
   }
   export interface Regex {
     [Keying.Source]: string;
@@ -225,6 +225,6 @@ export namespace Serialize {
 
     String = 8,
 
-    Undefined = 1
+    Undefined = 1,
   }
 }

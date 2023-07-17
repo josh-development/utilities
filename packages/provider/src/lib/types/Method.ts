@@ -59,5 +59,5 @@ export enum Method {
 
   Update = 'update',
 
-  Values = 'values'
+  Values = 'values',
 }

@@ -157,7 +157,7 @@ export namespace Payload {
 
     Value,
 
-    Path
+    Path,
   }
 
   /**

@@ -476,14 +476,14 @@ export abstract class JoshProvider<StoredValue = unknown> {
       return new JoshProviderError({
         identifier: options,
         origin: { type: JoshProviderError.OriginType.Provider, name: this.constructor.name.replace(/Provider/, '') },
-        message: this.resolveIdentifier(options, metadata)
+        message: this.resolveIdentifier(options, metadata),
       });
     }
 
     return new JoshProviderError({
       ...options,
       name: options.name ?? `${this.constructor.name}Error`,
-      origin: { type: JoshProviderError.OriginType.Provider, name: this.constructor.name.replace(/Provider/, '') }
+      origin: { type: JoshProviderError.OriginType.Provider, name: this.constructor.name.replace(/Provider/, '') },
     });
   }
 
@@ -581,6 +581,6 @@ export namespace JoshProvider {
   export enum CommonIdentifiers {
     MigrationNotFound = 'MigrationNotFound',
 
-    NeedsMigration = 'needsMigration'
+    NeedsMigration = 'needsMigration',
   }
 }

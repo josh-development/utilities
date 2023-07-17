@@ -411,7 +411,7 @@ export function runProviderTest<
                 method: Method.Every,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -431,16 +431,16 @@ export function runProviderTest<
                 errors: [],
                 entries: [
                   { key: 'firsKey', path: [], value: 'value' },
-                  { key: 'secondKey', path: [], value: 'value' }
+                  { key: 'secondKey', path: [], value: 'value' },
                 ],
-                overwrite: true
+                overwrite: true,
               });
 
               const payload = await provider[Method.Every]({
                 method: Method.Every,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -462,7 +462,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -483,9 +483,9 @@ export function runProviderTest<
                 errors: [],
                 entries: [
                   { key: 'firsKey', path: [], value: 'value' },
-                  { key: 'secondKey', path: [], value: 'value' }
+                  { key: 'secondKey', path: [], value: 'value' },
                 ],
-                overwrite: true
+                overwrite: true,
               });
 
               const payload = await provider[Method.Every]({
@@ -493,7 +493,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -516,7 +516,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['invalid'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -540,7 +540,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['p'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -577,9 +577,9 @@ export function runProviderTest<
                 errors: [],
                 entries: [
                   { key: 'firsKey', path: [], value: 'value' },
-                  { key: 'secondKey', path: [], value: 'value' }
+                  { key: 'secondKey', path: [], value: 'value' },
                 ],
-                overwrite: true
+                overwrite: true,
               });
 
               const payload = await provider[Method.Every]({ method: Method.Every, errors: [], type: Payload.Type.Value, path: [], value: 'value' });
@@ -605,7 +605,7 @@ export function runProviderTest<
                 method: Method.Filter,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -626,7 +626,7 @@ export function runProviderTest<
                 method: Method.Filter,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -648,7 +648,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -671,7 +671,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['invalid'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -695,7 +695,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -719,7 +719,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -743,7 +743,7 @@ export function runProviderTest<
                 method: Method.Find,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -765,7 +765,7 @@ export function runProviderTest<
                 method: Method.Find,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -787,7 +787,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -810,7 +810,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['invalid'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -834,7 +834,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -858,7 +858,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1254,7 +1254,7 @@ export function runProviderTest<
               key: 'key',
               path: [],
               operator: MathOperator.Addition,
-              operand: 1
+              operand: 1,
             });
 
             expect(typeof payload).toBe('object');
@@ -1280,7 +1280,7 @@ export function runProviderTest<
               key: 'key',
               path: ['path'],
               operator: MathOperator.Addition,
-              operand: 1
+              operand: 1,
             });
 
             expect(typeof payload).toBe('object');
@@ -1306,7 +1306,7 @@ export function runProviderTest<
               key: 'key',
               path: [],
               operator: MathOperator.Addition,
-              operand: 1
+              operand: 1,
             });
 
             expect(typeof payload).toBe('object');
@@ -1332,7 +1332,7 @@ export function runProviderTest<
               key: 'key',
               path: ['path'],
               operator: MathOperator.Addition,
-              operand: 1
+              operand: 1,
             });
 
             expect(typeof payload).toBe('object');
@@ -1357,7 +1357,7 @@ export function runProviderTest<
                 method: Method.Partition,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1380,7 +1380,7 @@ export function runProviderTest<
                 method: Method.Partition,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1403,7 +1403,7 @@ export function runProviderTest<
                 method: Method.Partition,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value !== 'value'
+                hook: (value) => value !== 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1427,7 +1427,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1452,7 +1452,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1477,7 +1477,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['invalid'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1503,7 +1503,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1529,7 +1529,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: [],
-                value: 'anotherValue'
+                value: 'anotherValue',
               });
 
               expect(typeof payload).toBe('object');
@@ -1861,7 +1861,7 @@ export function runProviderTest<
                 type: Payload.Type.Hook,
                 key: 'key',
                 path: [],
-                hook: (value: string) => value === 'value'
+                hook: (value: string) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1887,7 +1887,7 @@ export function runProviderTest<
                 type: Payload.Type.Hook,
                 key: 'key',
                 path: [],
-                hook: (value: string) => value === 'value'
+                hook: (value: string) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1917,7 +1917,7 @@ export function runProviderTest<
                 type: Payload.Type.Hook,
                 key: 'key',
                 path: [],
-                hook: (value: string) => value === 'value'
+                hook: (value: string) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1946,7 +1946,7 @@ export function runProviderTest<
                 type: Payload.Type.Value,
                 key: 'key',
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -1972,7 +1972,7 @@ export function runProviderTest<
                 type: Payload.Type.Value,
                 key: 'key',
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2002,7 +2002,7 @@ export function runProviderTest<
                 type: Payload.Type.Value,
                 key: 'key',
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2082,7 +2082,7 @@ export function runProviderTest<
               method: Method.SetMany,
               errors: [],
               entries: [{ key: 'key', path: [], value: 'value' }],
-              overwrite: true
+              overwrite: true,
             });
 
             expect(typeof payload).toBe('object');
@@ -2106,7 +2106,7 @@ export function runProviderTest<
               method: Method.SetMany,
               errors: [],
               entries: [{ key: 'key', path: [], value: 'anotherValue' }],
-              overwrite: false
+              overwrite: false,
             });
 
             expect(typeof payload).toBe('object');
@@ -2134,7 +2134,7 @@ export function runProviderTest<
               method: Method.SetMany,
               errors: [],
               entries: [{ key: 'key', path: [], value: 'anotherValue' }],
-              overwrite: true
+              overwrite: true,
             });
 
             expect(typeof payload).toBe('object');
@@ -2189,7 +2189,7 @@ export function runProviderTest<
                 method: Method.Some,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2210,7 +2210,7 @@ export function runProviderTest<
                 method: Method.Some,
                 errors: [],
                 type: Payload.Type.Hook,
-                hook: (value) => value === 'value'
+                hook: (value) => value === 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2232,7 +2232,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2255,7 +2255,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2278,7 +2278,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['invalid'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2302,7 +2302,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: ['path'],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2324,7 +2324,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2347,7 +2347,7 @@ export function runProviderTest<
                 errors: [],
                 type: Payload.Type.Value,
                 path: [],
-                value: 'value'
+                value: 'value',
               });
 
               expect(typeof payload).toBe('object');
@@ -2387,7 +2387,7 @@ export function runProviderTest<
               method: Method.Update,
               errors: [],
               key: 'key',
-              hook: (value) => (value as string).toUpperCase()
+              hook: (value) => (value as string).toUpperCase(),
             });
 
             expect(typeof payload).toBe('object');
@@ -2412,7 +2412,7 @@ export function runProviderTest<
               method: Method.Update,
               errors: [],
               key: 'key',
-              hook: (value) => ({ path: (value as Record<'path', string>).path.toUpperCase() })
+              hook: (value) => ({ path: (value as Record<'path', string>).path.toUpperCase() }),
             });
 
             expect(typeof payload).toBe('object');
