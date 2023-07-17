@@ -4,14 +4,6 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "build/**"]
     },
-    "lint": {
-      "dependsOn": [],
-      "outputs": []
-    },
-    "test": {
-      "dependsOn": [],
-      "outputs": ["coverage/**"]
-    },
     "bump": {
       "dependsOn": [],
       "outputs": ["CHANGELOG.md"]
@@ -23,6 +15,14 @@
     "docs": {
       "dependsOn": [],
       "outputs": ["docs/**"]
+    },
+    "lint": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": [],
+      "outputs": ["coverage/**"]
     }
   }
 }
