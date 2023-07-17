@@ -70,7 +70,8 @@
     "curly": ["error"],
     "no-lone-blocks": "error",
     "no-tabs": "error",
-    "padding-line-between-statements": [
+    "padding-line-between-statements": "off",
+    "@typescript-eslint/padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
       { "blankLine": "always", "prev": "*", "next": ["const", "let", "var"] },
