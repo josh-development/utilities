@@ -33,8 +33,10 @@ Add the Prettier config to your `package.json`:
 }
 ```
 
-Or to `prettierrc.js`:
+Or to `prettierrc.mjs`:
 
 ```js
-module.exports = require('@joshdb/prettier-config');
+import JoshPrettierConfig from '@joshdb/prettier-config';
+
+export default JoshPrettierConfig;
 ```

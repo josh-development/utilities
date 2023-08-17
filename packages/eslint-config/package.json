@@ -18,17 +18,17 @@
     "check-update": "cliff-jumper --dry-run"
   },
   "dependencies": {
-    "@sapphire/eslint-config": "^4.4.2",
-    "@typescript-eslint/eslint-plugin": "^5.60.1",
-    "@typescript-eslint/parser": "^5.60.1",
-    "eslint": "^8.44.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.8",
-    "typescript": "^5.1.6"
+    "@sapphire/eslint-config": "^5.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@favware/cliff-jumper": "^2.1.1",
+    "@favware/cliff-jumper": "^2.1.2",
     "typedoc": "^0.25.1",
     "typedoc-json-parser": "^9.0.0"
   },

@@ -6,10 +6,14 @@ import { Trigger } from '../types';
  */
 export function PreProvider(): MethodDecorator {
   return (target, propertyKey) => {
-    if (!Reflect.hasMetadata(Trigger.PreProvider, target.constructor)) Reflect.defineMetadata(Trigger.PreProvider, [], target.constructor);
+    if (!Reflect.hasMetadata(Trigger.PreProvider, target.constructor)) {
+      Reflect.defineMetadata(Trigger.PreProvider, [], target.constructor);
+    }
 
     const methods = Reflect.getMetadata(Trigger.PreProvider, target.constructor);
 
-    if (Array.isArray(methods)) methods.push(propertyKey);
+    if (Array.isArray(methods)) {
+      methods.push(propertyKey);
+    }
   };
 }

@@ -6,10 +6,14 @@ import { Trigger } from '../types';
  */
 export function PostProvider(): MethodDecorator {
   return (target, propertyKey) => {
-    if (!Reflect.hasMetadata(Trigger.PostProvider, target.constructor)) Reflect.defineMetadata(Trigger.PostProvider, [], target.constructor);
+    if (!Reflect.hasMetadata(Trigger.PostProvider, target.constructor)) {
+      Reflect.defineMetadata(Trigger.PostProvider, [], target.constructor);
+    }
 
     const methods = Reflect.getMetadata(Trigger.PostProvider, target.constructor);
 
-    if (Array.isArray(methods)) methods.push(propertyKey);
+    if (Array.isArray(methods)) {
+      methods.push(propertyKey);
+    }
   };
 }
