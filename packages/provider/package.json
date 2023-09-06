@@ -59,7 +59,7 @@
     "tests.d.ts"
   ],
   "engines": {
-    "node": ">=16.6.0",
+    "node": ">=18.17.0",
     "npm": ">=7"
   },
   "keywords": [],
