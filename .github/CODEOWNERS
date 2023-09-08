@@ -1,4 +1,3 @@
-/packages/serialize/**/*.ts @RealShadowNova
 /packages/provider/**/*.ts @RealShadowNova @WilsontheWolf
 
 /.github/ @RealShadowNova
