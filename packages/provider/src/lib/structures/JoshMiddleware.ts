@@ -69,7 +69,9 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
 
     const { name, conditions } = options;
 
-    if (!name) throw this.error(JoshMiddleware.CommonIdentifiers.NameNotFound);
+    if (!name) {
+      throw this.error(JoshMiddleware.CommonIdentifiers.NameNotFound);
+    }
 
     this.name = name;
     this.conditions = conditions ?? { [Trigger.PreProvider]: [], [Trigger.PostProvider]: [] };
@@ -86,7 +88,9 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
    * @since 1.0.0
    */
   protected get provider(): JoshProvider<StoredValue> {
-    if (this.store === undefined) throw this.error(JoshMiddleware.CommonIdentifiers.StoreNotFound);
+    if (this.store === undefined) {
+      throw this.error(JoshMiddleware.CommonIdentifiers.StoreNotFound);
+    }
 
     return this.store.provider;
   }
@@ -105,14 +109,18 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
     if (version.major < this.version.major) {
       const { allowMigrations } = this.context;
 
-      if (!allowMigrations) throw this.error(JoshMiddleware.CommonIdentifiers.NeedsMigration);
+      if (!allowMigrations) {
+        throw this.error(JoshMiddleware.CommonIdentifiers.NeedsMigration);
+      }
 
       const migration = this.migrations.find(
         (migration) =>
           migration.version.major === version.major && migration.version.minor <= version.minor && migration.version.patch <= version.patch
       );
 
-      if (migration === undefined) throw this.error(JoshMiddleware.CommonIdentifiers.MigrationNotFound, { version });
+      if (migration === undefined) {
+        throw this.error(JoshMiddleware.CommonIdentifiers.MigrationNotFound, { version });
+      }
 
       const { major, minor, patch } = version;
 
@@ -313,7 +321,9 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
   protected resolveIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string {
     const result = resolveCommonIdentifier(identifier, metadata);
 
-    if (result !== null) return result;
+    if (result !== null) {
+      return result;
+    }
 
     switch (identifier) {
       case JoshMiddleware.CommonIdentifiers.MigrationNotFound: {
