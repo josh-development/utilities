@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^2.1.1",
-    "typedoc": "^0.24.8",
-    "typedoc-json-parser": "^8.2.0"
+    "typedoc": "^0.25.1",
+    "typedoc-json-parser": "^9.0.0"
   },
   "repository": {
     "type": "git",
