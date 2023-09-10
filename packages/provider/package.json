@@ -43,7 +43,7 @@
     "@vitest/coverage-c8": "^0.32.2",
     "rollup": "^2.79.1",
     "typedoc": "^0.24.8",
-    "typedoc-json-parser": "^8.2.0",
+    "typedoc-json-parser": "^9.0.0",
     "vitest": "^0.32.2"
   },
   "repository": {
