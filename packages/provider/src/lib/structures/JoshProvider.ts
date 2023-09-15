@@ -1,6 +1,6 @@
 import type { Awaitable, PartialRequired } from '@sapphire/utilities';
 import { resolveCommonIdentifier } from '../functions';
-import type { Method, Payload, Semver } from '../types';
+import { type Method, type Payload, type Semver } from '../types';
 import { JoshProviderError } from './JoshProviderError';
 
 /**
@@ -309,7 +309,7 @@ export abstract class JoshProvider<StoredValue = unknown> {
    *
    * An error should be pushed to the payload and immediately return, if any of the following occurs:
    * - The key and/or path does not exist - `CommonIdentifiers.MissingData`
-   * - The data is not an integer - `CommonIdentifiers.InvalidDataType`
+   * - The data is not a number - `CommonIdentifiers.InvalidDataType`
    * @since 1.0.0
    * @param payload The payload sent by this provider's Josh instance.
    * @returns The payload (modified), originally sent by this provider's Josh instance.
