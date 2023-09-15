@@ -73,6 +73,6 @@
   },
   "homepage": "https://josh.evie.dev",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   }
 }
