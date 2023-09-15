@@ -59,7 +59,7 @@
     "url": "git+https://github.com/josh-development/utilities.git"
   },
   "files": [
-    "tsconfig.json"
+    "src"
   ],
   "engines": {
     "node": ">=18.17.0",
