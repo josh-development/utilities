@@ -3,4 +3,3 @@ package:
   - '@joshdb/eslint-config'
   - '@joshdb/prettier-config'
   - '@joshdb/provider'
-  - '@joshdb/serialize'
