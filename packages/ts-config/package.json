@@ -50,7 +50,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@favware/cliff-jumper": "^2.2.0",
+    "@favware/cliff-jumper": "^2.2.1",
     "typedoc": "^0.25.3",
     "typedoc-json-parser": "^9.0.1"
   },
