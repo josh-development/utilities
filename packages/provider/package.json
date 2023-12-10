@@ -35,8 +35,8 @@
     "check-update": "cliff-jumper --dry-run"
   },
   "dependencies": {
-    "@sapphire/utilities": "^3.13.0",
-    "reflect-metadata": "^0.1.13"
+    "@sapphire/utilities": "^3.14.0",
+    "reflect-metadata": "^0.1.14"
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^2.2.3",
