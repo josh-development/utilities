@@ -746,7 +746,7 @@ __metadata:
     eslint: ^8.55.0
     eslint-config-prettier: ^9.1.0
     eslint-plugin-prettier: ^5.0.1
-    prettier: ^3.1.0
+    prettier: ^3.1.1
     typedoc: ^0.25.4
     typedoc-json-parser: ^9.0.1
     typescript: ^5.3.3
@@ -758,7 +758,7 @@ __metadata:
   resolution: "@joshdb/prettier-config@workspace:packages/prettier-config"
   dependencies:
     "@favware/cliff-jumper": ^2.2.3
-    prettier: ^3.1.0
+    prettier: ^3.1.1
     typedoc: ^0.25.4
     typedoc-json-parser: ^9.0.1
   languageName: unknown
