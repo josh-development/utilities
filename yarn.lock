@@ -749,7 +749,7 @@ __metadata:
     prettier: ^3.2.5
     typedoc: ^0.25.12
     typedoc-json-parser: ^9.0.1
-    typescript: ^5.4.2
+    typescript: ^5.4.3
   languageName: unknown
   linkType: soft
 
@@ -789,7 +789,7 @@ __metadata:
     tslib: ^2.6.2
     typedoc: ^0.25.12
     typedoc-json-parser: ^9.0.1
-    typescript: ^5.4.2
+    typescript: ^5.4.3
   languageName: unknown
   linkType: soft
 
