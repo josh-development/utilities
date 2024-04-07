@@ -24,9 +24,9 @@
     "@favware/npm-deprecate": "^1.0.7",
     "@sapphire/eslint-config": "^5.0.4",
     "@sapphire/ts-config": "^5.0.1",
-    "@types/node": "^20.12.2",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
+    "@types/node": "^20.12.5",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "@vitest/coverage-v8": "^1.4.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -38,8 +38,8 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
     "tsup": "^8.0.2",
-    "turbo": "^1.13.0",
-    "typescript": "^5.4.3",
+    "turbo": "^1.13.2",
+    "typescript": "^5.4.4",
     "vitest": "^1.4.0"
   },
   "repository": {
