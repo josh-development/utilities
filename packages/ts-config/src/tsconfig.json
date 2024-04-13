@@ -4,6 +4,6 @@
     "importHelpers": true,
     "noEmitHelpers": true,
     "lib": ["ESNext"],
-    "target": "ES2021"
+    "target": "ES2022"
   }
 }

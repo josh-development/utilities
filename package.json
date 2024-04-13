@@ -47,7 +47,7 @@
     "url": "git+https://github.com/josh-development/utilities.git"
   },
   "engines": {
-    "node": ">=18.17.0",
+    "node": ">=20",
     "npm": ">=7.0.0"
   },
   "lint-staged": {
