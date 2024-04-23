@@ -13,16 +13,9 @@
   "unpkg": "dist/index.global.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
-    "./tests": {
-      "types": "./dist/tests/index.d.ts",
-      "import": "./dist/tests/index.mjs",
-      "require": "./dist/tests/index.js"
-    }
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
   },
   "sideEffects": false,
   "scripts": {
