@@ -806,6 +806,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     typedoc: "npm:^0.25.13"
     typedoc-json-parser: "npm:^9.0.1"
+    typescript: "npm:^5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -821,6 +822,7 @@ __metadata:
     tsup: "npm:^8.0.2"
     typedoc: "npm:^0.25.13"
     typedoc-json-parser: "npm:^9.0.1"
+    typescript: "npm:^5.4.5"
     vitest: "npm:^1.5.0"
   languageName: unknown
   linkType: soft
