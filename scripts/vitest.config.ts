@@ -1,5 +1,5 @@
 import type { ESBuildOptions } from 'vite';
-import { defineConfig, UserConfig } from 'vitest/config';
+import { configDefaults, defineConfig, type UserConfig } from 'vitest/config';
 
 export const createVitestConfig = (options: UserConfig = {}) =>
   defineConfig({
@@ -9,15 +9,10 @@ export const createVitestConfig = (options: UserConfig = {}) =>
       globals: true,
       coverage: {
         ...options.test?.coverage,
+        provider: 'v8',
         enabled: true,
         reporter: ['text', 'lcov', 'clover'],
-        exclude: [
-          ...(options.test?.coverage?.exclude ?? []),
-          '**/node_modules/**',
-          '**/dist/**',
-          '**/tests/**',
-          'packages/provider/src/lib/decorators/**'
-        ]
+        exclude: [...(options.test?.coverage?.exclude ?? []), ...configDefaults.exclude, 'packages/provider/src/lib/decorators/**']
       }
     },
     esbuild: {

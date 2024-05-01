@@ -1,7 +1,4 @@
 {
   "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/tsconfig.json",
-  "compilerOptions": {
-    "module": "ES2022",
-    "moduleResolution": "Bundler"
-  }
+  "extends": "@sapphire/ts-config/bundler"
 }

@@ -1,6 +1,4 @@
 {
   "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/tsconfig.json",
-  "compilerOptions": {
-    "verbatimModuleSyntax": true
-  }
+  "extends": "@sapphire/ts-config/verbatim"
 }

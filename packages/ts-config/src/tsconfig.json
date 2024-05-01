@@ -3,7 +3,6 @@
   "compilerOptions": {
     "importHelpers": true,
     "noEmitHelpers": true,
-    "lib": ["ESNext"],
     "target": "ES2022"
   }
 }

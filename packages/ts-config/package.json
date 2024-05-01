@@ -6,6 +6,7 @@
   "contributors": [
     "Hezekiah Hendry <hezekiah.hendry@gmail.com>"
   ],
+  "license": "Apache-2.0",
   "main": "src/tsconfig.json",
   "exports": {
     ".": {
@@ -40,6 +41,7 @@
     }
   },
   "sideEffects": false,
+  "homepage": "https://github.com/josh-development/utilities/tree/main/packages/ts-config",
   "scripts": {
     "bump": "cliff-jumper",
     "check-update": "cliff-jumper --dry-run"
@@ -71,7 +73,6 @@
   "bugs": {
     "url": "https://github.com/josh-development/utilities/issues"
   },
-  "homepage": "https://josh.evie.dev",
   "publishConfig": {
     "access": "public"
   }

@@ -1,3 +1,4 @@
 name: prettier-config
 org: joshdb
+install: true
 packagePath: packages/prettier-config

@@ -1,9 +1,4 @@
 {
   "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/tsconfig.json",
-  "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": false,
-    "noImplicitOverride": true
-  }
+  "extends": "@sapphire/ts-config/extra-strict"
 }

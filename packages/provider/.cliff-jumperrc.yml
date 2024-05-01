@@ -1,3 +1,4 @@
 name: provider
 org: joshdb
+install: true
 packagePath: packages/provider
