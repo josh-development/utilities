@@ -8,6 +8,7 @@
 
 [![GitHub](https://img.shields.io/github/license/josh-development/utilities)](https://github.com/josh-development/utilities/blob/main/LICENSE.md)
 [![codecov](https://codecov.io/gh/josh-development/utilities/branch/main/graph/badge.svg?token=JnJcjxqT3k)](https://codecov.io/gh/josh-development/utilities)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@joshdb/ts-config?logo=webpack&style=flat-square)](https://bundlephobia.com/result?p=@joshdb/ts-config)
 [![npm](https://img.shields.io/npm/v/@joshdb/ts-config?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/@joshdb/ts-config)
 
 [![Support Server](https://discord.com/api/guilds/298508738623438848/embed.png?style=banner2)](https://discord.gg/N7ZKH3P)

@@ -6,12 +6,14 @@
   "contributors": [
     "Hezekiah Hendry <hezekiah.hendry@gmail.com>"
   ],
+  "license": "Apache-2.0",
   "main": "eslint-config.json",
   "exports": {
     "import": "./eslint-config.json",
     "require": "./eslint-config.json"
   },
   "sideEffects": false,
+  "homepage": "https://github.com/josh-development/utilities/tree/main/packages/eslint-config",
   "scripts": {
     "lint": "eslint src tests --ext ts --fix -c ../../.eslintrc",
     "bump": "cliff-jumper",
@@ -49,7 +51,6 @@
   "bugs": {
     "url": "https://github.com/josh-development/utilities/issues"
   },
-  "homepage": "https://josh.evie.dev",
   "publishConfig": {
     "access": "public"
   }

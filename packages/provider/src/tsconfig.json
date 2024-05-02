@@ -2,9 +2,7 @@
   "extends": ["../../../tsconfig.base.json", "../../ts-config/src/decorators.json"],
   "compilerOptions": {
     "rootDir": "./",
-    "outDir": "../dist",
-    "tsBuildInfoFile": "../dist/.tsbuildinfo",
-    "skipLibCheck": true
+    "outDir": "../dist"
   },
   "include": ["."]
 }

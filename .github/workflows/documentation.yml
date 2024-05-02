@@ -21,22 +21,28 @@ jobs:
       NAME: ${{ steps.env.outputs.NAME }}
       TYPE: ${{ steps.env.outputs.TYPE }}
       SHA: ${{ steps.env.outputs.SHA }}
+
     steps:
       - name: Checkout Project
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
-      - name: Setup Node
+
+      - name: Setup Node & Install Dependencies
         uses: josh-development/.github/setup-node@main
         with:
           turbo: true
+
       - name: Build Packages
-        run: yarn build --cache-dir=./.turbo
+        run: yarn build
+
       - name: Build Documentation
-        run: yarn docs --cache-dir=./.turbo
+        run: yarn docs
+
       - name: Upload Documentation Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4
         with:
           name: docs
           path: packages/*/docs/api.json
+
       - name: Set Output
         id: env
         run: |
@@ -46,34 +52,36 @@ jobs:
 
   upload:
     name: Upload Documentation
-    needs: build
+    runs-on: ubuntu-latest
+    needs: [build]
+
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix:
         package:
           - provider
-    runs-on: ubuntu-latest
+
     env:
       NAME: ${{ needs.build.outputs.NAME }}
       TYPE: ${{ needs.build.outputs.TYPE }}
       SHA: ${{ needs.build.outputs.SHA }}
+
     steps:
       - name: Checkout Project
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
-      - name: Use Node.js v20
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+
+      - name: Setup Node & Install Dependencies
+        uses: josh-development/.github/setup-node@main
         with:
-          node-version: 20
-          cache: yarn
-          registry-url: https://registry.npmjs.org/
-      - name: Install Dependencies
-        run: yarn --immutable
+          turbo: true
+
       - name: Download Documentation Artifacts
         uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4
         with:
           name: docs
           path: docs
+
       - name: Checkout Documentation Project
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
         with:
@@ -96,6 +104,7 @@ jobs:
         run: |
           mkdir -p out/docs/utilities/${PACKAGE}
           mv docs/${PACKAGE}/docs/api.json out/docs/utilities/${PACKAGE}/${SEMVER}.json
+
       - name: Move Documentation
         if: ${{ env.TYPE == 'branch' }}
         env:

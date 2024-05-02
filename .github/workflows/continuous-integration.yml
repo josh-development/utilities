@@ -7,28 +7,72 @@ on:
   pull_request:
 
 jobs:
-  ci:
-    name: Continuous Integration
+  linting:
+    name: Linting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
-      - name: Setup Node
+
+      - name: Add ESLint Problem Matcher
+        run: echo "::add-matcher::.github/problemMatchers/eslint.json"
+
+      - name: Setup Node & Install Dependencies
         uses: josh-development/.github/setup-node@main
         with:
           turbo: true
-      - name: Add ESLint Problem Matcher
-        run: echo "::add-matcher::.github/problemMatchers/eslint.json"
+
       - name: Run ESLint
         run: yarn lint --fix=false
+
+  building:
+    name: Compile Source Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
+
       - name: Add TypeScript Problem Matcher
         run: echo "::add-matcher::.github/problemMatchers/tsc.json"
-      - name: Compile Source Code
-        run: yarn build --cache-dir=./.turbo
+
+      - name: Setup Node & Install Dependencies
+        uses: josh-development/.github/setup-node@main
+        with:
+          turbo: true
+
+      - name: Build Code
+        run: yarn build
+
+  docs:
+    name: Generate Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
+
+      - name: Setup Node & Install Dependencies
+        uses: josh-development/.github/setup-node@main
+        with:
+          turbo: true
+
       - name: Generate Documentation
-        run: yarn docs --cache-dir=./.turbo
+        run: yarn docs
+
+  testing:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
+
+      - name: Setup Node & Install Dependencies
+        uses: josh-development/.github/setup-node@main
+        with:
+          turbo: true
+
       - name: Run Tests
         run: yarn test --coverage
+
       - name: Store Code Coverage Report
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4
         with:
@@ -37,18 +81,20 @@ jobs:
 
   upload-coverage-report:
     name: Upload Code Coverage Report
-    needs: [ci]
+    needs: [testing]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
         with:
           fetch-depth: 2
+
       - name: Download Coverage Report
         uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4
         with:
           name: coverage
           path: coverage/
+
       - name: Codecov Upload
         uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed # v4
         with:
