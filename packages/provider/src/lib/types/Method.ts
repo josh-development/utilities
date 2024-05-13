@@ -1,5 +1,5 @@
 /**
- * An enum of methods used in this package.
+ * An enum of methods used in providers.
  * @since 1.0.0
  */
 export enum Method {
