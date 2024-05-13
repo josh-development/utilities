@@ -1,6 +1,14 @@
 import { MathOperator } from '../types';
 
-export function doMath(operator: string, data: number, operand: number): number {
+/**
+ * Perform a math operation on the data.
+ * @param operator The math operator to use.
+ * @param data The data to perform the operation on.
+ * @param operand The operand to use in the operation.
+ * @returns The result of the operation.
+ * @since 1.0.0
+ */
+export function doMath(operator: MathOperator, data: number, operand: number): number {
   switch (operator) {
     case MathOperator.Addition:
       data += operand;

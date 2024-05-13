@@ -15,7 +15,6 @@ describe('JoshProvider', () => {
     public migrations = [
       {
         version: { major: 1, minor: 0, patch: 0 },
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
         run() {}
       }
     ];
@@ -24,9 +23,13 @@ describe('JoshProvider', () => {
       return { major: 2, minor: 0, patch: 0 };
     }
 
-    public setMetadata(_metadata: Record<string, unknown>) {
-      return this;
+    public deleteMetadata(_key: string): void {}
+
+    public getMetadata(_key: string): unknown {
+      return undefined;
     }
+
+    public setMetadata(_key: string, _value: unknown): void {}
 
     public [Method.AutoKey](payload: Payload.AutoKey): Payload.AutoKey {
       return payload;

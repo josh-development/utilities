@@ -12,7 +12,13 @@ export const createVitestConfig = (options: UserConfig = {}) =>
         provider: 'v8',
         enabled: true,
         reporter: ['text', 'lcov', 'clover'],
-        exclude: [...(options.test?.coverage?.exclude ?? []), ...configDefaults.exclude, 'packages/provider/src/lib/decorators/**']
+        exclude: [
+          ...(options.test?.coverage?.exclude ?? []),
+          ...configDefaults.exclude,
+          'packages/provider/src/lib/decorators/**',
+          'scripts/**',
+          '.yarn/**'
+        ]
       }
     },
     esbuild: {

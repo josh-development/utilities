@@ -1,5 +1,5 @@
 /**
- * An enum of common identifiers used in this package.
+ * An enum of common identifiers used in providers.
  * @since 1.0.0
  */
 export enum CommonIdentifiers {
