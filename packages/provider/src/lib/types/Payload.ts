@@ -483,6 +483,20 @@ export namespace Payload {
   }
 
   /**
+   * The payload for {@link Method.Query}
+   * @since 1.0.0
+   */
+  export interface Query<Value> extends Payload, KeyPath {
+    method: Method.Query;
+
+    /**
+     * The built query.
+     * @since 1.0.0
+     */
+    query: Query<Value>;
+  }
+
+  /**
    * The payload for {@link Method.Random}
    * @since 1.0.0
    */
