@@ -1,9 +1,10 @@
 /**
  * Represents a [Semver](https://semver.org/) version with an object.
  * @since 1.0.0
- *
  * @example
- * const version = { major: 1, minor: 3, patch: 9 };
+ * ```json
+ * { major: 1, minor: 3, patch: 9 };
+ * ```
  */
 export interface Semver {
   /**

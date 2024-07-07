@@ -282,7 +282,7 @@ export abstract class JoshMiddleware<ContextData extends JoshMiddleware.Context,
    * @since 1.0.0
    * @returns The options for this JoshMiddleware as an object.
    */
-  public toJSON(): JoshMiddleware.JSON {
+  public toJSON(): JoshMiddleware.Json {
     return { name: this.name, conditions: this.conditions };
   }
 
@@ -428,7 +428,7 @@ export namespace JoshMiddleware {
    * The options in an object for {@link JoshMiddleware}
    * @since 1.0.0
    */
-  export interface JSON {
+  export interface Json {
     /**
      * The name of this JoshMiddleware.
      * @since 1.0.0

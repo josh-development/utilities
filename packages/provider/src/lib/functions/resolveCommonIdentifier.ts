@@ -6,6 +6,7 @@ import { CommonIdentifiers } from '../types';
  * @param identifier The identifier to resolve.
  * @param metadata The metadata for the identifier.
  * @returns The resolved identifier message or `null`.
+ * @since 1.0.0
  */
 export function resolveCommonIdentifier(identifier: string, metadata: Record<string, unknown> = {}): string | null {
   switch (identifier) {
