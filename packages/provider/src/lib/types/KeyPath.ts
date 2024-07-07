@@ -18,14 +18,6 @@
  * ```json
  * {
  *   "key": "key",
- *   "path": "path.to.value"
- * }
- * ```
- *
- * @example
- * ```json
- * {
- *   "key": "key",
  *   "path": ["path", "to", "value"]
  * }
  * ```

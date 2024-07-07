@@ -8,6 +8,7 @@ import type { Semver } from '../types';
  * @example
  * ```typescript
  * resolveVersion('1.2.3'); // { major: 1, minor: 2, patch: 3 }
+ * ```
  */
 export function resolveVersion(version: string): Semver {
   const [major, minor, patch] = version.split('.').map(Number);
