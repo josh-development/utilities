@@ -12,13 +12,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@actions/core@npm:^1.10.1":
-  version: 1.10.1
-  resolution: "@actions/core@npm:1.10.1"
+"@actions/core@npm:^1.11.1":
+  version: 1.11.1
+  resolution: "@actions/core@npm:1.11.1"
   dependencies:
+    "@actions/exec": "npm:^1.1.1"
     "@actions/http-client": "npm:^2.0.1"
-    uuid: "npm:^8.3.2"
-  checksum: 10/d32af783ecb07f25a0f190112ee8e749a4c4cb88327d6df756ea1dcee146ab413c0e651a9c949294f8202ced1436c049d7b469485431a5cc4491d66926ec8323
+  checksum: 10/94f260e33607cc16567ce4c88014f069cd7da92baaa443b72cff80fdf4f1dcd18192e135df0d51ec29e8b82cfe214218715d482f2a7804efa5095737d1245f38
+  languageName: node
+  linkType: hard
+
+"@actions/exec@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@actions/exec@npm:1.1.1"
+  dependencies:
+    "@actions/io": "npm:^1.0.1"
+  checksum: 10/c04bd25191e522841c7e17862d70099de8db61278d2b4c744b69ac0197a48f85c75dba548e1c29c695c4cc5363d558846b4dcd3db9013463c18ba8cf36497c6d
   languageName: node
   linkType: hard
 
@@ -28,6 +37,13 @@ __metadata:
   dependencies:
     tunnel: "npm:^0.0.6"
   checksum: 10/9bfc6b96c9426c8f633f227d2d781b5419a89a5bad502ed882691de29f7b9af01be4591caa6c89444b6bfc9ba1555bf7e77a121127a976de27fa5296d399eb3a
+  languageName: node
+  linkType: hard
+
+"@actions/io@npm:^1.0.1":
+  version: 1.1.3
+  resolution: "@actions/io@npm:1.1.3"
+  checksum: 10/4de44e8d428ba9f20049c844b37ecd486b589ed201f8cc8c5b550a9e4c72d1f594271ee2a7a6cfe8a42ebfb5dd527ef65016454656db391a353d41eab4f147e1
   languageName: node
   linkType: hard
 
@@ -830,8 +846,8 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.2.1"
     prettier: "npm:^3.3.3"
-    typedoc: "npm:^0.26.7"
-    typedoc-json-parser: "npm:^10.1.5"
+    typedoc: "npm:^0.26.8"
+    typedoc-json-parser: "npm:^10.1.6"
     typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
@@ -842,8 +858,8 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": "npm:^3.0.3"
     prettier: "npm:^3.3.3"
-    typedoc: "npm:^0.26.7"
-    typedoc-json-parser: "npm:^10.1.5"
+    typedoc: "npm:^0.26.8"
+    typedoc-json-parser: "npm:^10.1.6"
     typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
@@ -858,8 +874,8 @@ __metadata:
     "@vitest/coverage-v8": "npm:^1.6.0"
     reflect-metadata: "npm:^0.2.1"
     tsup: "npm:^8.3.0"
-    typedoc: "npm:^0.26.7"
-    typedoc-json-parser: "npm:^10.1.5"
+    typedoc: "npm:^0.26.8"
+    typedoc-json-parser: "npm:^10.1.6"
     typescript: "npm:^5.6.2"
     vitest: "npm:^1.6.0"
   languageName: unknown
@@ -872,8 +888,8 @@ __metadata:
     "@favware/cliff-jumper": "npm:^3.0.3"
     "@sapphire/ts-config": "npm:^5.0.1"
     tslib: "npm:^2.7.0"
-    typedoc: "npm:^0.26.7"
-    typedoc-json-parser: "npm:^10.1.5"
+    typedoc: "npm:^0.26.8"
+    typedoc-json-parser: "npm:^10.1.6"
     typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
@@ -1287,13 +1303,6 @@ __metadata:
     "@types/hast": "npm:^3.0.4"
     hast-util-to-html: "npm:^9.0.2"
   checksum: 10/e2cdcb7354235bf473b1e3b51fadbd98f0debb2c85daf01ef8da90655b311a3d10024c5cc2bacf9c67a1e44e72523856eebc8ec166348b7420127d02ea67a48f
-  languageName: node
-  linkType: hard
-
-"@shikijs/core@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@shikijs/core@npm:1.9.1"
-  checksum: 10/c05c0838278e236a4947b4fa762a361c3f53e9d1db5ff48e45b5beb4a6b9953289a41bd67f989424ba158a24c8be618dc965a7d72de2163aba03bb9d64626eeb
   languageName: node
   linkType: hard
 
@@ -5728,7 +5737,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root@workspace:."
   dependencies:
-    "@actions/core": "npm:^1.10.1"
+    "@actions/core": "npm:^1.11.1"
     "@commitlint/cli": "npm:^19.5.0"
     "@commitlint/config-conventional": "npm:^19.5.0"
     "@favware/cliff-jumper": "npm:^3.0.3"
@@ -5748,7 +5757,7 @@ __metadata:
     ts-node: "npm:^10.9.2"
     tslib: "npm:^2.7.0"
     tsup: "npm:^8.3.0"
-    turbo: "npm:^2.1.2"
+    turbo: "npm:^2.1.3"
     typescript: "npm:^5.6.2"
     vitest: "npm:^1.6.0"
   languageName: unknown
@@ -5842,15 +5851,6 @@ __metadata:
     "@shikijs/vscode-textmate": "npm:^9.2.2"
     "@types/hast": "npm:^3.0.4"
   checksum: 10/28e030872e98481401bd366121a4dff79e19a5acc09b832f8a4ace087e465641680558fdc70f746418ecbb14f7879ac793e07e63151a09be9dcedaf7bb4a127d
-  languageName: node
-  linkType: hard
-
-"shiki@npm:^1.9.1":
-  version: 1.9.1
-  resolution: "shiki@npm:1.9.1"
-  dependencies:
-    "@shikijs/core": "npm:1.9.1"
-  checksum: 10/27d61557e73854b4c0e652a6fed1153a5f8d1271c5532d96d25fd04cc0eecdaa5cad5e3d83e752f262d8b29096b05fb80252a6801c53161474b3109c91e08f01
   languageName: node
   linkType: hard
 
@@ -6433,58 +6433,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.1.2":
-  version: 2.1.2
-  resolution: "turbo-darwin-64@npm:2.1.2"
+"turbo-darwin-64@npm:2.1.3":
+  version: 2.1.3
+  resolution: "turbo-darwin-64@npm:2.1.3"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:2.1.2":
-  version: 2.1.2
-  resolution: "turbo-darwin-arm64@npm:2.1.2"
+"turbo-darwin-arm64@npm:2.1.3":
+  version: 2.1.3
+  resolution: "turbo-darwin-arm64@npm:2.1.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:2.1.2":
-  version: 2.1.2
-  resolution: "turbo-linux-64@npm:2.1.2"
+"turbo-linux-64@npm:2.1.3":
+  version: 2.1.3
+  resolution: "turbo-linux-64@npm:2.1.3"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:2.1.2":
-  version: 2.1.2
-  resolution: "turbo-linux-arm64@npm:2.1.2"
+"turbo-linux-arm64@npm:2.1.3":
+  version: 2.1.3
+  resolution: "turbo-linux-arm64@npm:2.1.3"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:2.1.2":
-  version: 2.1.2
-  resolution: "turbo-windows-64@npm:2.1.2"
+"turbo-windows-64@npm:2.1.3":
+  version: 2.1.3
+  resolution: "turbo-windows-64@npm:2.1.3"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:2.1.2":
-  version: 2.1.2
-  resolution: "turbo-windows-arm64@npm:2.1.2"
+"turbo-windows-arm64@npm:2.1.3":
+  version: 2.1.3
+  resolution: "turbo-windows-arm64@npm:2.1.3"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "turbo@npm:2.1.2"
+"turbo@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "turbo@npm:2.1.3"
   dependencies:
-    turbo-darwin-64: "npm:2.1.2"
-    turbo-darwin-arm64: "npm:2.1.2"
-    turbo-linux-64: "npm:2.1.2"
-    turbo-linux-arm64: "npm:2.1.2"
-    turbo-windows-64: "npm:2.1.2"
-    turbo-windows-arm64: "npm:2.1.2"
+    turbo-darwin-64: "npm:2.1.3"
+    turbo-darwin-arm64: "npm:2.1.3"
+    turbo-linux-64: "npm:2.1.3"
+    turbo-linux-arm64: "npm:2.1.3"
+    turbo-windows-64: "npm:2.1.3"
+    turbo-windows-arm64: "npm:2.1.3"
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -6500,7 +6500,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10/8dea62fa29ff9ca6fc56b19c1558d2b2bf628e71de109bcd82374e2d745d2f825559c54f9c56d60449f4ddbb2b2d5e2d064a9d814474a7b72e058d6236f85703
+  checksum: 10/b8e90a38f47dc5c07e5f1c0bd708f9dc6b00b744847a45c06e5de5a5379a32bb155e8ad994eb03e60f697afc87f0815dd02fc680e22c0fad83d65c0a1fb6fc96
   languageName: node
   linkType: hard
 
@@ -6527,9 +6527,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-json-parser@npm:^10.1.5":
-  version: 10.1.5
-  resolution: "typedoc-json-parser@npm:10.1.5"
+"typedoc-json-parser@npm:^10.1.6":
+  version: 10.1.6
+  resolution: "typedoc-json-parser@npm:10.1.6"
   dependencies:
     "@favware/colorette-spinner": "npm:^1.0.1"
     "@sapphire/node-utilities": "npm:^1.0.2"
@@ -6537,34 +6537,17 @@ __metadata:
     commander: "npm:^12.1.0"
     js-yaml: "npm:^4.1.0"
     tslib: "npm:^2.6.3"
-    typedoc: "npm:^0.26.3"
+    typedoc: "npm:^0.26.4"
     typescript: "npm:^5.5.3"
   bin:
     typedoc-json-parser: ./dist/bin/index.js
-  checksum: 10/bfa4bd55d3efc2ea8df97301de47381fb56f67fff61e0f0708a2a31c16d001d124d0001dd1ca1ba56b71158f527f93e46748c1b252172c060a1f6a6015b59718
+  checksum: 10/798aa9d3649a54b603e8fbc63a05e410fa6b23d9b9d0794ce56ba5ce5797becc515972e6229e6102e0d18b09dccc1b7ec9b15d8744d2543d955fe9e1a94105c0
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.26.3":
-  version: 0.26.3
-  resolution: "typedoc@npm:0.26.3"
-  dependencies:
-    lunr: "npm:^2.3.9"
-    markdown-it: "npm:^14.1.0"
-    minimatch: "npm:^9.0.5"
-    shiki: "npm:^1.9.1"
-    yaml: "npm:^2.4.5"
-  peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x
-  bin:
-    typedoc: bin/typedoc
-  checksum: 10/55473079de55140d29299b449c0c8de6da1c6c76553bae17c11d1be9e4521612c5f0d9d5a6ee4e18ba7103f79de9ff98223fa0fb2d0e09b2bd535e54efe3d08d
-  languageName: node
-  linkType: hard
-
-"typedoc@npm:^0.26.7":
-  version: 0.26.7
-  resolution: "typedoc@npm:0.26.7"
+"typedoc@npm:^0.26.4, typedoc@npm:^0.26.8":
+  version: 0.26.8
+  resolution: "typedoc@npm:0.26.8"
   dependencies:
     lunr: "npm:^2.3.9"
     markdown-it: "npm:^14.1.0"
@@ -6575,7 +6558,7 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10/1b8ff53fa108fec664af5497c7a11d72074f6e58e7bac7e3e884a8ee9173b38efad50e67df7d961830e218af58429760bfe464739a9e26b03e1c0d3937d5424d
+  checksum: 10/a903e77fdbc45f8fa99c6454f31d36304b9edcd4f04a787bed25f0300ce779ffebfd9dc8525678484799bc2d0990bc40522a222f962a4f65a079e68950d13670
   languageName: node
   linkType: hard
 
@@ -6787,15 +6770,6 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 10/474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^8.3.2":
-  version: 8.3.2
-  resolution: "uuid@npm:8.3.2"
-  bin:
-    uuid: dist/bin/uuid
-  checksum: 10/9a5f7aa1d6f56dd1e8d5f2478f855f25c645e64e26e347a98e98d95781d5ed20062d6cca2eecb58ba7c84bc3910be95c0451ef4161906abaab44f9cb68ffbdd1
   languageName: node
   linkType: hard
 
@@ -7058,15 +7032,6 @@ __metadata:
   version: 4.0.0
   resolution: "yallist@npm:4.0.0"
   checksum: 10/4cb02b42b8a93b5cf50caf5d8e9beb409400a8a4d85e83bb0685c1457e9ac0b7a00819e9f5991ac25ffabb56a78e2f017c1acc010b3a1babfe6de690ba531abd
-  languageName: node
-  linkType: hard
-
-"yaml@npm:^2.4.5":
-  version: 2.4.5
-  resolution: "yaml@npm:2.4.5"
-  bin:
-    yaml: bin.mjs
-  checksum: 10/b09bf5a615a65276d433d76b8e34ad6b4c0320b85eb3f1a39da132c61ae6e2ff34eff4624e6458d96d49566c93cf43408ba5e568218293a8c6541a2006883f64
   languageName: node
   linkType: hard
 
