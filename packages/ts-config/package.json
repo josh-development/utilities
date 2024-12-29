@@ -52,7 +52,7 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@favware/cliff-jumper": "^3.0.3",
+    "@favware/cliff-jumper": "^5.0.0",
     "typedoc": "^0.27.6",
     "typedoc-json-parser": "^10.2.0"
   },
