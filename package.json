@@ -32,7 +32,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.3",
     "lint-staged": "^15.4.3",
-    "prettier": "^3.5.1",
+    "prettier": "^3.5.2",
     "ts-node": "^10.9.2",
     "tslib": "^2.8.1",
     "tsup": "^8.3.6",
