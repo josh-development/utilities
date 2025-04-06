@@ -41,12 +41,12 @@
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^3.0.3",
-    "@swc/core": "^1.11.13",
+    "@swc/core": "^1.11.16",
     "@vitest/coverage-v8": "^1.6.1",
     "tsup": "^8.4.0",
     "typedoc": "^0.28.1",
     "typedoc-json-parser": "^10.2.0",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "vitest": "^1.6.1"
   },
   "repository": {
