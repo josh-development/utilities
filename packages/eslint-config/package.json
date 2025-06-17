@@ -20,14 +20,14 @@
     "check-update": "cliff-jumper --dry-run"
   },
   "dependencies": {
-    "@sapphire/eslint-config": "^5.0.5",
+    "@sapphire/eslint-config": "^5.0.6",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.5",
+    "eslint-plugin-prettier": "^5.5.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@favware/cliff-jumper": "^3.0.3",
