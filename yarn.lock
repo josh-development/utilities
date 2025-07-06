@@ -863,7 +863,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.18.0"
     "@typescript-eslint/parser": "npm:^7.18.0"
     eslint: "npm:^8.57.1"
-    eslint-config-prettier: "npm:^9.1.0"
+    eslint-config-prettier: "npm:^10.1.5"
     eslint-plugin-prettier: "npm:^5.2.5"
     prettier: "npm:^3.5.3"
     typedoc: "npm:^0.28.7"
@@ -3157,7 +3157,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^10.1.3":
+"eslint-config-prettier@npm:^10.1.3, eslint-config-prettier@npm:^10.1.5":
   version: 10.1.5
   resolution: "eslint-config-prettier@npm:10.1.5"
   peerDependencies:
@@ -5974,7 +5974,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.18.0"
     "@vitest/coverage-v8": "npm:^1.6.1"
     eslint: "npm:^8.57.1"
-    eslint-config-prettier: "npm:^9.1.0"
+    eslint-config-prettier: "npm:^10.1.5"
     eslint-plugin-prettier: "npm:^5.5.1"
     lint-staged: "npm:^15.5.2"
     prettier: "npm:^3.6.2"
