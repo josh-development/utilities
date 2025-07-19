@@ -1682,12 +1682,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.19.7":
-  version: 20.19.7
-  resolution: "@types/node@npm:20.19.7"
+"@types/node@npm:^22.16.5":
+  version: 22.16.5
+  resolution: "@types/node@npm:22.16.5"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/29608e52642635950952027ff721a3e2a272031456c5162569db314b21ee61e87cf0e63076f933a02332a49e7922319baca7ead8409ef25848da2e0223c81701
+  checksum: 10/ba45b5c9113cbc5edb12960fcfe7e80db2c998af5c1931264240695b27d756570d92462150b95781bd67a03aa82111cc970ab0f4504eb99213edff8bf425354e
   languageName: node
   linkType: hard
 
@@ -5969,7 +5969,7 @@ __metadata:
     "@favware/npm-deprecate": "npm:^1.0.7"
     "@sapphire/eslint-config": "npm:^5.0.6"
     "@sapphire/ts-config": "npm:^5.0.1"
-    "@types/node": "npm:^20.19.7"
+    "@types/node": "npm:^22.16.5"
     "@typescript-eslint/eslint-plugin": "npm:^7.18.0"
     "@typescript-eslint/parser": "npm:^7.18.0"
     "@vitest/coverage-v8": "npm:^1.6.1"
