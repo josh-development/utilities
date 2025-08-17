@@ -866,7 +866,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.2.5"
     prettier: "npm:^3.5.3"
-    typedoc: "npm:^0.28.9"
+    typedoc: "npm:^0.28.10"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.8.2"
   languageName: unknown
@@ -878,7 +878,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": "npm:^3.0.3"
     prettier: "npm:^3.5.3"
-    typedoc: "npm:^0.28.9"
+    typedoc: "npm:^0.28.10"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.9.2"
   languageName: unknown
@@ -894,7 +894,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:^1.6.1"
     reflect-metadata: "npm:^0.2.1"
     tsup: "npm:^8.5.0"
-    typedoc: "npm:^0.28.9"
+    typedoc: "npm:^0.28.10"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.9.2"
     vitest: "npm:^1.6.1"
@@ -908,7 +908,7 @@ __metadata:
     "@favware/cliff-jumper": "npm:^3.0.3"
     "@sapphire/ts-config": "npm:^5.0.1"
     tslib: "npm:^2.8.1"
-    typedoc: "npm:^0.28.9"
+    typedoc: "npm:^0.28.10"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.8.2"
   languageName: unknown
@@ -1682,12 +1682,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.19.10":
-  version: 20.19.10
-  resolution: "@types/node@npm:20.19.10"
+"@types/node@npm:^20.19.11":
+  version: 20.19.11
+  resolution: "@types/node@npm:20.19.11"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/4324ad83555b2db0393311b0267fa06e4be0029a2bc51778e179dbdad8fdaad582d0f24e803db872dce8e879fff4c88739f67183e45095b5da6d06ca25a29980
+  checksum: 10/7179ed464a781cad20117362df58c12839b40922b53356e1a74f86c99d9d1ef9a27edce360901608f896c247c9c4131ba9c7222331e92cde17b723c75d5c8f2e
   languageName: node
   linkType: hard
 
@@ -5980,7 +5980,7 @@ __metadata:
     "@favware/npm-deprecate": "npm:^1.0.7"
     "@sapphire/eslint-config": "npm:^5.0.6"
     "@sapphire/ts-config": "npm:^5.0.1"
-    "@types/node": "npm:^20.19.10"
+    "@types/node": "npm:^20.19.11"
     "@typescript-eslint/eslint-plugin": "npm:^7.18.0"
     "@typescript-eslint/parser": "npm:^7.18.0"
     "@vitest/coverage-v8": "npm:^1.6.1"
@@ -5992,7 +5992,7 @@ __metadata:
     ts-node: "npm:^10.9.2"
     tslib: "npm:^2.8.1"
     tsup: "npm:^8.5.0"
-    turbo: "npm:^2.5.5"
+    turbo: "npm:^2.5.6"
     typescript: "npm:^5.9.2"
     vitest: "npm:^1.6.1"
   languageName: unknown
@@ -6695,58 +6695,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.5.5":
-  version: 2.5.5
-  resolution: "turbo-darwin-64@npm:2.5.5"
+"turbo-darwin-64@npm:2.5.6":
+  version: 2.5.6
+  resolution: "turbo-darwin-64@npm:2.5.6"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:2.5.5":
-  version: 2.5.5
-  resolution: "turbo-darwin-arm64@npm:2.5.5"
+"turbo-darwin-arm64@npm:2.5.6":
+  version: 2.5.6
+  resolution: "turbo-darwin-arm64@npm:2.5.6"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:2.5.5":
-  version: 2.5.5
-  resolution: "turbo-linux-64@npm:2.5.5"
+"turbo-linux-64@npm:2.5.6":
+  version: 2.5.6
+  resolution: "turbo-linux-64@npm:2.5.6"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:2.5.5":
-  version: 2.5.5
-  resolution: "turbo-linux-arm64@npm:2.5.5"
+"turbo-linux-arm64@npm:2.5.6":
+  version: 2.5.6
+  resolution: "turbo-linux-arm64@npm:2.5.6"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:2.5.5":
-  version: 2.5.5
-  resolution: "turbo-windows-64@npm:2.5.5"
+"turbo-windows-64@npm:2.5.6":
+  version: 2.5.6
+  resolution: "turbo-windows-64@npm:2.5.6"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:2.5.5":
-  version: 2.5.5
-  resolution: "turbo-windows-arm64@npm:2.5.5"
+"turbo-windows-arm64@npm:2.5.6":
+  version: 2.5.6
+  resolution: "turbo-windows-arm64@npm:2.5.6"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^2.5.5":
-  version: 2.5.5
-  resolution: "turbo@npm:2.5.5"
+"turbo@npm:^2.5.6":
+  version: 2.5.6
+  resolution: "turbo@npm:2.5.6"
   dependencies:
-    turbo-darwin-64: "npm:2.5.5"
-    turbo-darwin-arm64: "npm:2.5.5"
-    turbo-linux-64: "npm:2.5.5"
-    turbo-linux-arm64: "npm:2.5.5"
-    turbo-windows-64: "npm:2.5.5"
-    turbo-windows-arm64: "npm:2.5.5"
+    turbo-darwin-64: "npm:2.5.6"
+    turbo-darwin-arm64: "npm:2.5.6"
+    turbo-linux-64: "npm:2.5.6"
+    turbo-linux-arm64: "npm:2.5.6"
+    turbo-windows-64: "npm:2.5.6"
+    turbo-windows-arm64: "npm:2.5.6"
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -6762,7 +6762,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10/edbaf7f88a1238b52655bee7846460b9807b31f29e6712202c1723d548b2da6c79824afe90d700054b1f8e3ab76cf633fb5a40745815e7060369501b51f48a66
+  checksum: 10/8b6509854c32b3163a6de943787e9a33d2c610577360968db1a0cc959b79aaf7e8e80611a349384295e9181ac26edede2a86ea9867d8e6b3d2d676c584b2a3a5
   languageName: node
   linkType: hard
 
@@ -6824,9 +6824,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.28.9":
-  version: 0.28.9
-  resolution: "typedoc@npm:0.28.9"
+"typedoc@npm:^0.28.10":
+  version: 0.28.10
+  resolution: "typedoc@npm:0.28.10"
   dependencies:
     "@gerrit0/mini-shiki": "npm:^3.9.0"
     lunr: "npm:^2.3.9"
@@ -6837,7 +6837,7 @@ __metadata:
     typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10/b803651a2c1295c293c68b97bc8aa722ba89fe253b23104aab0f751f30921b69a813352173bf09fa65efc0c6dfbce11305f365218ee7298f955a0993907da36d
+  checksum: 10/b9a29d4142da5ebb5158a3e31fcec15592db0b10c35bf094b6ea82fc1f2ec52b09c36e1700e4d1ceac86a5a15da422be638c3c27ab29aff23ae4872c58c24f61
   languageName: node
   linkType: hard
 
