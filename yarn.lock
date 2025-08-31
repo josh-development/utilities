@@ -866,7 +866,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.2.5"
     prettier: "npm:^3.5.3"
-    typedoc: "npm:^0.28.10"
+    typedoc: "npm:^0.28.11"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.8.2"
   languageName: unknown
@@ -878,7 +878,7 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": "npm:^3.0.3"
     prettier: "npm:^3.5.3"
-    typedoc: "npm:^0.28.10"
+    typedoc: "npm:^0.28.11"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.9.2"
   languageName: unknown
@@ -890,11 +890,11 @@ __metadata:
   dependencies:
     "@favware/cliff-jumper": "npm:^3.0.3"
     "@sapphire/utilities": "npm:^3.18.2"
-    "@swc/core": "npm:^1.13.4"
+    "@swc/core": "npm:^1.13.5"
     "@vitest/coverage-v8": "npm:^1.6.1"
     reflect-metadata: "npm:^0.2.1"
     tsup: "npm:^8.5.0"
-    typedoc: "npm:^0.28.10"
+    typedoc: "npm:^0.28.11"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.9.2"
     vitest: "npm:^1.6.1"
@@ -908,7 +908,7 @@ __metadata:
     "@favware/cliff-jumper": "npm:^3.0.3"
     "@sapphire/ts-config": "npm:^5.0.1"
     tslib: "npm:^2.8.1"
-    typedoc: "npm:^0.28.10"
+    typedoc: "npm:^0.28.11"
     typedoc-json-parser: "npm:^10.2.0"
     typescript: "npm:^5.8.2"
   languageName: unknown
@@ -1465,90 +1465,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-darwin-arm64@npm:1.13.4"
+"@swc/core-darwin-arm64@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-darwin-arm64@npm:1.13.5"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-darwin-x64@npm:1.13.4"
+"@swc/core-darwin-x64@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-darwin-x64@npm:1.13.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.13.4"
+"@swc/core-linux-arm-gnueabihf@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.13.5"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.13.4"
+"@swc/core-linux-arm64-gnu@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.13.5"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-linux-arm64-musl@npm:1.13.4"
+"@swc/core-linux-arm64-musl@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-linux-arm64-musl@npm:1.13.5"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-linux-x64-gnu@npm:1.13.4"
+"@swc/core-linux-x64-gnu@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-linux-x64-gnu@npm:1.13.5"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-linux-x64-musl@npm:1.13.4"
+"@swc/core-linux-x64-musl@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-linux-x64-musl@npm:1.13.5"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.13.4"
+"@swc/core-win32-arm64-msvc@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.13.5"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.13.4"
+"@swc/core-win32-ia32-msvc@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.13.5"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core-win32-x64-msvc@npm:1.13.4"
+"@swc/core-win32-x64-msvc@npm:1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core-win32-x64-msvc@npm:1.13.5"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.13.4":
-  version: 1.13.4
-  resolution: "@swc/core@npm:1.13.4"
+"@swc/core@npm:^1.13.5":
+  version: 1.13.5
+  resolution: "@swc/core@npm:1.13.5"
   dependencies:
-    "@swc/core-darwin-arm64": "npm:1.13.4"
-    "@swc/core-darwin-x64": "npm:1.13.4"
-    "@swc/core-linux-arm-gnueabihf": "npm:1.13.4"
-    "@swc/core-linux-arm64-gnu": "npm:1.13.4"
-    "@swc/core-linux-arm64-musl": "npm:1.13.4"
-    "@swc/core-linux-x64-gnu": "npm:1.13.4"
-    "@swc/core-linux-x64-musl": "npm:1.13.4"
-    "@swc/core-win32-arm64-msvc": "npm:1.13.4"
-    "@swc/core-win32-ia32-msvc": "npm:1.13.4"
-    "@swc/core-win32-x64-msvc": "npm:1.13.4"
+    "@swc/core-darwin-arm64": "npm:1.13.5"
+    "@swc/core-darwin-x64": "npm:1.13.5"
+    "@swc/core-linux-arm-gnueabihf": "npm:1.13.5"
+    "@swc/core-linux-arm64-gnu": "npm:1.13.5"
+    "@swc/core-linux-arm64-musl": "npm:1.13.5"
+    "@swc/core-linux-x64-gnu": "npm:1.13.5"
+    "@swc/core-linux-x64-musl": "npm:1.13.5"
+    "@swc/core-win32-arm64-msvc": "npm:1.13.5"
+    "@swc/core-win32-ia32-msvc": "npm:1.13.5"
+    "@swc/core-win32-x64-msvc": "npm:1.13.5"
     "@swc/counter": "npm:^0.1.3"
     "@swc/types": "npm:^0.1.24"
   peerDependencies:
@@ -1577,7 +1577,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: 10/1e3eee5b1d7fed1f6ebe401c1f39a73f2f5aca01c704ff10c0706bd634ba978c65036150bef233cab16d21097ac26618066a5948b98259002dd5f0e9c3f8c32c
+  checksum: 10/75b44c5008cd043ca2aa33697aee677b3a30792c7e844d1b636d30fe8f865cbc95e606d396969c4bea9b95eb00bd3fc183b3359ec77d9c6a6f737c473ec2146e
   languageName: node
   linkType: hard
 
@@ -6824,9 +6824,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.28.10":
-  version: 0.28.10
-  resolution: "typedoc@npm:0.28.10"
+"typedoc@npm:^0.28.11":
+  version: 0.28.11
+  resolution: "typedoc@npm:0.28.11"
   dependencies:
     "@gerrit0/mini-shiki": "npm:^3.9.0"
     lunr: "npm:^2.3.9"
@@ -6837,7 +6837,7 @@ __metadata:
     typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10/b9a29d4142da5ebb5158a3e31fcec15592db0b10c35bf094b6ea82fc1f2ec52b09c36e1700e4d1ceac86a5a15da422be638c3c27ab29aff23ae4872c58c24f61
+  checksum: 10/35efd88e960acc8633a9c46c56c3e1f67173441ab8dce96e161108745d04174382150e4fd02d2f735704cb3d7b42cc468db8013368e8f97678bec0186ebc77d4
   languageName: node
   linkType: hard
 
