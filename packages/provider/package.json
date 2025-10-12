@@ -44,7 +44,7 @@
     "@swc/core": "^1.13.20",
     "@vitest/coverage-v8": "^1.6.1",
     "tsup": "^8.5.0",
-    "typedoc": "^0.28.13",
+    "typedoc": "^0.28.14",
     "typedoc-json-parser": "^10.2.0",
     "typescript": "^5.9.3",
     "vitest": "^1.6.1"
