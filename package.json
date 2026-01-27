@@ -16,7 +16,7 @@
     "check-update": "turbo run check-update"
   },
   "devDependencies": {
-    "@actions/core": "^1.11.1",
+    "@actions/core": "^2.0.3",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@favware/cliff-jumper": "^3.0.3",
