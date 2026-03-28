@@ -43,6 +43,8 @@ export enum Method {
 
   Push = 'push',
 
+  Query = 'query',
+
   Random = 'random',
 
   RandomKey = 'randomKey',
